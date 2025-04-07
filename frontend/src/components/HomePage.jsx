@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from "../images/CreateAccount.png";
+import Logo from "../images/Logo.png";
 function HomePage() {
   return (
    <>
