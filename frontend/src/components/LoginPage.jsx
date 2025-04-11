@@ -4,7 +4,7 @@ import image from "../images/Login.png";
 function LoginPage() {
   return (
     <>
-      <h1>Login</h1>
+      <h1><u>Login</u></h1>
       <div className="LoginPageLeft">
         <div className="LoginImage">
           <br />
@@ -44,6 +44,9 @@ function LoginPage() {
           <a href="#">Create an Account</a>
         </div>
       </div>
+      <footer><br/><br/><br/>
+      <p>&copy; 2025 Technocrats Group. All rights reserved.</p>
+    </footer><br/><br/><br/>
     </>
   );
 }

@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import PassKeyImage from "../images/PassKey.png";
-import CollLogo from "../images/Logo.png";
-import UserLogo from "../images/UserLogo.png";
 export class PassKey extends Component {
   render() {
     return (
       <>
-        <div class="container">
+        <div class="container_passkey">
         <div class='PasskeyImage'>
           <img src={PassKeyImage} alt="Image_PassKey" />
         </div>
@@ -18,6 +16,9 @@ export class PassKey extends Component {
       <button class="next-button">NEXT</button>
     </div>
   </div><br/>
+  <footer className="footer_PAsskey">
+      <p>&copy; 2025 Technocrats Group. All rights reserved.</p>
+    </footer><br/><br/>
       </>
     );
   }
