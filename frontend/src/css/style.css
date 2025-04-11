@@ -10,13 +10,97 @@
   text-decoration: none;
   text-transform: capitalize;
   transition: 0.2s linear;
-  
+  scroll-behavior: smooth;
 }
+
+  /*HomePage*/
+
 .welcome h1{
- color:#00FFFF;
+ color:#08b0ed;
  font-size:2rem;
+ margin-bottom: auto;
 }
 .image{
- height: 50%;
- width: 50%;
+ height: 300px;
+ width: 300px;
+ margin: 0 auto;
+}
+.welcome .Name{
+  color :#ff0400;
+  font-size: 2rem;
+}
+.welcome .Name:hover{
+  color: #08b0ed;
+  font-size: 2.5rem;
+}
+
+/*PAssKey */
+
+.PasskeyImage{
+  height:100px;
+  width:100px;
+  margin-left:-400px;
+}
+
+.passkey-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.passkey-text{
+  font-size: 50px;
+  color: #c42200;
+  text-align: center;
+  margin-top:70px;
+  margin-left:+400px;
+}
+.InputMethodPasskey{
+  font-size: 19px;
+  color: #c42200;
+  text-align: center;
+  margin-right:-450px;
+  padding: 20px;
+  margin-top: 20px;
+}
+.passkey-input {
+  background-color: #c42200;
+  color: white;
+  border: none;
+  padding: 20px;
+  width: 300px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.next-button {
+  background-color: #c42200;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  align-self: flex-end;
+  font-size: 16px;
+  margin-right:50px;
+}
+
+.next-button:hover {
+  background-color: #a31d00;
+}
+
+
+/* Log in page*/
+.LoginImage{
+  height:100px;
+  width:100px;
+  margin-left:-400px;
+}
+.LoginButton{
+  height:2px;
+  width: 2px;
+  margin-left: 250px;
+  margin-top: 10px;
+  padding-bottom: 5px;
+}
+.LoginPageleft{
+  margin-left:-400px;
 }

@@ -7,9 +7,7 @@ function HomePage() {
       <img src={Logo} alt="logo" />
     </div>
     <div className='welcome'>
-      <h1>Welcome!</h1>
-      <h1>Dheeraj</h1>
-      <h1>hey i am shidhart</h1>
+      <h1 class='Welcome'>Welcome!</h1>
     </div>
   </>
   );
