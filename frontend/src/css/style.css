@@ -520,3 +520,21 @@ body {
   cursor: pointer;
   
 }
+
+/*guideline page*/
+
+.Guideline1 {
+  display: flex;
+  justify-content: center; /* Centers the image horizontally */
+  align-items: center; /* Centers the image vertically */
+  margin-top: 20px; /* Adds spacing above the image */
+}
+
+.Guideline1 img {
+  max-width: 400px; /* Sets the maximum width of the image */
+  height: auto; /* Maintains the aspect ratio */
+  border-radius: 8px; /* Optional: Adds rounded corners */
+  object-fit: contain; /* Ensures the image fits within its container */
+}
+
+

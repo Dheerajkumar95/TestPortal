@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from '../images/Logo.png';
 import UserLogo from "../images/UserLogo.png";
-import Congratulation from "../images/Congratulation.png";
+import Congratulation from "../images/Congratulation.gif";
 const congratulation=()=> {
     return (
     <>
@@ -17,8 +17,8 @@ const congratulation=()=> {
        
       </div>
       <h1>congratulation</h1>
-      <div className="PasskeyImage">
-      <img src={Congratulation} alt="congrats" width={500} />
+      <div className="Congratulation1">
+      <img src={Congratulation} alt="congrats" width={300} />
               </div>
       <div className="stars">
         <span className="star filled">★</span>
