@@ -24,7 +24,7 @@ const guideline =()=> {
           </ul>
         </div>
             <div>
-            <input type ="checkbox" id="myCheakbox"/> Accept Terms and Conditions git cheak
+            <input type ="checkbox" id="myCheakbox"/> Accept Terms and Conditions
             </div>
             
         
