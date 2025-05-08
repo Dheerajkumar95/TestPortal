@@ -1,53 +1,38 @@
 import React from "react";
-import image from "../images/Login.png";
 
-function LoginPage() {
+import login from "../images/Login.png"; // Replace with your image path
+import  Logo from "../images/Logo.png";
+const LoginPage = () => {
   return (
     <>
-      <h1><u>Login</u></h1>
-      <div className="LoginPageLeft">
-        <div className="LoginImage">
-          <br />
-          <img src={image} alt="image" />
+    <section>
+       <div className="logo-left">
+              <img src={Logo} alt="logo" />
+            </div>
+      <div className="container_passkey">
+        <div className="PasskeyImage">
+          <img src={login} alt="PassKey" />
         </div>
-
-        <form className="LoginForm" action="">
-          <label htmlFor="user-id">User ID :</label>
-          <br />
-          <input type="text" placeholder="Input user ID" required />
-          <br />
-          <label htmlFor="password">Password :</label>
-          <br />
-          <input
-            type="password"
-            placeholder="Input Password"
-            maxlength="12"
-            minlength="6"
-          />
-          <br />
-          <input type="checkbox" id="remember-me" />
-          <label for="remember-me">Remember me</label>
-          <br />
-
-          <div className="LoginButton">
-            <button>Log In</button>
+        <div className="passkey-section">
+          <div className="logintext"><h1>Login</h1></div>
+          
+          <h1 className="passkey-text">Email ID</h1>
+          <div className="InputMethodPasskey">
+            <input type="text" placeholder="Enter email ID" required />
           </div>
-          <br />
-        </form>
-        <br />
-
-        <div className="ForgotPassword">
-          <a href="#">Forgot Password?</a>
-        </div>
-        <br />
-        <div className="CreateAccount">
-          <a href="#">Create an Account</a>
+          <h1 className="passkey-text">Password</h1>
+          <div className="InputMethodPasskey">
+            <input type="text" placeholder="Enter Password" required />
+          </div>
+          <div className="button-container">
+          <a className="crt1" href="#">Create account</a>
+          <button className="next-button1" type="submit">Log in</button>
+          </div>
         </div>
       </div>
-      <footer><br/><br/><br/>
-      <p>&copy; 2025 Technocrats Group. All rights reserved.</p>
-    </footer><br/><br/><br/>
+    </section>
     </>
   );
-}
+};
+
 export default LoginPage;

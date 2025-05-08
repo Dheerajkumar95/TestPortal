@@ -12,97 +12,154 @@
   transition: 0.2s linear;
   scroll-behavior: smooth;
 }
-
-  /*HomePage*/
-
-.welcome h1{
- color:#08b0ed;
- font-size:2rem;
- margin-bottom: auto;
+/*logo*/
+.logo-left img{
+  margin-right:1200px;
+  height:15%;
+  width:8%;
 }
-.image{
- margin: 0 auto;
+/* User Logo*/
+.logo-left1 img{
+  margin-right:-1200px;
+  margin-top: -70px;
+  height:5%;
+  width:8%;
 }
+ /* passkey*/
 
-.welcome .Name:hover{
-  color: #08b0ed;
-  font-size: 2.5rem;
-}
-.container{
-  position: absolute;
-        top: 1%;
-        left: 60%;
-  margin-left:-600px;
-}
-.welcome-section{
-  
-  flex-direction: column;
-  gap: 20px;
-  margin-right:-600px;
-  margin-top: 100px;
-  top: 1%;
-        right: 60%;
-
+ /* Reset and layout */
+/* Reset and full-screen white background */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #ffffff;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-/*PAssKey */
+#root {
+  height: 100%;
+}
 
-.container_passkey {
+/* Main container */
+.passkey-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
- 
+  background-color: #ffffff;
+  box-sizing: border-box;
+  gap:300px;
+  margin-top: -8rem;
 }
 
-.passkey-section {
+/* Left section: image aligned to side */
+.passkey-left {
+  flex: 1;
+  display: flex; /* align image to the side */ 
+}
+
+.passkey-left img {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Right section: content centered vertically */
+.passkey-right {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  height: 100vh;
+  justify-content: center; /* center vertically */
+  background-color: #ffffff;
+  padding: 10px;
+  max-width: 500px;
+  border-radius: 20px;
+   
 }
-.passkey-text{
-  font-size: 90px;
-  color: #c42200;
-  text-align: center;
-  margin-top:80px;
-  margin-left:+400px;
+
+/* Title */
+.title {
+  font-size: 32px;
+  font-weight: bold;
+  color: rgb(255, 102, 0);
+  margin-bottom: 20px;
 }
-.InputMethodPasskey{
-  
-  font-size: 50px;
-  color: #c42200;
-  text-align: center;
-  margin-right:-450px;
-  height: 100px; width: 350px
-}
-.next-button {
-  background-color: #c42200;
+
+/* Instruction box */
+.instruction {
+  background: linear-gradient(90deg, rgb(108, 47, 17), rgb(255, 102, 0));
   color: white;
-  padding: 8px 16px;
-  border: none;
-  cursor: pointer;
-  align-self: flex-end;
-  font-size: 16px;
-  margin-right:50px;
-  width: 150px;
-  height: 50px;
+  font-size: 14px;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 30px;
 }
 
-.next-button:hover {
-  background-color: #a31d00;
-}
-.footer_PAsskey{
+/* Form styling */
+form {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px;
-  margin-inline-end: auto;
+  flex-direction: column;
 }
 
-/* Log in page*/
+label {
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #333;
+  margin-left: -21rem;
+}
+
+input {
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #007bff;
+}
+
+button {
+  background: linear-gradient(90deg, rgb(108, 47, 17), rgb(255, 102, 0));
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: linear-gradient(to right, rgb(255, 102, 0), rgb(108, 47, 17));
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .passkey-container {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .passkey-left,
+  .passkey-right {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .passkey-left {
+    padding: 0;
+  }
+
+  .passkey-right {
+    margin-top: 20px;
+    box-shadow: none;
+  }
+}
+
+/* Login page*/
 .LoginImage{
   margin-right :+400px;
 }
@@ -120,7 +177,6 @@
 
 
 /*Create Account*/
-/*
 .create-account-form {
   max-width: 600px;
   margin: auto;
@@ -147,17 +203,7 @@
   border-radius: 4px;
 }
 
-.create-account-form button {
-  margin-top: 1.2rem;
-  width: 100%;
-  padding: 0.75rem;
-  background-color: #007bff;
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
+ 
 
 .success-message {
   color: green;
@@ -168,4 +214,309 @@
   color: red;
   text-align: center;
 }
-*/
+/* signUp */
+.signUp{
+  color: #a31d00;
+  text-align: center;
+  height: auto;
+  
+}
+.signUpimg{
+  height: 35px;
+  width: 25px;
+}
+
+/*congratulation*/
+.container {
+  text-align: center;
+  margin: 50px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logo, .user-logo {
+  background-color: red;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.image-container {
+  background-color: red;
+  width: 300px;
+  height: 200px;
+  display: inline-block;
+  position: relative;
+}
+
+.image {
+  color: white;
+  text-align: center;
+  line-height: 200px; /* Vertically center text */
+}
+
+.stars {
+  margin-top: 20px;
+}
+
+.star {
+  font-size: 30px;
+  color: red; /* Default color for stars */
+}
+
+.star {
+  color: rgb(0, 255, 102); /* Color for the highlighted star */
+}
+/*loging page/*
+/* General reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #ffffff;
+}
+
+.passkey {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+  background-color: #fff; /* Plain white background */
+}
+
+.container_passkey {
+  display: flex;
+  width: 90%; /* Adjust width as needed */
+  max-width: 1200px;
+  height: 80%; /* Adjust height as needed */
+  gap: 200px; /* Add a 20px gap between the image and the content */
+}
+
+.PasskeyImage {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.PasskeyImage img {
+  width: 100%;
+  height: auto;
+  object-fit: contain; /* Ensure the image fits within its container */
+}
+
+.passkey-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0.2, 0.2, 0.2, 0.2); /* Adds a subtle shadow */
+  border-radius: 8px; /* Optional: Adds rounded corners */
+  background-color: #fff; /* Optional: Ensures the background is white */
+  height: 500px;
+}
+.passkey-section1 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0.2, 0.2, 0.2, 0.2); /* Adds a subtle shadow */
+  border-radius: 8px; /* Optional: Adds rounded corners */
+  background-color: #fff; /* Optional: Ensures the background is white */
+  height: 600px;
+}
+.logintext h1{
+ margin-bottom:100px;
+ margin-left:170px;
+
+}
+
+.passkey-text {
+  font-size: 1rem;
+  color: #333; /* Dark text for contrast */
+}
+
+.InputMethodPasskey input {
+  width: 200%;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  outline: none;
+}
+
+.InputMethodPasskey input:focus {
+  border-color: rgb(255, 102, 0);
+}
+
+.next-button {
+  padding: 12px 20px;
+  background: linear-gradient(90deg, rgb(108, 47, 17), rgb(255, 102, 0));
+  color: black;
+  border: none;
+  border-radius: 6px;
+  width: 75%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.next-button:hover {
+   background: linear-gradient(90deg, rgb(108, 47, 17), rgb(255, 102, 0));
+}
+
+.button-container {
+  display: flex; /* Aligns items in a single row */
+  justify-content: center; /* Centers the buttons horizontally */
+  align-items: center; /* Aligns the buttons vertically */
+  gap: 150px; /* Adds space between the buttons */
+  margin-top: 20px; /* Adds spacing above the container */
+
+}
+
+.crt1 {
+  padding: 10px 20px; /* Adds padding for better appearance */
+  font-size: 14px;
+  border-radius: 6px;
+  text-align: center;
+  text-decoration: none; /* Removes underline from the link */
+  color: rgb(255, 102, 0); /* Orange text color */
+  border: 1px solid rgb(255, 102, 0); /* Orange border */
+  background-color: transparent; /* Transparent background */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.crt1:hover {
+  background-color: rgb(255, 102, 0); /* Orange background on hover */
+  color: #fff; /* White text on hover */
+}
+
+.next-button1 {
+  padding: 10px 20px; /* Adds padding for better appearance */
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #111010;
+  background: linear-gradient(90deg, rgb(108, 47, 17), rgb(255, 102, 0)); /* Gradient background */
+  color: #fff; /* White text */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 50px;
+}
+
+.next-button1:hover {
+  background-color: rgb(255, 102, 0); /* Solid orange background on hover */
+
+}
+
+/*instruction page*/
+.instruction-section {
+  font-family: 'Segoe UI', sans-serif;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.company-logo {
+  height: 60px;
+}
+
+.user-info {
+  text-align: right;
+}
+
+.user-name {
+  font-weight: bold;
+  color: #1d4ed8;
+}
+
+.user-email {
+  color: #555;
+  font-size: 14px;
+}
+
+.instruction-container {
+  display: flex;
+  margin-top: 30px;
+  gap: 10rem;
+}
+
+.illustration img {
+  max-width: 300px;
+  margin-top: 5rem;
+  margin-left: -5rem;
+}
+
+.instruction-box {
+  background-color: rgb(241, 214, 200);
+  padding: 20px;
+  border-radius: 10px;
+  flex-grow: 1;
+}
+
+.instruction-box h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: rgb(255, 102, 0);
+  text-transform:none;
+}
+
+.instruction-box ul {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.instruction-box li {
+  margin-bottom: 5px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1e1e1e;
+  display: flex;
+  margin-right:0%;
+  text-transform:none;
+}
+.instruction-box li::before {
+  content: "•"; /* Custom bullet */
+  position:relative; /* Positions the bullet */
+  left: 0; /* Aligns the bullet to the left */
+  color: rgb(255, 102, 0);; /* Blue color for the bullet */
+  font-size: 20px; /* Adjust bullet size */
+  line-height: 1.6; /* Matches the line height of the text */
+  padding:0% 1%;
+  
+}
+
+.continue-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-left: 20rem;
+}
+
+.continue-button {
+  padding: 10px 30px;
+  font-size: 16px;
+  background: linear-gradient(90deg, rgb(108, 47, 17), rgb(255, 102, 0)); /* Gradient background */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  
+}
