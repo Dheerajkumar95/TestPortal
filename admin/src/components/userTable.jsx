@@ -70,7 +70,7 @@ const UserTable = () => {
         </div>
       </div>
 
-      <table>
+      <table >
         <thead>
           <tr>
             <th>S.No</th>
