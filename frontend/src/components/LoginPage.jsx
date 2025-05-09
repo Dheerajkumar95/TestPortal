@@ -2,6 +2,7 @@ import React from "react";
 
 import login from "../images/Login.png"; // Replace with your image path
 import  Logo from "../images/Logo.png";
+import { Link } from "react-router-dom";
 const LoginPage = () => {
   return (
     <>
@@ -25,8 +26,8 @@ const LoginPage = () => {
             <input type="text" placeholder="Enter Password" required />
           </div>
           <div className="button-container">
-          <a className="crt1" href="#">Create account</a>
-          <button className="next-button1" type="submit">Log in</button>
+         <Link className="crt1"to="/signup">Create account</Link>
+          <Link className='button' type="submit" to="/instructions">Log In</Link>
           </div>
         </div>
       </div>

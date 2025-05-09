@@ -1,6 +1,7 @@
 import React from "react";
 import CreateAccount from "../images/CreateAccount.png";
 import  Logo from "../images/Logo.png";
+import { Link } from "react-router-dom";
 const signUp=()=>{
 
     return(
@@ -32,7 +33,7 @@ const signUp=()=>{
             <h1 className="passkey-text"> Confirm Password </h1>
           <div className="InputMethodPasskey">
             <input type="text" placeholder="Confirm Password" required />
-            <button>Submit</button>
+            <Link className='button' type="submit" to="/login">Submit</Link>
           </div>
           </div>
         </div>

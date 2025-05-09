@@ -2,6 +2,7 @@ import React from 'react';
 import Logo from '../images/Logo.png';
 import UserLogo from "../images/UserLogo.png";
 import Guideline from "../images/guideline.png";
+import { Link } from "react-router-dom";
 const  guideline =()=> {
   return (
     <>
@@ -34,14 +35,14 @@ const  guideline =()=> {
             <li>Submit your answers before the timer runs out.</li>
             <li>If the exam is being supervised, follow all proctoring guidelines.</li>
             <li>Do not take screenshots, screen record, or switch to another tab during the exam.</li>
-            <li>The test duration is 2 hours and 10 minutes with no extra time allowed.</li>
+            <li>The test duration is 2 hours and 10 minutes with no extra time allowed.</li>
              </ul>
                 </div>
             <div>
             <input type ="checkbox" id="myCheakbox"/> Accept Terms and Conditions
             </div>
             <div>
-              <button>Start The Test</button>
+              <Link className='button' type="submit" to="/congratulations">Start The Test</Link>
             </div>
             
         

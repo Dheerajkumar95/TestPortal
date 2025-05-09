@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from '../images/Logo.png';
 import UserLogo from "../images/UserLogo.png";
+import { Link } from "react-router-dom";
 const evaluationScreen=()=> {
   return (
     <>
@@ -44,7 +45,7 @@ const evaluationScreen=()=> {
         <span>15 Questions</span>
       </div>
 
-      <button className="continue-btn">Continue</button>
+     <Link className='button' type="submit" to="/guideline">Continue</Link>
     </div>
     </section>
 

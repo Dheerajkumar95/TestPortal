@@ -2,7 +2,7 @@ import React from 'react';
 import PassKeyImage from "../images/PassKey.png";
 import UserLogo from "../images/UserLogo.png";
 import Logo from "../images/Logo.png";
-
+import { Link } from "react-router-dom";
 const InstructionScreen = () => {
   return (
     <section className="instruction-section">
@@ -37,7 +37,7 @@ const InstructionScreen = () => {
       </div>
 
       <div className="continue-wrapper">
-        <button className="continue-button">Continue</button>
+        <Link className='button' type="submit" to="/evaluation">Continue</Link>
       </div>
     </section>
   );

@@ -1,7 +1,8 @@
 import React from 'react';
 import Logo from '../images/Logo.png';
 import UserLogo from "../images/UserLogo.png";
-import Congratulation from "../images/Congratulation.gif";
+import Congratulation from "../images/congratulation.jpg";
+import { Link } from "react-router-dom";
 const congratulation=()=> {
     return (
     <>

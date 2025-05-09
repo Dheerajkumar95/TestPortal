@@ -1,6 +1,7 @@
 import React from 'react';
 import PassKeyImage from "../images/PassKey.png";
 import  Logo from "../images/Logo.png";
+import { Link } from "react-router-dom";
 const PasskeyPage = () => {
   return (
     <>
@@ -18,7 +19,7 @@ const PasskeyPage = () => {
     <form>
       <label htmlFor="passkey">Enter Passkey</label>
       <input type="text" id="passkey" placeholder="Enter Passkey" />
-      <button type="submit">Next</button>
+      <Link className='button' type="submit" to="/login">Next</Link>
     </form>
   </div>
 </div>
