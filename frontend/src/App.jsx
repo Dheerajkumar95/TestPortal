@@ -10,6 +10,7 @@ import EvaluationScreen from './components/evalutionScreen';
 import Guideline from './components/guideline';
 import Congratulation from './components/congratulation';
 import Passkey from './components/passkey';
+import VerificationPage from './components/VerificationPage';
 
 function App() {
   return (
@@ -17,10 +18,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Passkey />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/verify" element={<VerificationPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/instructions" element={<InstructionScreen />} />
         <Route path="/evaluation" element={<EvaluationScreen />} />
-         
         <Route path="/guideline" element={<Guideline />} />
         <Route path="/congratulations" element={<Congratulation />} />
       </Routes>

@@ -14,7 +14,7 @@ const Login = () => {
         <div className="login-form">
          <div className="login-header">
           <h2 className="login-title">Admin Dashboard login</h2>
-          <p className="note">Note – Only for HR Staff</p>
+          <p className="note">Only admin login</p>
           </div>
           <form>
             <label>User ID</label>

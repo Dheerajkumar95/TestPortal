@@ -42,7 +42,26 @@ body {
 #root {
   height: 100%;
 }
+.loader {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #13131a;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+}
 
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 /* Main container */
 .passkey-container {
   display: flex;
@@ -82,13 +101,13 @@ body {
 .title {
   font-size: 32px;
   font-weight: bold;
-  color: rgb(255, 102, 0);
+  color: rgb(213, 0, 0);
   margin-bottom: 20px;
 }
 
 /* Instruction box */
 .instruction {
-  background: linear-gradient(90deg, rgb(108, 47, 17), rgb(255, 102, 0));
+  background: linear-gradient(90deg, rgb(108, 47, 17), rgb(213, 0, 0));
   color: white;
   font-size: 14px;
   padding: 15px;
@@ -123,7 +142,7 @@ input:focus {
 }
 
 .button {
-  background: linear-gradient(90deg, rgb(108, 47, 17), rgb(255, 102, 0));
+  background: linear-gradient(90deg, rgb(108, 47, 17), rgb(213, 0, 0));
   color: #ffffff;
   border: none;
   padding: 12px;
@@ -133,7 +152,7 @@ input:focus {
 }
 
 .button:hover {
-  background: linear-gradient(to right, rgb(255, 102, 0), rgb(108, 47, 17));
+  background: linear-gradient(to right, rgb(213, 0, 0), rgb(108, 47, 17));
   color: #ffffff;
 }
 
@@ -180,7 +199,7 @@ input:focus {
 }
 /* signUp */
 .signUp {
-  color: #a31d00;
+  color: rgb(213, 0, 0);
   text-align: center;
   height: auto;
 }
@@ -204,14 +223,14 @@ input:focus {
 
 .logo,
 .user-logo {
-  background-color: red;
+  background-color: rgb(213, 0, 0);
   color: white;
   padding: 10px;
   border-radius: 50%;
 }
 
 .image-container {
-  background-color: red;
+  background-color: rgb(213, 0, 0);
   width: 300px;
   height: 200px;
   display: inline-block;
@@ -234,7 +253,7 @@ input:focus {
 }
 
 .star {
-  color: rgb(0, 255, 102);
+  color: rgb(213, 0, 0);
 }
 /*loging page/*
 /* General reset */
@@ -308,7 +327,7 @@ body {
 .logintext h1 {
   margin-bottom: 60px;
   margin-left: 150px;
-  color: rgb(255, 102, 0);
+  color: rgb(213, 0, 0);
 }
 
 .passkey-text {
@@ -329,7 +348,7 @@ body {
 }
 
 .InputMethodPasskey input:focus {
-  border-color: rgb(255, 102, 0);
+  border-color: rgb(213, 0, 0);
 }
 
 .button-container {
@@ -346,15 +365,15 @@ body {
   border-radius: 6px;
   text-align: center;
   text-decoration: none; /* Removes underline from the link */
-  color: rgb(255, 102, 0); /* Orange text color */
-  border: 1px solid rgb(255, 102, 0); /* Orange border */
+  color: rgb(213, 0, 0); /* Orange text color */
+  border: 1px solid rgb(213, 0, 0); /* Orange border */
   background-color: transparent; /* Transparent background */
   transition: background-color 0.3s ease, color 0.3s ease;
   margin-left: 20px;
 }
 
 .crt1:hover {
-  background-color: rgb(255, 102, 0); /* Orange background on hover */
+  background: linear-gradient(to right, rgb(213, 0, 0), rgb(108, 47, 17));
   color: #fff; /* White text on hover */
 }
 
@@ -393,7 +412,7 @@ body {
 .instruction-box h2 {
   font-size: 18px;
   margin-bottom: 15px;
-  color: rgb(255, 102, 0);
+  color: rgb(213, 0, 0);
   text-transform: none;
 }
 
@@ -415,7 +434,7 @@ body {
   content: "•"; /* Custom bullet */
   position: relative; /* Positions the bullet */
   left: 0; /* Aligns the bullet to the left */
-  color: rgb(255, 102, 0); /* Blue color for the bullet */
+  color: rgb(213, 0, 0); /* Blue color for the bullet */
   font-size: 20px; /* Adjust bullet size */
   line-height: 1.6; /* Matches the line height of the text */
   padding: 0% 1%;
@@ -434,7 +453,7 @@ body {
   background: linear-gradient(
     90deg,
     rgb(108, 47, 17),
-    rgb(255, 102, 0)
+    rgb(213, 0, 0)
   ); /* Gradient background */
   color: white;
   border: none;
@@ -456,4 +475,91 @@ body {
   height: auto; /* Maintains the aspect ratio */
   border-radius: 8px; /* Optional: Adds rounded corners */
   object-fit: contain; /* Ensures the image fits within its container */
+}
+
+/* OTP Box */
+.otp-box {
+  background-color: rgb(241, 214, 200);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 350px;
+}
+
+.otp-box h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: rgb(213, 0, 0);
+}
+
+.otp-box p {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* OTP Inputs */
+.otp-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.otp-inputs input {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 22px;
+  border: 2px solid #cbd5e1;
+  border-radius: 10px;
+  outline: none;
+  transition: border 0.2s ease;
+  color: rgb(2, 2, 2);
+  background: none;
+}
+
+.otp-inputs input:focus {
+  border-color: rgb(213, 0, 0);
+  box-shadow: 0 0 5px rgb(213, 0, 0);
+}
+
+/* Buttons */
+.otp-box-button {
+  background: linear-gradient(90deg, rgb(108, 47, 17), rgb(213, 0, 0));
+  color: white;
+  padding: 10px 20px;
+  font-size: 15px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.otp-box-button:hover {
+  background: linear-gradient(90deg, rgb(213, 0, 0), rgb(108, 47, 17));
+}
+
+/* Resend OTP Section */
+.resend-section {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #444;
+}
+
+.resend {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: rgb(213, 0, 0);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.resend:hover {
+  color: rgb(108, 47, 17);
+}
+
+.resend-timer {
+  color: rgb(213, 0, 0);
 }

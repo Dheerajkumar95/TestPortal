@@ -2,6 +2,8 @@ const bcrypt = require("bcryptjs");
 const { generateToken } = require("../lib/utils.js");
 const User = require("../models/user.model.js");
 const NPasskey = require("../models/passkey.model.js");
+const Otp = require("../models/otp.model.js");
+const nodemailer = require("nodemailer");
 const createpasskey = async (req, res) => {
   const { Passkey } = req.body;
   try {
@@ -39,10 +41,103 @@ const createpasskey = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
-const signup = async (req, res) => {
-  const { fullName, email, contact, password, ConfirmPassword } = req.body;
+const sendotp = async (req, res) => {
+  const { email } = req.body;
+  console.log("Email received:", email);
+
+  // 1. Check if already registered
+  const exists = await Otp.findOne({ email });
+  if (exists) return res.status(400).json({ message: "User already exists" });
+
+  // 2. Generate OTP
+  const otp = Math.floor(100000 + Math.random() * 900000);
+
+  // 3. Save OTP in temp DB or in-memory storage
+  await Otp.create({
+    email,
+    otp,
+    expiresAt: Date.now() + 300000,
+  });
+
+  // 4. Send OTP (e.g. via email/SMS)
+  await sendOTP(email, otp);
+  console.log("Email received:", email);
+  return res.status(200).json({ message: "OTP sent successfully" });
+};
+const sendOTP = async (email, otp) => {
+  console.log("here");
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "dheerajk35973@gmail.com",
+      pass: "yuma unch fwbn uyhh",
+    },
+  });
+
+  await transporter.sendMail({
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: "Your OTP Code",
+    text: `Your OTP is ${otp}. It is valid for 5 minutes.`,
+  });
+};
+
+const verifyOtpAndRegister = async (req, res) => {
+  const { otp, user } = req.body;
+  const { fullName, email, contact, password, confirmPassword } = user;
+  console.log("Received body:", req.body);
   try {
-    if (!fullName || !email || !contact || !password || !ConfirmPassword) {
+    // 1. Check if passwords match
+    if (password !== confirmPassword) {
+      return res.status(400).json({ message: "Passwords do not match" });
+    }
+
+    // 2. Find the OTP record
+    const otpRecord = await Otp.findOne({ email });
+    if (!otpRecord) return res.status(400).json({ message: "OTP not found" });
+
+    // 3. Check if OTP expired
+    if (otpRecord.expiresAt < Date.now()) {
+      await Otp.deleteOne({ email });
+      return res.status(400).json({ message: "OTP expired" });
+    }
+
+    // 4. Check if OTP matches
+    if (otpRecord.otp !== otp) {
+      return res.status(400).json({ message: "Invalid OTP" });
+    }
+
+    // 5. Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedConfirmPassword = await bcrypt.hash(confirmPassword, 10);
+    // 6. Create user
+    const newUser = await User.create({
+      fullName,
+      email,
+      contact,
+      password: hashedPassword,
+      confirmPassword: hashedConfirmPassword,
+    });
+
+    // 7. Clean up used OTP
+    await Otp.deleteOne({ email });
+
+    // 8. Return success response
+    res.status(201).json({
+      _id: newUser._id,
+      fullName: newUser.fullName,
+      email: newUser.email,
+    });
+  } catch (error) {
+    console.error("OTP verification error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+const signup = async (req, res) => {
+  const { fullName, email, contact, password, confirmPassword } = req.body;
+  try {
+    if (!fullName || !email || !contact || !password || !confirmPassword) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -64,7 +159,7 @@ const signup = async (req, res) => {
       email,
       contact,
       password: hashedPassword,
-      ConfirmPassword: hashedPassword,
+      confirmPassword: hashedPassword,
     });
 
     if (newUser) {
@@ -157,6 +252,7 @@ const checkAuth = (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
 module.exports = {
   signup,
   login,
@@ -164,4 +260,6 @@ module.exports = {
   updateProfile,
   checkAuth,
   createpasskey,
+  sendotp,
+  verifyOtpAndRegister,
 };
