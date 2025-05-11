@@ -74,14 +74,13 @@ const SignUp = () => {
         <img src={Logo} alt="logo" />
       </div>
 
-      <div className="signUpimg">
+      <div className="passkey-left">
         <img src={CreateAccount} alt="signUp" />
       </div>
 
-      <h1 className="signUp-text">Create Account</h1>
-
       <form onSubmit={handleSubmit}>
         <div className="passkey-section1">
+           <h1 className="signUp-text">Create Account</h1>
           <div className="InputMethodsignUp">
             <h1 className="passkey-text">Name</h1>
             <div className="InputMethodPasskey">
