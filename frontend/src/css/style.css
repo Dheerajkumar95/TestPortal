@@ -12,6 +12,12 @@
   scroll-behavior: smooth;
 }
 /*logo*/
+.Plogo-left img {
+  margin-right: 1103px;
+  margin-top: -10.5px;
+  height: 15%;
+  width: 8%;
+}
 .logo-left img {
   margin-right: 1200px;
   margin-top: -70px;
@@ -83,6 +89,7 @@ body {
   width: 100%;
   height: auto;
   object-fit: contain;
+  margin-top: 10rem;
 }
 
 /* Right section: content centered vertically */
@@ -98,8 +105,8 @@ body {
   border-radius: 8px;
   background-color: rgb(241, 214, 200);
   max-height: 400px;
-  margin-top: 15.1rem;
-  margin-right: 5.5rem;
+  margin-top: 13rem;
+  margin-right: 5rem;
 }
 
 /* Title */

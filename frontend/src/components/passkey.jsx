@@ -6,7 +6,7 @@ const PasskeyPage = () => {
   return (
     <>
     <section>
-      <div className="logo-left">
+      <div className="Plogo-left">
         <img src={Logo} alt="logo" />
       </div>
     <div className="passkey-container">

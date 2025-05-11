@@ -50,6 +50,8 @@ const sendotp = async (req, res) => {
   console.log("Email received:", email);
 
   // 1. Check if already registered
+  const uexists = await User.findOne({ email });
+  if (uexists) return res.status(400).json({ message: "User already exists" });
   const exists = await Otp.findOne({ email });
   if (exists) return res.status(400).json({ message: "User already exists" });
   if (password !== confirmPassword) {
