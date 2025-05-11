@@ -4,6 +4,10 @@ const User = require("../models/user.model.js");
 const NPasskey = require("../models/passkey.model.js");
 const Otp = require("../models/otp.model.js");
 const nodemailer = require("nodemailer");
+const {
+  sendVerificationEamil,
+  senWelcomeEmail,
+} = require("../middleware/Email.js");
 const createpasskey = async (req, res) => {
   const { Passkey } = req.body;
   try {
@@ -42,13 +46,15 @@ const createpasskey = async (req, res) => {
   }
 };
 const sendotp = async (req, res) => {
-  const { email } = req.body;
+  const { email, password, confirmPassword, fullName } = req.body;
   console.log("Email received:", email);
 
   // 1. Check if already registered
   const exists = await Otp.findOne({ email });
   if (exists) return res.status(400).json({ message: "User already exists" });
-
+  if (password !== confirmPassword) {
+    return res.status(400).json({ message: "Passwords do not match" });
+  }
   // 2. Generate OTP
   const otp = Math.floor(100000 + Math.random() * 900000);
 
@@ -60,26 +66,9 @@ const sendotp = async (req, res) => {
   });
 
   // 4. Send OTP (e.g. via email/SMS)
-  await sendOTP(email, otp);
+  await sendVerificationEamil(email, otp, fullName);
   console.log("Email received:", email);
   return res.status(200).json({ message: "OTP sent successfully" });
-};
-const sendOTP = async (email, otp) => {
-  console.log("here");
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "dheerajk35973@gmail.com",
-      pass: "yuma unch fwbn uyhh",
-    },
-  });
-
-  await transporter.sendMail({
-    from: process.env.EMAIL_USER,
-    to: email,
-    subject: "Your OTP Code",
-    text: `Your OTP is ${otp}. It is valid for 5 minutes.`,
-  });
 };
 
 const verifyOtpAndRegister = async (req, res) => {
@@ -118,7 +107,7 @@ const verifyOtpAndRegister = async (req, res) => {
       password: hashedPassword,
       confirmPassword: hashedConfirmPassword,
     });
-
+    await senWelcomeEmail(email, fullName);
     // 7. Clean up used OTP
     await Otp.deleteOne({ email });
 
@@ -131,6 +120,29 @@ const verifyOtpAndRegister = async (req, res) => {
   } catch (error) {
     console.error("OTP verification error:", error);
     res.status(500).json({ message: "Server error" });
+  }
+};
+const resendotp = async (req, res) => {
+  try {
+    const { email, fullName } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    await Otp.findOneAndUpdate(
+      { email },
+      { otp, createdAt: new Date() },
+      { upsert: true, new: true }
+    );
+
+    await sendVerificationEamil(email, otp, fullName);
+
+    res.status(200).json({ message: "OTP sent successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to send OTP" });
   }
 };
 
@@ -261,5 +273,6 @@ module.exports = {
   checkAuth,
   createpasskey,
   sendotp,
+  resendotp,
   verifyOtpAndRegister,
 };

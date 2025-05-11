@@ -1,12 +1,13 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useAuthStore } from "../store/useAuthStore";
-
+import { useNavigate } from "react-router-dom";
 const VerificationPage = ({ email, formData }) => {
   const inputsRef = useRef([]);
   const [timer, setTimer] = useState(30);
   const [isResendEnabled, setIsResendEnabled] = useState(false);
   const { Verification } = useAuthStore();
-
+  const { resendotp } = useAuthStore();
+  const navigate = useNavigate();
   useEffect(() => {
     if (timer > 0) {
       const countdown = setInterval(() => {
@@ -41,15 +42,15 @@ const VerificationPage = ({ email, formData }) => {
     }
 
     // ✅ Now formData is passed correctly
-    Verification(otp, formData);
+    Verification(otp, formData,navigate);
     console.log("Submitted OTP:", otp, "Form Data:", formData);
   };
 
   const resendOTP = () => {
     setTimer(30);
     setIsResendEnabled(false);
-    // TODO: Call backend to resend OTP
     console.log("OTP resent to:", email);
+    resendotp(email,formData.fullName);
   };
 
   return (

@@ -2,11 +2,11 @@ import React, { useRef, useState } from "react";
 import CreateAccount from "../images/CreateAccount.png";
 import Logo from "../images/Logo.png";
 import { toast } from "react-hot-toast";
-import { useAuthStore } from "../store/useAuthStore";
+ 
 import VerificationPage from './VerificationPage';
 import { axiosInstance } from "../lib/axios.js";
 const SignUp = () => {
-  const { Signup } = useAuthStore();
+ 
   const [showOTP, setShowOTP] = useState(false);
  
 
@@ -31,15 +31,16 @@ const SignUp = () => {
     if (password.length < 8)
       return toast.error("Password must be at least 8 characters");
     if (password !== confirmPassword)
-      return toast.error("Passwords do not match");
+      return true;
 
     return true;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const isValid = validateForm();
-    if (!isValid) return;
+  
+    const isValid = validateForm(); // ✅ yahan check hoga
+    if (!isValid) return; // agar false hai toh yahin ruk jao
   
     const btn = buttonRef.current;
     if (btn) {
@@ -48,9 +49,9 @@ const SignUp = () => {
     }
   
     try {
-      await axiosInstance.post("/auth/sendotp", { email: formData.email });
+      await axiosInstance.post("/auth/sendotp", { email: formData.email ,password: formData.password,confirmPassword: formData.confirmPassword,fullName:formData.fullName});
       toast.success("OTP sent to your email");
-      setShowOTP(true);
+      setShowOTP(true); // ✅ sirf API call ke baad OTP page dikhao
     } catch (error) {
       toast.error(error.response?.data?.message || "Error sending OTP");
     } finally {
@@ -60,6 +61,7 @@ const SignUp = () => {
       }
     }
   };
+  
   
 
   return (

@@ -4,18 +4,9 @@ import { toast } from "react-hot-toast";
 
 export const useAuthStore = create((set) => ({
   authUser: null,
-  pendingUser: null, // ⬅️ Temporary storage
+  pendingUser: null, //  Temporary storage
 
-  Signup: async (contactOrEmail) => {
-    try {
-      await axiosInstance.post("/auth/send-otp", { contactOrEmail });
-      set({ otpSentTo: contactOrEmail });
-      toast.success("OTP sent successfully");
-    } catch (err) {
-      toast.error(err.response?.data?.message || "Failed to send OTP");
-    }
-  },
-  Verification: async (otp, formData) => {
+  Verification: async (otp, formData, navigate) => {
     try {
       const res = await axiosInstance.post("/auth/verifyOtpAndRegister", {
         otp,
@@ -23,8 +14,18 @@ export const useAuthStore = create((set) => ({
       });
       set({ authUser: res.data, otpSentTo: null });
       toast.success("Account created successfully");
+      navigate("/login");
     } catch (err) {
       toast.error(err.response?.data?.message || "Verification failed");
+    }
+  },
+  resendotp: async (email, fullName) => {
+    try {
+      await axiosInstance.post("/auth/resendotp", { email, fullName });
+      console.log("OTP resent to:", email);
+    } catch (error) {
+      console.error("Error resending OTP:", error);
+      alert("Failed to resend OTP. Please try again.");
     }
   },
 }));
