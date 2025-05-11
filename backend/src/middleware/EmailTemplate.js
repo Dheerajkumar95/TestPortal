@@ -19,10 +19,10 @@ const Verification_Email_Template = `
               border-radius: 8px;
               box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
               overflow: hidden;
-              border: 1px solid #ddd;
+              border: 1px solid rgb(213, 0, 0);
           }
           .header {
-              background-color: rgb(213, 0, 0);
+              background-color:rgb(213, 0, 0);
               color: white;
               padding: 20px;
               text-align: center;
@@ -57,10 +57,10 @@ const Verification_Email_Template = `
               letter-spacing: 2px;
           }
           .footer {
-              background-color:  rgb(213, 0, 0);
+              background-color: #f4f4f4;
               padding: 15px;
               text-align: center;
-              color: rgb(0, 0, 0);
+              color: #777;
               font-size: 12px;
               border-top: 1px solid #ddd;
           }
@@ -104,14 +104,14 @@ const Welcome_Email_Template = `
           .container {
               max-width: 600px;
               margin: 30px auto;
-              background: #ffffff;
+              background:  #ffffff;
               border-radius: 8px;
               box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
               overflow: hidden;
-              border: 1px solid #ddd;
+              border: 1px solid rgb(213, 0, 0);
           }
           .header {
-              background-color:  rgb(213, 0, 0);
+              background-color: rgb(213, 0, 0);
               color: white;
               padding: 20px;
               text-align: center;
@@ -130,8 +130,8 @@ const Welcome_Email_Template = `
               display: inline-block;
               padding: 12px 25px;
               margin: 20px 0;
-              background-color: linear-gradient(90deg, rgb(108, 47, 17), rgb(213, 0, 0));
-              color: white;
+              background-color: rgb(213, 0, 0);
+              color:#000000;
               text-decoration: none;
               border-radius: 5px;
               text-align: center;
@@ -140,10 +140,10 @@ const Welcome_Email_Template = `
               transition: background-color 0.3s;
           }
           .button:hover {
-              background-color: linear-gradient(90deg,rgb(213, 0, 0),rgb(108, 47, 17),);
+              background-color: linear-gradient(90deg, rgb(108, 47, 17), rgb(213, 0, 0));
           }
           .footer {
-              background-color:rgb(213, 0, 0)4;
+              background-color: #f4f4f4;
               padding: 15px;
               text-align: center;
               color: #777;
