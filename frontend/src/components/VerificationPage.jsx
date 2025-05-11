@@ -1,13 +1,17 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useAuthStore } from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
+
 const VerificationPage = ({ email, formData }) => {
   const inputsRef = useRef([]);
   const [timer, setTimer] = useState(30);
   const [isResendEnabled, setIsResendEnabled] = useState(false);
-  const { Verification } = useAuthStore();
-  const { resendotp } = useAuthStore();
+  const [loading, setLoading] = useState(false); // ✅ For spinner on Verify button
+  const { Verification, resendotp } = useAuthStore();
   const navigate = useNavigate();
+  const buttonRef = useRef(null);
+
+  // Timer countdown
   useEffect(() => {
     if (timer > 0) {
       const countdown = setInterval(() => {
@@ -19,6 +23,7 @@ const VerificationPage = ({ email, formData }) => {
     }
   }, [timer]);
 
+  // Handle input change
   const handleChange = (e, index) => {
     const value = e.target.value.replace(/[^0-9]/g, '');
     e.target.value = value;
@@ -27,30 +32,40 @@ const VerificationPage = ({ email, formData }) => {
     }
   };
 
+  // Handle backspace
   const handleKeyDown = (e, index) => {
     if (e.key === 'Backspace' && !e.target.value && index > 0) {
       inputsRef.current[index - 1].focus();
     }
   };
 
-  const submitOTP = (e) => {
+  // Submit OTP
+  const submitOTP = async (e) => {
     e.preventDefault();
     const otp = inputsRef.current.map((input) => input.value).join('');
-    
+
     if (otp.length !== 6) {
       return alert("Please enter the 6-digit OTP");
     }
 
-    // ✅ Now formData is passed correctly
-    Verification(otp, formData,navigate);
-    console.log("Submitted OTP:", otp, "Form Data:", formData);
+    setLoading(true); // ✅ Start loading
+    try {
+      await Verification(otp, formData, navigate);
+      console.log("Submitted OTP:", otp, "Form Data:", formData);
+    } catch (error) {
+      console.error("Verification failed:", error);
+      alert("Verification failed. Please try again.");
+    } finally {
+      setLoading(false); // ✅ Stop loading
+    }
   };
 
+  // Resend OTP
   const resendOTP = () => {
     setTimer(30);
     setIsResendEnabled(false);
     console.log("OTP resent to:", email);
-    resendotp(email,formData.fullName);
+    resendotp(email, formData.fullName);
   };
 
   return (
@@ -70,7 +85,21 @@ const VerificationPage = ({ email, formData }) => {
             />
           ))}
         </div>
-        <button onClick={submitOTP} className='otp-box-button'>Verify OTP</button>
+
+        <button
+          onClick={submitOTP}
+          ref={buttonRef}
+          className='otp-box-button'
+          disabled={loading}
+        >
+          {loading ? (
+            <>
+              <span className="loader"></span> Loading...
+            </>
+          ) : (
+            "Verify OTP"
+          )}
+        </button>
 
         <div className='resend-section'>
           {isResendEnabled ? (
