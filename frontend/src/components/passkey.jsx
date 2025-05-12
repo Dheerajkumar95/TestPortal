@@ -3,7 +3,6 @@ import PassKeyImage from "../images/PassKey.png";
 import  Logo from "../images/Logo.png";
 import { useAuthStore } from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 const PasskeyPage = () => {
    const { passkey } = useAuthStore();
      const navigate = useNavigate();
@@ -12,13 +11,8 @@ const PasskeyPage = () => {
     });
   
   const handleSubmit = async (e) => {
-    console.log("now");
     e.preventDefault();     
-    try {
-      await passkey(formPasskey, navigate);
-    } catch (error) {
-      console.error("Verification failed:", error);
-    }  
+      await passkey(formPasskey, navigate);  
   };
   return (
     <>

@@ -35,4 +35,19 @@ export const useAuthStore = create((set) => ({
       alert("Failed to resend OTP. Please try again.");
     }
   },
+  login: async (formData, navigate) => {
+    console.log("formData sent to backend:", formData); // ✅ check this
+    try {
+      await axiosInstance.post("/auth/login", {
+        email: formData.email,
+        password: formData.password,
+      });
+      navigate("/instructions");
+    } catch (error) {
+      console.log("Login error:", error.response?.data);
+      toast.error(
+        error.response?.data?.message || "Invalid Email and Password"
+      );
+    }
+  },
 }));

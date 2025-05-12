@@ -5,7 +5,6 @@ const {
   checkAuth,
   login,
   verifyOtpAndRegister,
-  signup,
   sendotp,
   resendotp,
 } = require("../controllers/auth.controller.js");
@@ -17,7 +16,6 @@ router.post("/passkey", passkey);
 router.post("/sendotp", sendotp);
 router.post("/resendotp", resendotp);
 router.post("/verifyOtpAndRegister", verifyOtpAndRegister);
-router.post("/signup", signup);
 router.post("/login", login);
 router.get("/check", protectRoute, checkAuth);
 module.exports = router;

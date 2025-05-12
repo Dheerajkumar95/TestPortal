@@ -372,10 +372,10 @@ body {
   margin-left: 90px;
   color: rgb(213, 0, 0);
 }
-.loginpasskey-text {
+.login-text {
   font-size: 1rem;
   color: #333;
-  margin-left: 1rem;
+  margin-left: -19rem;
 }
 .passkey-text {
   font-size: 1rem;
@@ -384,7 +384,7 @@ body {
 }
 
 .InputMethodPasskey input {
-  width: 200%;
+  width: 100%;
   font-size: 14px;
   border-radius: 6px;
   border: 1px solid #ccc;

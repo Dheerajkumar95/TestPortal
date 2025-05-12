@@ -173,80 +173,41 @@ const resendotp = async (req, res) => {
     res.status(500).json({ message: "Failed to send OTP" });
   }
 };
-
-const signup = async (req, res) => {
-  const { fullName, email, contact, password, confirmPassword } = req.body;
-  try {
-    if (!fullName || !email || !contact || !password || !confirmPassword) {
-      return res.status(400).json({ message: "All fields are required" });
-    }
-
-    if (password.length < 6) {
-      return res
-        .status(400)
-        .json({ message: "Password must be at least 6 characters" });
-    }
-
-    const user = await User.findOne({ email });
-
-    if (user) return res.status(400).json({ message: "Email already exists" });
-
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-
-    const newUser = new User({
-      fullName,
-      email,
-      contact,
-      password: hashedPassword,
-      confirmPassword: hashedPassword,
-    });
-
-    if (newUser) {
-      generateToken(newUser._id, res);
-      await newUser.save();
-
-      res.status(201).json({
-        _id: newUser._id,
-        fullName: newUser.fullName,
-        email: newUser.email,
-        contact: newUser.contact,
-        profilePic: newUser.profilePic,
-        createdAt: newUser.createdAt,
-      });
-    } else {
-      res.status(400).json({ message: "Invalid user data" });
-    }
-  } catch (error) {
-    console.log("Error in signup controller", error.message);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-};
-
 const login = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await User.findOne({ email });
-
-    if (!user) {
-      return res.status(400).json({ message: "Invalid Username" });
+    // Check if email and password are provided
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ message: "Email and password are required" });
     }
 
+    // Find user by email
+    const user = await User.findOne({ email });
+
+    console.log(user);
+    if (!user) {
+      return res.status(400).json({ message: "Invalid Email" });
+    }
+
+    // Compare password
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
     if (!isPasswordCorrect) {
       return res.status(400).json({ message: "Invalid Password" });
     }
 
+    // Generate token (assuming this sets it in a cookie)
     generateToken(user._id, res);
 
+    // Send user info back
     res.status(200).json({
       _id: user._id,
       fullName: user.fullName,
       email: user.email,
-      profilePic: user.profilePic,
     });
   } catch (error) {
-    console.log("Error in login controller", error.message);
+    console.log("Error in login controller:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
@@ -294,7 +255,6 @@ const checkAuth = (req, res) => {
 };
 
 module.exports = {
-  signup,
   login,
   logout,
   updateProfile,
