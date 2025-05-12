@@ -371,7 +371,7 @@ input:focus {
 }
 
 .InputMethodPasskey input {
-  width: 100%;
+  width: 25rem;
   font-size: 14px;
   border-radius: 6px;
   border: 1px solid #ccc;

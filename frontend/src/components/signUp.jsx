@@ -84,7 +84,7 @@ const SignUp = () => {
         <div className="passkey-section1">
            <h1 className="signUp-text">Create Account</h1>
           <div className="InputMethodsignUp">
-            <h1 className="passkey-text">Name</h1>
+            <h1  style={{ marginRight: "13.8rem" ,fontSize:"1rem" ,fontFamily:"monospace"}} className="passkey-text">Name</h1>
             <div className="InputMethodPasskey">
               <input
                 type="text"
@@ -97,7 +97,7 @@ const SignUp = () => {
               />
             </div>
 
-            <h1 style={{ marginRight: "-1rem"  }} className="passkey-text">Email ID</h1>
+            <h1 style={{ marginRight: "12rem" ,fontSize:"1rem" ,fontFamily:"monospace"}} className="passkey-text">Email ID</h1>
             <div className="InputMethodPasskey">
               <input
                 type="email"
@@ -110,7 +110,7 @@ const SignUp = () => {
               />
             </div>
 
-            <h1 style={{ marginRight: "-4.6rem" }} className="passkey-text">Contact Number</h1>
+            <h1 style={{ marginRight: "8.5rem",fontSize:"1rem",fontFamily:"monospace" }} className="passkey-text">Contact Number</h1>
             <div className="InputMethodPasskey">
               <input
                 type="text"
@@ -128,7 +128,7 @@ const SignUp = () => {
               />
             </div>
 
-            <h1 style={{ marginRight: "-4.7rem" }} className="passkey-text">Create Password</h1>
+            <h1 style={{ marginRight: "8.2rem" ,fontSize:"1rem",fontFamily:"monospace"}} className="passkey-text">Create Password</h1>
             <div className="InputMethodPasskey">
               <input
                 type="password"
@@ -141,7 +141,7 @@ const SignUp = () => {
               />
             </div>
 
-            <h1 style={{ marginRight: "-5.4rem" }} className="passkey-text" >Confirm Password</h1>
+            <h1 style={{ marginRight: "7.6rem" ,fontSize:"1rem", fontFamily:"monospace"}} className="passkey-text" >Confirm Password</h1>
             <div className="InputMethodPasskey">
               <input
                 type="password"
