@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
 
 * {
-  font-family: "Roboto", sans-serif;
+  font-family: "monospace";
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -31,13 +31,13 @@
   display: flex;
   gap: 65rem;
   margin-top: -3.3rem;
-  margin-left: -3.75rem;
+  margin-left: -5.05rem;
 }
 .Login-logo {
   display: flex;
   gap: 65rem;
   margin-top: -5.2rem;
-  margin-left: -1.58rem;
+  margin-left: -1.4rem;
 }
 
 .EIlogo-left img {

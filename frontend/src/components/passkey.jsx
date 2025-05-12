@@ -30,7 +30,7 @@ const PasskeyPage = () => {
     <h1 className="title">PassKey Verification</h1>
     <p className="instruction">Please enter the passkey provided by the company to begin the test</p>
     <form  onSubmit={handleSubmit}>
-      <label  htmlFor="passkey">Enter Passkey</label>
+      <h1 style={{ marginRight: "17.5rem",fontSize:"1rem" ,fontFamily:"monospace" }}>Enter Passkey</h1>
       <input    type="text"
                 value={formPasskey.Passkey}
                 onChange={(e) =>

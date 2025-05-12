@@ -32,24 +32,25 @@ const LoginPage = () => {
         <div className="passkey-section">
           <div className="logintext"><h1>Login</h1></div>
           <form onSubmit={handleSubmit}>
-          <h1 style={{ marginRight: "0.7rem" }} className="login-text">Email ID</h1>
+          <h1 style={{ marginRight: "0.3rem",fontSize:"1rem" ,fontFamily:"monospace" }} className="login-text">Email ID</h1>
           <div className="InputMethodPasskey">
+           <input
+              type="text"
+              name="email"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
+              placeholder="Enter email ID"
+              required
+            />
+           <h1 style={{fontSize:"1rem" ,fontFamily:"monospace" }} className="login-text">Password</h1>
             <input
-  type="text"
-  name="email"
-  value={formData.email}
-  onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
-  placeholder="Enter email ID"
-  required
-/>
-<input
-  type="password"
-  name="password"
-  value={formData.password}
-  onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
-  placeholder="Enter password"
-  required
-/>
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
+              placeholder="Enter password"
+              required
+            />
 
           </div>
           <div className="button-container">
