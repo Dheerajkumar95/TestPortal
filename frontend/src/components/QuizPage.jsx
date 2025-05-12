@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
 const QuizPage = () => {
   const [questions, setQuestions] = useState([]);
   const [current, setCurrent] = useState(0);
@@ -58,6 +57,7 @@ const handleOptionSelect = (qid, optId) => {
   const currentQ = questions[current];
 
   return (
+    
     <div className="quiz-app">
       {/* Left Sidebar */}
       <div className="sidebar">

@@ -17,9 +17,11 @@ const PasskeyPage = () => {
   return (
     <>
     <section>
-      <div className="Plogo-left">
-        <img src={Logo} alt="logo" />
-      </div>
+     <div className='Passkey-logo'>
+           <div className="Ilogo-left">
+             <img src={Logo} alt="Company Logo" />
+             </div>
+        </div>
     <div className="passkey-container">
   <div className="passkey-left">
     <img src={PassKeyImage} alt="Passkey Illustration" />

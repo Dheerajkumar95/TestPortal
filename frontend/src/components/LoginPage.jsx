@@ -19,9 +19,12 @@ const LoginPage = () => {
   return (
     <>
     <section>
-       <div className="logo-left">
-              <img src={Logo} alt="logo"/>
-            </div>
+      <div className='Login-logo'>
+                 <div className="Ilogo-left">
+                   <img src={Logo} alt="Company Logo" />
+                   </div>
+                    
+              </div>
       <div className="container_passkey">
         <div className="PasskeyImage">
           <img src={Login} alt="PassKey" />

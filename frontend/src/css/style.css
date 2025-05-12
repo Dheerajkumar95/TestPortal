@@ -21,11 +21,23 @@
   height: 15%;
   width: 8%;
 }
-.Slogo-left img {
-  margin-right: 1200px;
-  margin-top: -46px;
-  height: 15%;
-  width: 8%;
+.SignUp-logo {
+  display: flex;
+  gap: 65rem;
+  margin-top: -2rem;
+  margin-left: -2.28rem;
+}
+.Passkey-logo {
+  display: flex;
+  gap: 65rem;
+  margin-top: -3.3rem;
+  margin-left: -3.75rem;
+}
+.Login-logo {
+  display: flex;
+  gap: 65rem;
+  margin-top: -5.2rem;
+  margin-left: -1.58rem;
 }
 
 .EIlogo-left img {
