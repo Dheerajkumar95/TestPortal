@@ -8,11 +8,10 @@ const InstructionScreen = () => {
     <section className="instruction-section">
       <div className="Ilogo-left">
         <img src={Logo} alt="Company Logo" />
-        </div>
         <div className="logo-left1">
         <img src={UserLogo} alt="Company Logo"/>
         </div>
-      
+      </div>
 
       <div className="instruction-container">
         <div className="illustration">

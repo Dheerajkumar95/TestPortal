@@ -41,11 +41,27 @@
 }
 /* User Logo*/
 .logo-left1 img {
-  margin-right: -1200px;
-  margin-top: -70px;
-  height: 5%;
-  width: 8%;
+  margin-right: -1050px;
+  margin-top: -150px;
+  margin-bottom: 40px;
+  height:  15%;
+  width: 7%;
 }
+.EIlogo-left img{
+  margin-right: 1273.8px;
+  margin-top: -72px;
+  margin-left: -250px;
+  height: 15%;
+  width: 12%;
+
+}
+.Elogo-left1 img{
+  margin-right: -1050px;
+  margin-top: -150px;
+  height:  15%;
+  width: 20%;
+}
+
 /* passkey*/
 
 /* Reset and layout */
@@ -448,8 +464,8 @@ body {
 
 .instruction-container {
   display: flex;
-  margin-top: -60px;
-  gap: 10rem;
+  margin-top: -25px;
+  gap: 5rem;
 }
 
 .illustration img {
@@ -463,6 +479,7 @@ body {
   padding: 20px;
   border-radius: 10px;
   flex-grow: 1;
+  max-width: 50rem;
 }
 
 .instruction-box h2 {
@@ -619,3 +636,100 @@ body {
 .resend-timer {
   color: rgb(213, 0, 0);
 }
+
+
+/* evaluationscreen1 */
+ 
+/* Container for all content */
+.evcontainer {
+  max-width: 800px;
+  padding: 40px;
+  text-align: center;
+  position: relative;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Title style */
+.evtitle {
+  font-size: 24px;
+  margin-bottom: 30px;
+  font-weight: 500;
+  color: #222;
+}
+
+/* Topic rows */
+.evtopic {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #b4200c;
+  color: #fff;
+  padding: 12px 24px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  font-size: 16px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Continue button */
+.evbutton {
+  display: inline-block;
+  margin-top: 40px;
+  background-color: #b4200c;
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 40px;
+  border-radius: 4px;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+.evbutton:hover {
+  background-color: #951a08;
+}
+
+/* Left logo styles */
+.evlogo-left, .evlogo-left1 {
+  position: absolute;
+  top: -30px;
+  width: 100px;
+  height: 100px;
+  background-color: #b4200c;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.evlogo-left img,
+.evlogo-left1 img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+/* Positioning for left and right logos */
+.evlogo-left {
+  left: -140px;
+}
+
+.evlogo-left1 {
+  right: -140px;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .evtopic {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .evlogo-left,
+  .evlogo-left1 {
+    position: static;
+    margin: 20px auto;
+  }
+}
+
+
