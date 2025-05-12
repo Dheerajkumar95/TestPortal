@@ -24,6 +24,15 @@
   height: 15%;
   width: 8%;
 }
+
+.Ilogo-left img {
+  margin-right: 1273.8px;
+  margin-top: -72px;
+  margin-left: -15px;
+  height: 15%;
+  width: 8.3%;
+}
+
 .logo-left img {
   margin-right: 1200px;
   margin-top: -70px;
@@ -428,6 +437,7 @@ body {
   font-family: "Segoe UI", sans-serif;
   padding: 20px;
   background-color: #fff;
+  height: 80vh;
 }
 
 .header {
@@ -438,7 +448,7 @@ body {
 
 .instruction-container {
   display: flex;
-  margin-top: 30px;
+  margin-top: -60px;
   gap: 10rem;
 }
 

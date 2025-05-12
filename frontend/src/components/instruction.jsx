@@ -6,12 +6,13 @@ import { Link } from "react-router-dom";
 const InstructionScreen = () => {
   return (
     <section className="instruction-section">
-      <header className="logo-left">
+      <div className="Ilogo-left">
         <img src={Logo} alt="Company Logo" />
+        </div>
         <div className="logo-left1">
         <img src={UserLogo} alt="Company Logo"/>
         </div>
-      </header>
+      
 
       <div className="instruction-container">
         <div className="illustration">
