@@ -7,6 +7,7 @@ const {
   verifyOtpAndRegister,
   sendotp,
   resendotp,
+  questions,
 } = require("../controllers/auth.controller.js");
 const { protectRoute } = require("../middleware/auth.middleware.js");
 
@@ -17,5 +18,6 @@ router.post("/sendotp", sendotp);
 router.post("/resendotp", resendotp);
 router.post("/verifyOtpAndRegister", verifyOtpAndRegister);
 router.post("/login", login);
+router.get("/questions", questions);
 router.get("/check", protectRoute, checkAuth);
 module.exports = router;

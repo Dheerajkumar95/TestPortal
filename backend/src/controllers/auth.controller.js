@@ -211,7 +211,44 @@ const login = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
+const questions = (req, res) => {
+  const data = [
+    {
+      id: 1,
+      question: "Which HTML tag is used to define an unordered list?",
+      options: [
+        { id: "a", text: "<ol>" },
+        { id: "b", text: "<ul>" },
+        { id: "c", text: "<li>" },
+        { id: "d", text: "<list>" },
+      ],
+      correct: "b",
+    },
+    {
+      id: 2,
+      question: "Which tag defines a table row?",
+      options: [
+        { id: "a", text: "<table>" },
+        { id: "b", text: "<th>" },
+        { id: "c", text: "<tr>" },
+        { id: "d", text: "<td>" },
+      ],
+      correct: "c",
+    },
+    {
+      id: 3,
+      question: "Which property is used in CSS to change text color?",
+      options: [
+        { id: "a", text: "font-color" },
+        { id: "b", text: "text-color" },
+        { id: "c", text: "color" },
+        { id: "d", text: "background-color" },
+      ],
+      correct: "c",
+    },
+  ];
+  res.status(200).json(data);
+};
 const logout = (req, res) => {
   try {
     res.cookie("jwt", "", { maxAge: 0 });
@@ -264,4 +301,5 @@ module.exports = {
   sendotp,
   resendotp,
   verifyOtpAndRegister,
+  questions,
 };

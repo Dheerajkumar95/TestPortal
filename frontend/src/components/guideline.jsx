@@ -42,7 +42,7 @@ const  guideline =()=> {
             <input type ="checkbox" id="myCheakbox"/> Accept Terms and Conditions
             </div>
             <div>
-              <Link className='button' type="submit" to="/congratulations">Start The Test</Link>
+              <Link className='button' type="submit" to="/quiz">Start The Test</Link>
             </div>
             
         

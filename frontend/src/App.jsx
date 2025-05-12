@@ -11,6 +11,7 @@ import Guideline from './components/guideline';
 import Congratulation from './components/congratulation';
 import Passkey from './components/passkey';
 import VerificationPage from './components/VerificationPage';
+import QuizPage from './components/QuizPage';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/instructions" element={<InstructionScreen />} />
         <Route path="/evaluation" element={<EvaluationScreen />} />
         <Route path="/guideline" element={<Guideline />} />
+        <Route path="/quiz" element={<QuizPage />} />
         <Route path="/congratulations" element={<Congratulation />} />
       </Routes>
       <Toaster />

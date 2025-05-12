@@ -619,3 +619,193 @@ body {
 .resend-timer {
   color: rgb(213, 0, 0);
 }
+
+/* quiz-page */
+/* QuizPage.css */
+
+/* General styles */
+.quiz-app {
+  display: flex;
+  font-family: "Arial", sans-serif;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 250px;
+  border: 1px solid #e0e0e0;
+  padding: 15px;
+  border-radius: 10px;
+  margin-right: 20px;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h4 {
+  margin: 15px 0;
+  color: #333;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar h4 span {
+  background-color: #e0e0e0;
+  padding: 2px 8px;
+  border-radius: 50%;
+  font-size: 14px;
+}
+
+/* Question grid styles */
+.question-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.question-btn {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.question-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Different button states */
+.not-visited {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.marked {
+  background-color: #b2fab4;
+  color: #2e7d32;
+}
+
+.active {
+  background-color: #c8e6c9;
+  color: #1b5e20;
+  box-shadow: 0 0 0 2px #81c784;
+}
+
+/* Main content styles */
+.quiz-content {
+  flex: 1;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100rem;
+  height: 38rem;
+}
+
+.timer {
+  text-align: right;
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #d32f2f;
+  font-weight: bold;
+}
+
+.timer strong {
+  color: #b71c1c;
+}
+
+.quiz-title {
+  color: #2c3e50;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.question-text {
+  font-size: 18px;
+  margin-bottom: 25px;
+  line-height: 1.5;
+  color: #333;
+}
+
+/* Options styles */
+.option-container {
+  margin-bottom: 10px;
+}
+
+.option-label {
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+  margin-left: 0.5rem;
+}
+
+.option-label:hover {
+  background-color: #f5f5f5;
+}
+
+.option-input {
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+/* Navigation buttons */
+.nav-buttons {
+  margin-top: 8rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.nav-btn:hover {
+  opacity: 0.9;
+}
+
+.back-btn {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.next-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .quiz-app {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .question-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .question-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
