@@ -883,10 +883,12 @@ input:focus {
   border-radius: 4px;
   font-size: 18px;
   transition: background-color 0.3s ease;
+  background: linear-gradient(90deg, rgb(108, 47, 17), rgb(213, 0, 0));
 }
 
 .evbutton:hover {
-  background-color: #951a08;
+  background: linear-gradient(90deg, rgb(213, 0, 0), rgb(108, 47, 17));
+  color: #ffffff;
 }
 
 /* Left logo styles */
