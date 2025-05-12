@@ -1,6 +1,7 @@
 const express = require("express");
 const {
   createpasskey,
+  passkey,
   checkAuth,
   login,
   verifyOtpAndRegister,
@@ -12,6 +13,7 @@ const { protectRoute } = require("../middleware/auth.middleware.js");
 
 const router = express.Router();
 router.post("/createpasskey", createpasskey);
+router.post("/passkey", passkey);
 router.post("/sendotp", sendotp);
 router.post("/resendotp", resendotp);
 router.post("/verifyOtpAndRegister", verifyOtpAndRegister);

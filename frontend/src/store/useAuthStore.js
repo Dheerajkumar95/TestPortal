@@ -4,8 +4,15 @@ import { toast } from "react-hot-toast";
 
 export const useAuthStore = create((set) => ({
   authUser: null,
-  pendingUser: null, //  Temporary storage
-
+  pendingUser: null,
+  passkey: async (formData, navigate) => {
+    try {
+      await axiosInstance.post("/auth/passkey", { Passkey: formData.Passkey });
+      navigate("/login");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Invalid Passkey");
+    }
+  },
   Verification: async (otp, formData, navigate) => {
     try {
       const res = await axiosInstance.post("/auth/verifyOtpAndRegister", {
