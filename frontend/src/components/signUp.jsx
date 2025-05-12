@@ -95,14 +95,14 @@ const SignUp = () => {
               />
             </div>
 
-            <h1 style={{ marginRight: "-1rem" }} className="passkey-text">Email ID</h1>
+            <h1 style={{ marginRight: "-1rem"  }} className="passkey-text">Email ID</h1>
             <div className="InputMethodPasskey">
               <input
                 type="email"
                 placeholder="Enter Email ID"
                 value={formData.email}
                 onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
+                  setFormData({ ...formData, email: e.target.value.toLowerCase() })
                 }
                 required
               />
