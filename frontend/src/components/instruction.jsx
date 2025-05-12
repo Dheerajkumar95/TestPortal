@@ -30,8 +30,8 @@ const InstructionScreen = () => {
             <li>Submit your answers before the timer runs out.</li>
             <li>Follow all proctoring guidelines if the exam is being supervised.</li>
             <li>The test consists of sections: Aptitude, Logical Reasoning, English, Behavioral, and Coding.</li>
-            <li>Each section contains 15 questions.</li>
-            <li>Each section has a time limit of 20 minutes.</li>
+            <li>Each section contains 20 questions.</li>
+            <li>Each section has a time limit of 30 minutes.</li>
             <li>Questions must be attempted within the given time limit for each section.</li>
           </ul>
         </div>

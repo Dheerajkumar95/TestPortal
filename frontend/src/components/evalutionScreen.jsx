@@ -4,11 +4,11 @@ import UserLogo from "../images/UserLogo.png";
 import { Link } from "react-router-dom";
 const evaluationScreen=()=> {
   const topics = [
-  { id: 1, name: "Basic programming", time: "20 minutes", questions: "15 Questions" },
-  { id: 2, name: "Front - End Logic", time: "20 minutes", questions: "15 Questions" },
-  { id: 3, name: "Back-End Logic", time: "20 minutes", questions: "15 Questions" },
-  { id: 4, name: "Database Concepts", time: "20 minutes", questions: "15 Questions" },
-  { id: 5, name: "QA Testing", time: "20 minutes", questions: "15 Questions" },
+  { id: 1, name: "Basic programming", time: "30 minutes", questions: "20 Questions" },
+  { id: 2, name: "Front - End Logic", time: "30 minutes", questions: "20 Questions" },
+  { id: 3, name: "Back-End Logic", time: "30 minutes", questions: "20 Questions" },
+  { id: 4, name: "Database Concepts", time: "30 minutes", questions: "20 Questions" },
+  { id: 5, name: "QA Testing", time: "30 minutes", questions: "20 Questions" },
 ];
   return (
     <>
