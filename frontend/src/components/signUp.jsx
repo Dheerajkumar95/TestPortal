@@ -70,11 +70,11 @@ const SignUp = () => {
       <VerificationPage email={formData.email}  formData={formData}/>
     ) : (
     <section className="signUp" id="signUp">
-      <div className="logo-left">
+      <div className="Slogo-left">
         <img src={Logo} alt="logo" />
       </div>
 
-      <div className="passkey-left">
+      <div className="Spasskey-left">
         <img src={CreateAccount} alt="signUp" />
       </div>
 
@@ -95,7 +95,7 @@ const SignUp = () => {
               />
             </div>
 
-            <h1 className="passkey-text">Email ID</h1>
+            <h1 style={{ marginRight: "-1rem" }} className="passkey-text">Email ID</h1>
             <div className="InputMethodPasskey">
               <input
                 type="email"
@@ -108,7 +108,7 @@ const SignUp = () => {
               />
             </div>
 
-            <h1 className="passkey-text">Contact Number</h1>
+            <h1 style={{ marginRight: "-4.6rem" }} className="passkey-text">Contact Number</h1>
             <div className="InputMethodPasskey">
               <input
                 type="text"
@@ -126,7 +126,7 @@ const SignUp = () => {
               />
             </div>
 
-            <h1 className="passkey-text">Create Password</h1>
+            <h1 style={{ marginRight: "-4.7rem" }} className="passkey-text">Create Password</h1>
             <div className="InputMethodPasskey">
               <input
                 type="password"
@@ -139,7 +139,7 @@ const SignUp = () => {
               />
             </div>
 
-            <h1 className="passkey-text">Confirm Password</h1>
+            <h1 style={{ marginRight: "-5.4rem" }} className="passkey-text" >Confirm Password</h1>
             <div className="InputMethodPasskey">
               <input
                 type="password"
@@ -155,7 +155,7 @@ const SignUp = () => {
               />
             </div>
 
-            <button ref={buttonRef} className="button" type="submit">
+            <button ref={buttonRef} className="createbutton" type="submit">
               Create Account
             </button>
           </div>

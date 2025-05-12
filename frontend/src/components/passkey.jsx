@@ -17,7 +17,7 @@ const PasskeyPage = () => {
     <h1 className="title">PassKey Verification</h1>
     <p className="instruction">Please enter the passkey provided by the company to begin the test</p>
     <form>
-      <label htmlFor="passkey">Enter Passkey</label>
+      <label  htmlFor="passkey">Enter Passkey</label>
       <input type="text" id="passkey" placeholder="Enter Passkey" />
       <Link className='button' type="submit" to="/login">Next</Link>
     </form>

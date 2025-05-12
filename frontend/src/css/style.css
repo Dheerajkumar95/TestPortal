@@ -18,6 +18,12 @@
   height: 15%;
   width: 8%;
 }
+.Slogo-left img {
+  margin-right: 1200px;
+  margin-top: -46px;
+  height: 15%;
+  width: 8%;
+}
 .logo-left img {
   margin-right: 1200px;
   margin-top: -70px;
@@ -99,24 +105,22 @@ body {
   flex-direction: column;
   justify-content: center; /* center vertically */
   padding: 10px;
-  max-width: 500px;
+  max-width: 467px;
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0.2, 0.2, 0.2, 0.2);
   border-radius: 8px;
   background-color: rgb(241, 214, 200);
   max-height: 400px;
   margin-top: 13rem;
-  margin-right: 5rem;
+  margin-right: 7.1rem;
 }
 
 /* Title */
 .title {
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 2rem;
   color: rgb(213, 0, 0);
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
-
 /* Instruction box */
 .instruction {
   background: linear-gradient(90deg, rgb(108, 47, 17), rgb(213, 0, 0));
@@ -134,7 +138,7 @@ form {
 }
 
 label {
-  margin-bottom: 6px;
+  margin-bottom: -1px;
   font-weight: 500;
   color: #333;
   margin-left: -21rem;
@@ -155,7 +159,7 @@ input:focus {
 
 .button {
   background: linear-gradient(90deg, rgb(108, 47, 17), rgb(213, 0, 0));
-  color: #ffffff;
+  color: rgb(255, 255, 255);
   border: none;
   padding: 12px;
   font-size: 16px;
@@ -169,6 +173,21 @@ input:focus {
 }
 
 /*Create Account*/
+.createbutton {
+  background: linear-gradient(90deg, rgb(108, 47, 17), rgb(213, 0, 0));
+  color: rgb(255, 255, 255);
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: -15rem;
+}
+
+.createbutton:hover {
+  background: linear-gradient(to right, rgb(213, 0, 0), rgb(108, 47, 17));
+  color: #ffffff;
+}
 .create-account-form {
   max-width: 600px;
   margin: auto;
@@ -324,22 +343,44 @@ body {
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0.2, 0.2, 0.2, 0.2);
   border-radius: 8px;
-  background-color: #fff;
-  height: 300px;
+  background-color: rgb(241, 214, 200);
+  height: 100px;
   width: 500px;
-  margin-left: 38rem;
+  margin-left: 39.2rem;
+  margin-top: -35rem;
+}
+.Spasskey-left {
+  flex: 1;
+  display: flex; /* align image to the side */
+}
+
+.Spasskey-left img {
+  max-width: 600px;
+  height: auto;
+  object-fit: contain;
+  margin-top: 2rem;
 }
 .logintext h1 {
   margin-bottom: 60px;
   margin-left: 150px;
   color: rgb(213, 0, 0);
+  font-size: 2.5rem;
 }
-
+.signUp-text {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  margin-left: 90px;
+  color: rgb(213, 0, 0);
+}
+.loginpasskey-text {
+  font-size: 1rem;
+  color: #333;
+  margin-left: 1rem;
+}
 .passkey-text {
   font-size: 1rem;
   color: #333;
-  margin-left: 17px;
-  margin-bottom: 2px;
+  margin-left: -115px;
 }
 
 .InputMethodPasskey input {

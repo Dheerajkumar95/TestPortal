@@ -17,11 +17,11 @@ const LoginPage = () => {
         <div className="passkey-section">
           <div className="logintext"><h1>Login</h1></div>
           
-          <h1 className="passkey-text">Email ID</h1>
+          <h1 className="loginpasskey-text">Email ID</h1>
           <div className="InputMethodPasskey">
             <input type="text" placeholder="Enter email ID" required />
           </div>
-          <h1 className="passkey-text">Password</h1>
+          <h1 className="loginpasskey-text">Password</h1>
           <div className="InputMethodPasskey">
             <input type="text" placeholder="Enter Password" required />
           </div>
