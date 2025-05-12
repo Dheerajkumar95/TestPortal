@@ -834,7 +834,7 @@ input:focus {
 .evaluation-logo {
   display: flex;
   gap: 65rem;
-  margin-top: -5.7rem;
+  margin-top: -4.4rem;
 }
 .evaluation img {
   height: 6rem;
@@ -844,32 +844,37 @@ input:focus {
   height: 6rem;
   width: 5rem;
 }
-.evcontainer {
+.evtopic-container {
   max-width: 600px;
-  text-align: center;
-  margin-left: 20rem;
+  margin: 0 auto;
+  padding: 20px;
 }
-
-/* Title style */
 .evtitle {
-  font-size: 24px;
-  margin-bottom: 30px;
-  font-weight: 500;
-  color: #222;
+  color: rgb(213, 0, 0);
 }
-
-/* Topic rows */
 .evtopic {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #b4200c;
-  color: #fff;
-  padding: 12px 24px;
-  margin-bottom: 15px;
-  border-radius: 4px;
+  background-color: rgb(213, 0, 0);
+  padding: 15px 20px;
+  margin: 10px 0;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.evtopic span {
+  flex: 1;
+  text-align: center;
   font-size: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+.evtopic .topic-name {
+  text-align: left;
+  font-weight: 500;
 }
 
 /* Continue button */

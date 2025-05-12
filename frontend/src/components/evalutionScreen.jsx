@@ -3,6 +3,13 @@ import Logo from '../images/Logo.png';
 import UserLogo from "../images/UserLogo.png";
 import { Link } from "react-router-dom";
 const evaluationScreen=()=> {
+  const topics = [
+  { id: 1, name: "Basic programming", time: "20 minutes", questions: "15 Questions" },
+  { id: 2, name: "Front - End Logic", time: "20 minutes", questions: "15 Questions" },
+  { id: 3, name: "Back-End Logic", time: "20 minutes", questions: "15 Questions" },
+  { id: 4, name: "Database Concepts", time: "20 minutes", questions: "15 Questions" },
+  { id: 5, name: "QA Testing", time: "20 minutes", questions: "15 Questions" },
+];
   return (
     <>
     <section className="instruction-section">
@@ -16,33 +23,15 @@ const evaluationScreen=()=> {
          </div>
                   
       <h2 className="evtitle">Technical Aptitude Evaluation</h2>
-      <div className='evcontainer'>
-      <div className="evtopic">
-        <span>1. Basic programming</span>
-        <span>20 minutes</span>
-        <span>15 Questions</span>
-      </div>
-      <div className="evtopic">
-        <span>2. Front - End Logic</span>
-        <span>20 minutes</span>
-        <span>15 Questions</span>
-      </div>
-      <div className="evtopic">
-        <span>3. Back-End Logic</span>
-        <span>20 minutes</span>
-        <span>15 Questions</span>
-      </div>
-      <div className="evtopic">
-        <span>4. Database Concepts</span>
-        <span>20 minutes</span>
-        <span>15 Questions</span>
-      </div>
-      <div className="evtopic">
-        <span>5. QA Testing</span>
-        <span>20 minutes</span>
-        <span>15 Questions</span>
-      </div>
-      </div>
+      <div className="evtopic-container">
+  {topics.map((topic) => (
+    <div key={topic.id} className={`evtopic ${topic.id === 2 ? 'active' : ''}`}>
+      <span className="topic-name">{topic.id}. {topic.name}</span>
+      <span>{topic.time}</span>
+      <span>{topic.questions}</span>
+    </div>
+  ))}
+</div>
 
      <Link className='evbutton' type="submit" to="/guideline">Continue</Link>
     </section>
