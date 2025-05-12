@@ -246,6 +246,17 @@ const questions = (req, res) => {
       ],
       correct: "c",
     },
+    {
+      id: 4,
+      question: "Which property is used in CSS to change text color?",
+      options: [
+        { id: "a", text: "font-color" },
+        { id: "b", text: "text-color" },
+        { id: "c", text: "color" },
+        { id: "d", text: "background-color" },
+      ],
+      correct: "c",
+    },
   ];
   res.status(200).json(data);
 };
