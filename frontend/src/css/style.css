@@ -876,11 +876,12 @@ input:focus {
 .evbutton {
   display: inline-block;
   margin-top: 40px;
+  margin-left: 3rem;
   background-color: #b4200c;
   color: #fff;
   text-decoration: none;
-  padding: 12px 40px;
-  border-radius: 4px;
+  padding: 10px 20px;
+  border-radius: 5px;
   font-size: 18px;
   transition: background-color 0.3s ease;
   background: linear-gradient(90deg, rgb(108, 47, 17), rgb(213, 0, 0));
