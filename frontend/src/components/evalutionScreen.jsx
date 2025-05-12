@@ -5,19 +5,18 @@ import { Link } from "react-router-dom";
 const evaluationScreen=()=> {
   return (
     <>
-    <section>
-    <div className="evcontainer">
-      <div className="EIlogo-left">
-          <img src={Logo} alt="evlogo" />
-          </div>
-          <div className="evcontainer">
-       <div className="Elogo-left1">
-     <img src={UserLogo} alt="evlogo" />
-          </div>
-          </div>
+    <section className="instruction-section">
+       <div className='evaluation-logo'>
+            <div className="evaluation">
+              <img src={Logo} alt="Company Logo" />
+              </div>
+              <div className="evaluationlogo">
+              <img src={UserLogo} alt="Company Logo"/>
+            </div>
+         </div>
                   
       <h2 className="evtitle">Technical Aptitude Evaluation</h2>
-
+      <div className='evcontainer'>
       <div className="evtopic">
         <span>1. Basic programming</span>
         <span>20 minutes</span>
@@ -43,9 +42,9 @@ const evaluationScreen=()=> {
         <span>20 minutes</span>
         <span>15 Questions</span>
       </div>
+      </div>
 
      <Link className='evbutton' type="submit" to="/guideline">Continue</Link>
-    </div>
     </section>
 
     </>

@@ -8,8 +8,11 @@
   outline: none;
   border: none;
   text-decoration: none;
-  transition: 0.2s linear;
-  scroll-behavior: smooth;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 /*logo*/
 .Plogo-left img {
@@ -25,61 +28,20 @@
   width: 8%;
 }
 
-.Ilogo-left img {
-  margin-right: 1273.8px;
-  margin-top: -72px;
-  margin-left: -15px;
-  height: 15%;
-  width: 8.3%;
-}
-
-.logo-left img {
-  margin-right: 1200px;
-  margin-top: -70px;
-  height: 15%;
-  width: 8%;
-}
-/* User Logo*/
-.logo-left1 img {
-  margin-right: -1050px;
-  margin-top: -150px;
-  margin-bottom: 40px;
-  height:  15%;
-  width: 7%;
-}
-.EIlogo-left img{
+.EIlogo-left img {
   margin-right: 1273.8px;
   margin-top: -72px;
   margin-left: -250px;
   height: 15%;
   width: 12%;
-
 }
-.Elogo-left1 img{
+.Elogo-left1 img {
   margin-right: -1050px;
   margin-top: -150px;
-  height:  15%;
+  height: 15%;
   width: 20%;
 }
 
-/* passkey*/
-
-/* Reset and layout */
-/* Reset and full-screen white background */
-html {
-  background-color: #fff;
-}
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-
-  font-family: "Segoe UI", sans-serif;
-}
-
-#root {
-  height: 100%;
-}
 .loader {
   border: 3px solid #f3f3f3;
   border-top: 3px solid #13131a;
@@ -302,18 +264,6 @@ input:focus {
 .star {
   color: rgb(213, 0, 0);
 }
-/*loging page/*
-/* General reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Roboto", sans-serif;
-  background-color: #ffffff;
-}
 
 .passkey {
   display: flex;
@@ -447,13 +397,24 @@ body {
   background: linear-gradient(to right, rgb(213, 0, 0), rgb(108, 47, 17));
   color: #fff; /* White text on hover */
 }
-
 /*instruction page*/
+.Instruction-logo {
+  display: flex;
+  gap: 65rem;
+  margin-top: -3rem;
+}
+.Ilogo-left img {
+  height: 6rem;
+  width: 5rem;
+}
+.Ulogo-left img {
+  height: 6rem;
+  width: 5rem;
+}
+
 .instruction-section {
-  font-family: "Segoe UI", sans-serif;
-  padding: 20px;
   background-color: #fff;
-  height: 80vh;
+  height: auto;
 }
 
 .header {
@@ -464,8 +425,9 @@ body {
 
 .instruction-container {
   display: flex;
-  margin-top: -25px;
-  gap: 5rem;
+  margin-top: -1rem;
+  margin-left: 2rem;
+  gap: 2rem;
 }
 
 .illustration img {
@@ -480,6 +442,7 @@ body {
   border-radius: 10px;
   flex-grow: 1;
   max-width: 50rem;
+  margin-top: -1rem;
 }
 
 .instruction-box h2 {
@@ -516,40 +479,67 @@ body {
 .continue-wrapper {
   display: flex;
   justify-content: center;
-  margin-top: 30px;
-  margin-left: 20rem;
+  margin-top: 10px;
+  margin-left: 10rem;
 }
 
 .continue-button {
   padding: 10px 30px;
   font-size: 16px;
-  background: linear-gradient(
-    90deg,
-    rgb(108, 47, 17),
-    rgb(213, 0, 0)
-  ); /* Gradient background */
+  background: linear-gradient(90deg, rgb(108, 47, 17), rgb(213, 0, 0));
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
 }
-
-/*guideline page*/
-
-.Guideline1 {
+/* guidline */
+.guidline-logo {
   display: flex;
-  justify-content: center; /* Centers the image horizontally */
-  align-items: center; /* Centers the image vertically */
-  margin-top: 20px; /* Adds spacing above the image */
+  gap: 65rem;
+  margin-top: -1.9rem;
+}
+.cheakbox-container {
+  display: grid;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 5px;
+  margin-left: 10rem;
 }
 
-.Guideline1 img {
-  max-width: 400px; /* Sets the maximum width of the image */
-  height: auto; /* Maintains the aspect ratio */
-  border-radius: 8px; /* Optional: Adds rounded corners */
-  object-fit: contain; /* Ensures the image fits within its container */
+.checkbox {
+  display: fixed;
+  align-items: center;
+  font-size: 1rem;
+  gap: 0.2rem;
 }
 
+.checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: rgb(213, 0, 0); /* Modern browsers */
+}
+
+.start-wrapper {
+  margin-top: 0.5rem;
+}
+
+.Button {
+  background: linear-gradient(90deg, rgb(108, 47, 17), rgb(213, 0, 0));
+  color: #fff;
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: -2rem;
+}
+
+.Button:hover {
+  background: linear-gradient(90deg, rgb(213, 0, 0), rgb(108, 47, 17));
+  color: #fff;
+}
 /* OTP Box */
 .otp-box {
   background-color: rgb(241, 214, 200);
@@ -637,7 +627,6 @@ body {
   color: rgb(213, 0, 0);
 }
 
-<<<<<<< HEAD
 /* quiz-page */
 /* QuizPage.css */
 
@@ -662,9 +651,9 @@ body {
 }
 
 .sidebar h4 {
-  margin: 15px 0;
+  margin: 5px 0;
   color: #333;
-  font-size: 16px;
+  font-size: 1rem;
   display: flex;
   justify-content: space-between;
 }
@@ -705,7 +694,7 @@ body {
 
 .marked {
   background-color: #b2fab4;
-  color: #2e7d32;
+  color: #000000;
 }
 
 .active {
@@ -789,20 +778,17 @@ body {
   cursor: pointer;
   font-weight: bold;
   transition: all 0.2s;
+  font-size: 1rem;
+  background: linear-gradient(90deg, rgb(108, 47, 17), rgb(213, 0, 0));
+  color: #ffffff;
 }
-
 .nav-btn:hover {
-  opacity: 0.9;
+  background: linear-gradient(90deg, rgb(213, 0, 0), rgb(108, 47, 17));
+  color: #ffffff;
 }
-
-.back-btn {
-  background-color: #e0e0e0;
-  color: #333;
-}
-
 .next-btn {
-  background-color: #4caf50;
-  color: white;
+  position: absolute;
+  margin-left: 38rem;
 }
 
 /* Responsive design */
@@ -827,17 +813,29 @@ body {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-=======
 
-/* evaluationscreen1 */
- 
+/* evaluationscreen */
+
 /* Container for all content */
+
+/* evaluationscreen */
+.evaluation-logo {
+  display: flex;
+  gap: 65rem;
+  margin-top: -5.7rem;
+}
+.evaluation img {
+  height: 6rem;
+  width: 5rem;
+}
+.evaluationlogo img {
+  height: 6rem;
+  width: 5rem;
+}
 .evcontainer {
-  max-width: 800px;
-  padding: 40px;
+  max-width: 600px;
   text-align: center;
-  position: relative;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-left: 20rem;
 }
 
 /* Title style */
@@ -859,7 +857,7 @@ body {
   margin-bottom: 15px;
   border-radius: 4px;
   font-size: 16px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Continue button */
@@ -880,7 +878,8 @@ body {
 }
 
 /* Left logo styles */
-.evlogo-left, .evlogo-left1 {
+.evlogo-left,
+.evlogo-left1 {
   position: absolute;
   top: -30px;
   width: 100px;
@@ -922,6 +921,3 @@ body {
     margin: 20px auto;
   }
 }
-
-
->>>>>>> a56bbd263d8c433d3102d257100efd03046be89f

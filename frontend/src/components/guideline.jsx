@@ -1,27 +1,24 @@
 import React from 'react';
 import Logo from '../images/Logo.png';
 import UserLogo from "../images/UserLogo.png";
-import Guideline from "../images/guideline.png";
+import PassKeyImage from "../images/PassKey.png";
 import { Link } from "react-router-dom";
 const  guideline =()=> {
   return (
     <>
-    <section>
-    <div className="Guideline1">
-      <img src={Guideline} alt="Guideline"/>
-      </div>
-
-    <div className="container">
-       <div className="logo-left">
-               <img src={Logo} alt="logo" />
+    <section className="instruction-section">
+       <div className='guidline-logo'>
+             <div className="Ilogo-left">
+               <img src={Logo} alt="Company Logo" />
+               </div>
+               <div className="Ulogo-left">
+               <img src={UserLogo} alt="Company Logo"/>
+             </div>
+          </div>
+           <div className="instruction-container">
+                  <div className="illustration">
+                    <img src={PassKeyImage} alt="Exam Illustration" />
                   </div>
-                  <div className="logo-left1">
-               <img src={UserLogo} alt="logo" />
-                  </div>
-      <div className="top-row">
-        
-      </div>
-      </div>
       <div className="instruction-box">
           <h2>Read the instructions carefully before proceeding further.</h2>
           <ul>
@@ -37,12 +34,15 @@ const  guideline =()=> {
             <li>Do not take screenshots, screen record, or switch to another tab during the exam.</li>
             <li>The test duration is 2 hours and 10 minutes with no extra time allowed.</li>
              </ul>
-                </div>
-            <div>
+             </div>
+             </div>
+             <div className='cheakbox-container'>
+             <div className='checkbox'>
             <input type ="checkbox" id="myCheakbox"/> Accept Terms and Conditions
             </div>
-            <div>
-              <Link className='button' type="submit" to="/quiz">Start The Test</Link>
+            <div className="start-wrapper">
+               <Link className='Button' type="submit" to="/quiz">Start The Test</Link>
+            </div>
             </div>
             
         

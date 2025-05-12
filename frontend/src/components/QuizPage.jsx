@@ -110,9 +110,9 @@ const handleOptionSelect = (qid, optId) => {
 
         <div className="nav-buttons">
           {current > 0 && (
-            <button onClick={handleBack} className="nav-btn back-btn">Back</button>
+            <h1 onClick={handleBack} className="nav-btn back-btn">Back</h1>
           )}
-          <button onClick={handleNext} className="nav-btn next-btn">Save & Next</button>
+          <h1 onClick={handleNext} className="nav-btn next-btn">Save & Next</h1>
         </div>
       </div>
     </div>
