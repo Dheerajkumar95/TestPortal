@@ -14,7 +14,7 @@ const congratulation=()=> {
         <span className="star filled">★</span>
         <span className="star filled">★</span>
         <span className="star filled">★</span>
-        <span className="star highlighted">★</span>
+        <span className="star filled">★</span>
       </div>
     </div>
     </section>
