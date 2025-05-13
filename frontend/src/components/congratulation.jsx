@@ -8,19 +8,7 @@ const congratulation=()=> {
     <>
     <section>
     <div className="container">
-      <div className="logo-left">
-                     <img src={Logo} alt="logo" />
-                        </div>
-                        <div className="logo-left1">
-                     <img src={UserLogo} alt="logo" />
-                        </div>
-      <div className="header">
-       
-      </div>
       <h1>congratulation</h1>
-      <div className="Congratulation1">
-      <img src={Congratulation} alt="congrats" width={300} />
-              </div>
       <div className="stars">
         <span className="star filled">★</span>
         <span className="star filled">★</span>

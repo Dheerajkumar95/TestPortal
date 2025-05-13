@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from "react-hot-toast";
 const QuizPage = () => {
   const [questions, setQuestions] = useState([]);
   const [current, setCurrent] = useState(0);
@@ -7,6 +9,18 @@ const QuizPage = () => {
   const [statuses, setStatuses] = useState({});
   const [timeLeft, setTimeLeft] = useState(20 * 60); // 20 minutes
 
+  const navigate = useNavigate();
+  const handleSubmit = () => {
+  const totalQuestions = questions.length;
+  const answeredCount = Object.keys(selectedOptions).length;
+
+  if (answeredCount < totalQuestions) {
+    toast.error("Please answer all questions before submitting.");
+    return;
+  }
+
+  navigate('/congratulations');
+};
   useEffect(() => {
      axios.get('http://localhost:7007/api/auth/questions')
       .then(res => {
@@ -37,13 +51,15 @@ const QuizPage = () => {
   };
 const handleOptionSelect = (qid, optId) => {
   setSelectedOptions(prev => ({ ...prev, [qid]: optId }));
-  setStatuses(prev => ({ ...prev, [qid]: 'Marked' }));
+  setStatuses(prev => ({ ...prev, [current]: 'Marked' }));
 };
-
-  const handleNext = () => {
-    setStatuses(prev => ({ ...prev, [current]: 'Marked' }));
-    setCurrent((prev) => Math.min(prev + 1, questions.length - 1));
-  };
+const handleNext = () => {
+  setStatuses(prev => ({
+    ...prev,
+    [current]: prev[current] === 'Marked' ? 'Marked' : 'Visited',
+  }));
+  setCurrent((prev) => Math.min(prev + 1, questions.length - 1));
+};
 
   const handleBack = () => {
     setCurrent((prev) => Math.max(prev - 1, 0));
@@ -112,7 +128,11 @@ const handleOptionSelect = (qid, optId) => {
           {current > 0 && (
             <h1 onClick={handleBack} className="nav-btn back-btn">Back</h1>
           )}
-          <h1 onClick={handleNext} className="nav-btn next-btn">Save & Next</h1>
+          {current === questions.length - 1 ? (
+         <h1 onClick={handleSubmit} className="nav-btn submit-btn">Submit</h1>
+         ) : (
+        <h1 onClick={handleNext} className="nav-btn next-btn">Save & Next</h1>
+         )}
         </div>
       </div>
     </div>
