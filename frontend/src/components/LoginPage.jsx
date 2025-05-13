@@ -51,7 +51,7 @@ const LoginPage = () => {
               placeholder="Enter password"
               required
             />
-
+           <h6 style={{ marginRight: "-36rem",marginTop: "-22px",fontSize:"1rem" ,fontFamily:"monospace" }} className="login-text">Forgot Password</h6>
           </div>
           <div className="button-container">
          <Link className="crt1"to="/signup">Create account</Link>
