@@ -188,7 +188,7 @@ input:focus {
   font-size: 16px;
   border-radius: 6px;
   cursor: pointer;
-  margin-right: -15rem;
+  margin-right: -1rem;
 }
 
 .createbutton:hover {
