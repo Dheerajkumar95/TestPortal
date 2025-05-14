@@ -25,19 +25,19 @@
   display: flex;
   gap: 65rem;
   margin-top: -2rem;
-  margin-left: -3.1rem;
+  margin-left: -2.28rem;
 }
 .Passkey-logo {
   display: flex;
   gap: 65rem;
   margin-top: -3.3rem;
-  margin-left: -5.1rem;
+  margin-left: -4.28rem;
 }
 .Login-logo {
   display: flex;
   gap: 65rem;
   margin-top: -3.3rem;
-  margin-left: -5.1rem;
+  margin-left: -4.22rem;
 }
 
 .EIlogo-left img {
@@ -89,7 +89,10 @@
   gap: 108px;
   margin-top: -8rem;
 }
-
+.Llogo-left img {
+  height: 6rem;
+  width: 5rem;
+}
 /* Left section: image aligned to side */
 .passkey-left {
   flex: 1;
@@ -702,12 +705,12 @@ input:focus {
   text-align: right;
   font-size: 18px;
   margin-bottom: 20px;
-  color: #d32f2f;
+  color: rgb(24, 182, 74);
   font-weight: bold;
 }
 
 .timer strong {
-  color: #b71c1c;
+  color: rgb(24, 182, 74);
 }
 
 .quiz-title {
@@ -746,6 +749,7 @@ input:focus {
 .option-input {
   margin-right: 10px;
   transform: scale(1.2);
+  background-color: rgb(24, 182, 74);
 }
 
 /* Navigation buttons */
@@ -763,11 +767,11 @@ input:focus {
   font-weight: bold;
   transition: all 0.2s;
   font-size: 1rem;
-  background: linear-gradient(90deg, rgb(108, 47, 17), rgb(213, 0, 0));
+  background: linear-gradient(90deg, rgb(6, 72, 9), rgb(24, 182, 74));
   color: #ffffff;
 }
 .nav-btn:hover {
-  background: linear-gradient(90deg, rgb(213, 0, 0), rgb(108, 47, 17));
+  background: linear-gradient(90deg, rgb(24, 182, 74), rgb(6, 72, 9));
   color: #ffffff;
 }
 .next-btn {
@@ -828,7 +832,7 @@ input:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(213, 0, 0);
+  background-color: rgb(241, 214, 200);
   padding: 15px 20px;
   margin: 10px 0;
   border-radius: 12px;

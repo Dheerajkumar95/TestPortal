@@ -20,7 +20,7 @@ const LoginPage = () => {
     <>
     <section>
       <div className='Login-logo'>
-                 <div className="Ilogo-left">
+                 <div className="Llogo-left">
                    <img src={Logo} alt="Company Logo" />
                    </div>
               </div>
