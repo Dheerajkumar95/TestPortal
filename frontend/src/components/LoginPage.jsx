@@ -23,6 +23,41 @@ const LoginPage = () => {
                  <div className="Ilogo-left">
                    <img src={Logo} alt="Company Logo" />
                    </div>
+              </div>
+          <div className="login-container">
+        <div className="passkey-left">
+          <img src={Login} alt="Passkey Illustration" />
+        </div>
+        <div className="passkey-right">
+          <h1 className="title">Login</h1>
+          <form  onSubmit={handleSubmit}>
+            <h1 style={{ marginRight: "17.5rem",fontSize:"1rem" ,fontFamily:"monospace" }}>Email ID</h1>
+            <input   
+              type="text"
+              name="email"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
+              placeholder="Enter email ID"
+              required />
+            <h1 style={{ marginRight: "17.5rem",fontSize:"1rem" ,fontFamily:"monospace" }}>Password</h1>
+            <input    
+            type="password"
+              name="password"
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
+              placeholder="Enter password"
+              required />
+            <div className="button-container">
+         <Link className="crt1"to="/signup">Create account</Link>
+          <button className='button' type="submit">Log In</button>
+          </div>
+          </form>
+        </div>
+      </div>
+      {/* <div className='Login-logo'>
+                 <div className="Ilogo-left">
+                   <img src={Logo} alt="Company Logo" />
+                   </div>
                     
               </div>
       <div className="container_passkey">
@@ -60,7 +95,7 @@ const LoginPage = () => {
           </form>
         </div>
       </div>
-      
+       */}
     </section>
     </>
   );
