@@ -31,7 +31,7 @@ const LoginPage = () => {
         <div className="passkey-right">
           <h1 className="title">Login</h1>
           <form  onSubmit={handleSubmit}>
-            <h1 style={{ marginRight: "17.5rem",fontSize:"1rem" ,fontFamily:"monospace" }}>Email ID</h1>
+            <h1 style={{ marginRight: "20.5rem",fontSize:"1rem" ,fontFamily:"monospace" }}>Email ID</h1>
             <input   
               type="text"
               name="email"
@@ -39,7 +39,7 @@ const LoginPage = () => {
               onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
               placeholder="Enter email ID"
               required />
-            <h1 style={{ marginRight: "17.5rem",fontSize:"1rem" ,fontFamily:"monospace" }}>Password</h1>
+            <h1 style={{ marginRight: "20.5rem",fontSize:"1rem" ,fontFamily:"monospace" }}>Password</h1>
             <input    
             type="password"
               name="password"
@@ -54,48 +54,6 @@ const LoginPage = () => {
           </form>
         </div>
       </div>
-      {/* <div className='Login-logo'>
-                 <div className="Ilogo-left">
-                   <img src={Logo} alt="Company Logo" />
-                   </div>
-                    
-              </div>
-      <div className="container_passkey">
-        <div className="PasskeyImage">
-          <img src={Login} alt="PassKey" />
-        </div>
-        <div className="passkey-section">
-          <div className="logintext"><h1>Login</h1></div>
-          <form onSubmit={handleSubmit}>
-          <h1 style={{ marginRight: "0.3rem",fontSize:"1rem" ,fontFamily:"monospace" }} className="login-text">Email ID</h1>
-          <div className="InputMethodPasskey">
-           <input
-              type="text"
-              name="email"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
-              placeholder="Enter email ID"
-              required
-            />
-           <h1 style={{fontSize:"1rem" ,fontFamily:"monospace" }} className="login-text">Password</h1>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
-              placeholder="Enter password"
-              required
-            />
-           <h6 style={{ marginRight: "-36rem",marginTop: "-22px",fontSize:"1rem" ,fontFamily:"monospace" }} className="login-text">Forgot Password</h6>
-          </div>
-          <div className="button-container">
-         <Link className="crt1"to="/signup">Create account</Link>
-          <button className='button' type="submit">Log In</button>
-          </div>
-          </form>
-        </div>
-      </div>
-       */}
     </section>
     </>
   );
