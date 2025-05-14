@@ -7,7 +7,7 @@ const QuizPage = () => {
   const [current, setCurrent] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [statuses, setStatuses] = useState({});
-  const [timeLeft, setTimeLeft] = useState(20 * 60); // 20 minutes
+  const [timeLeft, setTimeLeft] = useState(1 * 60); // 20 minutes
 
   const navigate = useNavigate();
   const handleSubmit = () => {
@@ -34,15 +34,20 @@ const QuizPage = () => {
       .catch(err => console.error(err));
   }, []);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) clearInterval(timer);
-        return prev - 1;
-      });
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
+ useEffect(() => {
+  const timer = setInterval(() => {
+    setTimeLeft((prev) => {
+      if (prev <= 1) {
+        clearInterval(timer);
+        navigate('/congratulations'); // Navigate to Congratulations page
+        return 0;
+      }
+      return prev - 1;
+    });
+  }, 1000);
+  return () => clearInterval(timer);
+}, [navigate]); // Add navigate in dependency array
+
 
   const formatTime = (secs) => {
     const min = Math.floor(secs / 60);
