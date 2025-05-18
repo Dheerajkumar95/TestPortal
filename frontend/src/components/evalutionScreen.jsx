@@ -13,15 +13,6 @@ const evaluationScreen=()=> {
   return (
     <>
     <section className="instruction-section">
-       <div className='evaluation-logo'>
-            <div className="evaluation">
-              <img src={Logo} alt="Company Logo" />
-              </div>
-              <div className="evaluationlogo">
-              <img src={UserLogo} alt="Company Logo"/>
-            </div>
-         </div>
-                  
       <h2 className="evtitle">Technical Aptitude Evaluation</h2>
       <div className="evtopic-container">
   {topics.map((topic) => (

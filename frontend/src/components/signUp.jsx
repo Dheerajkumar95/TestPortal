@@ -70,12 +70,6 @@ const SignUp = () => {
       <VerificationPage email={formData.email}  formData={formData}/>
     ) : (
     <section className="signUp" id="signUp">
-      <div className='SignUp-logo'>
-                 <div className="Ilogo-left">
-                   <img src={Logo} alt="Company Logo" />
-                   </div>
-              </div>
-
       <div className="Spasskey-left">
         <img src={CreateAccount} alt="signUp" />
       </div>
