@@ -14,45 +14,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-/*logo*/
-.Plogo-left img {
-  margin-right: 1103px;
-  margin-top: -10.5px;
-  height: 15%;
-  width: 8%;
-}
-.SignUp-logo {
-  display: flex;
-  gap: 65rem;
-  margin-top: -2rem;
-  margin-left: -2.28rem;
-}
-.Passkey-logo {
-  display: flex;
-  gap: 65rem;
-  margin-top: -3.3rem;
-  margin-left: -4.28rem;
-}
-.Login-logo {
-  display: flex;
-  gap: 65rem;
-  margin-top: -3.3rem;
-  margin-left: -4.22rem;
-}
-
-.EIlogo-left img {
-  margin-right: 1273.8px;
-  margin-top: -72px;
-  margin-left: -250px;
-  height: 15%;
-  width: 12%;
-}
-.Elogo-left1 img {
-  margin-right: -1050px;
-  margin-top: -150px;
-  height: 15%;
-  width: 20%;
-}
 
 .loader {
   border: 3px solid #f3f3f3;
@@ -89,14 +50,9 @@
   gap: 108px;
   margin-top: -8rem;
 }
-.Llogo-left img {
-  height: 6rem;
-  width: 5rem;
-}
-/* Left section: image aligned to side */
 .passkey-left {
   flex: 1;
-  display: flex; /* align image to the side */
+  display: flex;
 }
 
 .passkey-left img {
@@ -108,12 +64,11 @@
   margin-right: 3.2rem;
 }
 
-/* Right section: content centered vertically */
 .passkey-right {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* center vertically */
+  justify-content: center;
   padding: 20px;
   max-width: 450px;
   border-radius: 20px;
@@ -125,13 +80,12 @@
   margin-right: 4.2rem;
 }
 
-/* Title */
 .title {
   font-size: 2rem;
   color: rgb(213, 0, 0);
   margin-bottom: 50px;
 }
-/* Instruction box */
+
 .instruction {
   background: linear-gradient(90deg, rgb(108, 47, 17), rgb(213, 0, 0));
   color: white;
@@ -227,15 +181,6 @@ input:focus {
   align-items: center;
   margin-bottom: 20px;
 }
-
-.logo,
-.user-logo {
-  background-color: rgb(213, 0, 0);
-  color: white;
-  padding: 10px;
-  border-radius: 50%;
-}
-
 .image-container {
   background-color: rgb(213, 0, 0);
   width: 300px;
@@ -386,19 +331,6 @@ input:focus {
   color: #fff; /* White text on hover */
 }
 /*instruction page*/
-.Instruction-logo {
-  display: flex;
-  gap: 65rem;
-  margin-top: -3rem;
-}
-.Ilogo-left img {
-  height: 6rem;
-  width: 5rem;
-}
-.Ulogo-left img {
-  height: 6rem;
-  width: 5rem;
-}
 
 .instruction-section {
   height: auto;
@@ -414,7 +346,7 @@ input:focus {
   display: flex;
   margin-top: -1rem;
   margin-left: 2rem;
-  gap: 2rem;
+  gap: 5rem;
 }
 
 .illustration img {
@@ -428,8 +360,8 @@ input:focus {
   padding: 20px;
   border-radius: 10px;
   flex-grow: 1;
-  max-width: 50rem;
-  margin-top: -1rem;
+  width: 50rem;
+  margin-top: 5rem;
 }
 
 .instruction-box h2 {
@@ -464,33 +396,20 @@ input:focus {
 }
 
 .continue-wrapper {
+  position: relative;
   display: flex;
   justify-content: center;
   margin-top: 10px;
-  margin-left: 10rem;
+  margin-left: 20rem;
 }
 
-.continue-button {
-  padding: 10px 30px;
-  font-size: 16px;
-  background: linear-gradient(90deg, rgb(108, 47, 17), rgb(213, 0, 0));
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
 /* guidline */
-.guidline-logo {
-  display: flex;
-  gap: 65rem;
-  margin-top: -1.9rem;
-}
 .cheakbox-container {
   display: grid;
   flex-direction: column;
   align-items: flex-start;
   margin-top: 5px;
-  margin-left: 10rem;
+  margin-left: 25rem;
 }
 
 .checkbox {
@@ -805,26 +724,9 @@ input:focus {
 
 /* evaluationscreen */
 
-/* Container for all content */
-
-/* evaluationscreen */
-.evaluation-logo {
-  display: flex;
-  gap: 65rem;
-  margin-top: -4.4rem;
-}
-.evaluation img {
-  height: 6rem;
-  width: 5rem;
-}
-.evaluationlogo img {
-  height: 6rem;
-  width: 5rem;
-}
 .evtopic-container {
-  max-width: 600px;
+  width: 50rem;
   margin: 0 auto;
-  padding: 20px;
 }
 .evtitle {
   color: rgb(213, 0, 0);
@@ -856,9 +758,8 @@ input:focus {
 
 /* Continue button */
 .evbutton {
+  position: relative;
   display: inline-block;
-  margin-top: 40px;
-  margin-left: 3rem;
   background-color: #b4200c;
   color: #fff;
   text-decoration: none;
@@ -872,37 +773,6 @@ input:focus {
 .evbutton:hover {
   background: linear-gradient(90deg, rgb(213, 0, 0), rgb(108, 47, 17));
   color: #ffffff;
-}
-
-/* Left logo styles */
-.evlogo-left,
-.evlogo-left1 {
-  position: absolute;
-  top: -30px;
-  width: 100px;
-  height: 100px;
-  background-color: #b4200c;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-}
-
-.evlogo-left img,
-.evlogo-left1 img {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-}
-
-/* Positioning for left and right logos */
-.evlogo-left {
-  left: -140px;
-}
-
-.evlogo-left1 {
-  right: -140px;
 }
 
 /* Responsive styles */
