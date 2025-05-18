@@ -31,7 +31,7 @@ const InstructionScreen = () => {
       </div>
 
       <div className="continue-wrapper">
-        <Link className='button' type="submit" to="/evaluation">Continue</Link>
+        <Link className='evbutton' type="submit" to="/evaluation">Continue</Link>
       </div>
     </section>
   );
