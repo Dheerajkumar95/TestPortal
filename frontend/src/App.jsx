@@ -12,7 +12,7 @@ import Congratulation from './components/congratulation';
 import Passkey from './components/passkey';
 import VerificationPage from './components/VerificationPage';
 import QuizPage from './components/QuizPage';
-
+import ResetPassword from "./components/ResetPassword";
 function App() {
   return (
     <>
@@ -22,6 +22,7 @@ function App() {
         <Route path="/verify" element={<VerificationPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot" element={<ForgotPassword />} />
+         <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/instructions" element={<InstructionScreen />} />
         <Route path="/evaluation" element={<EvaluationScreen />} />
         <Route path="/guideline" element={<Guideline />} />
