@@ -6,7 +6,7 @@ const VerificationPage = ({ email, formData }) => {
   const inputsRef = useRef([]);
   const [timer, setTimer] = useState(30);
   const [isResendEnabled, setIsResendEnabled] = useState(false);
-  const [loading, setLoading] = useState(false); // ✅ For spinner on Verify button
+  const [loading, setLoading] = useState(false);
   const { Verification, resendotp } = useAuthStore();
   const navigate = useNavigate();
   const buttonRef = useRef(null);
