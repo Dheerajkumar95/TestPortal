@@ -1,6 +1,4 @@
 import React from 'react';
-import Logo from '../images/Logo.png';
-import UserLogo from "../images/UserLogo.png";
 import PassKeyImage from "../images/PassKey.png";
 import { Link } from "react-router-dom";
 const  guideline =()=> {
@@ -33,7 +31,7 @@ const  guideline =()=> {
             <input type ="checkbox" id="myCheakbox"/> Accept Terms and Conditions
             </div>
             <div className="start-wrapper">
-               <Link className='Button' type="submit" to="/quiz">Start The Test</Link>
+               <Link className='evbutton' type="submit" to="/quiz">Start The Test</Link>
             </div>
             </div>
             

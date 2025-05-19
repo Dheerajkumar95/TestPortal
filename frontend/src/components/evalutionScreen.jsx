@@ -1,6 +1,4 @@
 import React from 'react';
-import Logo from '../images/Logo.png';
-import UserLogo from "../images/UserLogo.png";
 import { Link } from "react-router-dom";
 const evaluationScreen=()=> {
   const topics = [

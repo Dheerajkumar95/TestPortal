@@ -6,7 +6,7 @@ import LoginPage from './components/LoginPage';
 import SignUp from './components/signUp';
 import InstructionScreen from './components/instruction';
 import EvaluationScreen from './components/evalutionScreen';
- 
+import ForgotPassword from './components/ForgotPassword';
 import Guideline from './components/guideline';
 import Congratulation from './components/congratulation';
 import Passkey from './components/passkey';
@@ -21,6 +21,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/verify" element={<VerificationPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/forgot" element={<ForgotPassword />} />
         <Route path="/instructions" element={<InstructionScreen />} />
         <Route path="/evaluation" element={<EvaluationScreen />} />
         <Route path="/guideline" element={<Guideline />} />

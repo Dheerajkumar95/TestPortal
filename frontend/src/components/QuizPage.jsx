@@ -7,7 +7,7 @@ const QuizPage = () => {
   const [current, setCurrent] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [statuses, setStatuses] = useState({});
-  const [timeLeft, setTimeLeft] = useState(1 * 60); // 20 minutes
+  const [timeLeft, setTimeLeft] = useState(50* 60); // 20 minutes
 
   const navigate = useNavigate();
   const handleSubmit = () => {
@@ -78,7 +78,7 @@ const handleNext = () => {
   const currentQ = questions[current];
 
   return (
-    
+    <>
     <div className="quiz-app">
       {/* Left Sidebar */}
       <div className="sidebar">
@@ -109,7 +109,17 @@ const handleNext = () => {
           ⏱️ Time Left: <strong>{formatTime(timeLeft)}</strong>
         </div>
         <h2 className="quiz-title">Front-End Logic</h2>
-        <p className="question-text">Q{current + 1}. {currentQ.question}</p>
+       <div className="question-container">
+      {currentQ.image && (
+    <img
+      src={currentQ.image}
+      alt={`Question ${current + 1}`}
+      className="question-image"
+      style={{ maxWidth: "100%", marginBottom: "1rem" }}
+    />
+     )}
+  <p className="question-text">Q{current + 1}. {currentQ.question}</p>
+</div>
 
         <div>
           {currentQ.options.map((opt, idx) => (
@@ -128,19 +138,24 @@ const handleNext = () => {
             </div>
           ))}
         </div>
+         
 
-        <div className="nav-buttons">
-          {current > 0 && (
-            <h1 onClick={handleBack} className="nav-btn back-btn">Back</h1>
-          )}
-          {current === questions.length - 1 ? (
-         <h1 onClick={handleSubmit} className="nav-btn submit-btn">Submit</h1>
-         ) : (
-        <h1 onClick={handleNext} className="nav-btn next-btn">Save & Next</h1>
-         )}
-        </div>
       </div>
     </div>
+      <div className="nav-buttons-container">
+  {/* Back button (only shows when current > 0) */}
+  {current > 0 && (
+    <h1 onClick={handleBack} className="nav-btn">Back</h1>
+  )}
+
+  {/* Save & Next or Submit button */}
+  {current === questions.length - 1 ? (
+    <h1 onClick={handleSubmit} className="nav-btn">Submit</h1>
+  ) : (
+    <h1 onClick={handleNext} className="nav-btn">Save & Next</h1>
+  )}
+</div>
+</>
   );
 };
 
