@@ -1,15 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PassKeyImage from "../images/PassKey.png";
-import { Link } from "react-router-dom";
-const  guideline =()=> {
+import { useNavigate } from "react-router-dom";
+
+const Guideline = () => {
+  const [isChecked, setIsChecked] = useState(false);
+  const navigate = useNavigate();
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
+  const handleStartTest = () => {
+    if (isChecked) {
+      navigate("/quiz");
+    } else {
+      alert("Please accept the terms and conditions before starting the test.");
+    }
+  };
+
   return (
-    <>
     <section className="instruction-section">
-           <div className="instruction-container">
-                  <div className="illustration">
-                    <img src={PassKeyImage} alt="Exam Illustration" />
-                  </div>
-      <div className="instruction-box">
+      <div className="instruction-container">
+        <div className="illustration">
+          <img src={PassKeyImage} alt="Exam Illustration" />
+        </div>
+        <div className="instruction-box">
           <h2>Read the instructions carefully before proceeding further.</h2>
           <ul>
             <li>Each section has 20 questions and a 30-minute time limit.</li>
@@ -23,22 +38,38 @@ const  guideline =()=> {
             <li>If the exam is being supervised, follow all proctoring guidelines.</li>
             <li>Do not take screenshots, screen record, or switch to another tab during the exam.</li>
             <li>The test duration is 2 hours and 30 minutes with no extra time allowed.</li>
-             </ul>
-             </div>
-             </div>
-             <div className='cheakbox-container'>
-             <div className='checkbox'>
-            <input type ="checkbox" id="myCheakbox"/> Accept Terms and Conditions
-            </div>
-            <div className="start-wrapper">
-               <Link className='evbutton' type="submit" to="/quiz">Start The Test</Link>
-            </div>
-            </div>
-            
-        
-    </section>
-    </>
-  );
-}
+          </ul>
+        </div>
+      </div>
 
-export default guideline;
+      <div className='cheakbox-container'>
+        <div className='checkbox'>
+          <input  
+          className='inputbox'
+            type="checkbox" 
+            id="myCheckbox" 
+            checked={isChecked} 
+            onChange={handleCheckboxChange} 
+          />
+          <label htmlFor="myCheckbox"> Accept Terms and Conditions</label>
+        </div>
+        <div className="start-wrapper">
+          <h1 
+            className='evbutton' 
+            type="button" 
+            onClick={handleStartTest}
+            disabled={!isChecked}
+            style={{ 
+              opacity: isChecked ? 1 : 0.5,
+              cursor: isChecked ? 'pointer' : 'not-allowed' 
+            }}
+          >
+            Start The Test
+          </h1>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Guideline;
