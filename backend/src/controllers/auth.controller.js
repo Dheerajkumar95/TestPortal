@@ -210,11 +210,11 @@ const forgotPassword = async (req, res) => {
     if (!user)
       return res.status(400).json({ message: "Email not registered." });
 
-    const token = await bcrypt.hash(email, 10); // ✅ Await bcrypt.hash
+    const token = await bcrypt.hash(email, 10); //
     console.log(token);
 
     const resetToken = token;
-    const resetTokenExpire = Date.now() + 15 * 60 * 1000; // ✅ Corrected from 5 minutes to 15 minutes
+    const resetTokenExpire = Date.now() + 15 * 60 * 1000;
 
     const newUser = await forgot.create({
       email,
