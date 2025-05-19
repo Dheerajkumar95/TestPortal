@@ -50,7 +50,7 @@ const ResetPassword = () => {
       });
 
       toast.success(response.data.message || "Password reset successful!");
-      setTimeout(() => navigate("/login"), 2000);
+      setTimeout(() => navigate("/login"),10);
     } catch (error) {
       toast.error(error.response?.data?.message || "Password reset failed.");
     } finally {

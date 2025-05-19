@@ -239,8 +239,7 @@ const forgotPassword = async (req, res) => {
       },
     });
   } catch (err) {
-    console.error("Forgot Password Error:", err);
-    res.status(500).json({ message: "Server Error", error: err.message });
+    res.status(500).json({ message: "Server Error" });
   }
 };
 const verifyToken = async (req, res) => {
