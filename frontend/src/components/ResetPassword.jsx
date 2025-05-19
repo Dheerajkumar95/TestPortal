@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axiosInstance from "../utils/axiosInstance"; // Make sure this is correctly imported
-import { toast } from "react-toastify";
+import { axiosInstance } from "../lib/axios.js";
+import { toast } from "react-hot-toast";
 
 const ResetPassword = () => {
   const { token } = useParams();
