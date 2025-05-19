@@ -227,7 +227,7 @@ const forgotPassword = async (req, res) => {
     )}`;
     console.log("Reset link:", link);
 
-    await ResetPasswordEmail(email, link); // ✅ Consider renaming this to something like sendResetEmail
+    await ResetPasswordEmail(email, link);
 
     return res.status(201).json({
       message: "Reset link sent to your email.",
