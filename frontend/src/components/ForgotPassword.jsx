@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-
+import { axiosInstance } from "../lib/axios.js";
+import { toast } from "react-hot-toast";
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -16,29 +17,19 @@ const ForgotPassword = () => {
       return;
     }
 
-    try {
-      setLoading(true);
-      // Replace with your backend endpoint
-      const response = await fetch("https://yourapi.com/auth/forgot-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
+   try {
+  setLoading(true);
+  const response = await axiosInstance.post("/auth/forgotPassword", {
+    email,
+  });
+  toast.success(response.data.message || "Reset link sent!");
+  setEmail("");
+} catch (error) {
+  toast.error(error.response?.data?.error || "Failed to send reset link.");
+} finally {
+  setLoading(false);
+}
 
-      const data = await response.json();
-      if (response.ok) {
-        setMessage(data.message || "Reset link sent!");
-        setEmail("");
-      } else {
-        throw new Error(data.error || "Failed to send reset link.");
-      }
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
   };
 
   return (
