@@ -1,6 +1,5 @@
 import React,{useState}from "react";
 import Login from "../images/Login.png"; // Replace with your image path
-import  Logo from "../images/Logo.png";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
@@ -43,6 +42,8 @@ const LoginPage = () => {
               onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
               placeholder="Enter password"
               required />
+              
+            <Link className="forgotlink" to="/forgot">Forgot Password</Link>
             <div className="button-container">
          <Link className="crt1"to="/signup">Create account</Link>
           <button className='button' type="submit">Log In</button>

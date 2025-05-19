@@ -217,6 +217,8 @@ const questions = (req, res) => {
       id: 1,
       question:
         "Which method is used to add an element to the end of an array in JavaScript?",
+      image:
+        "https://t4.ftcdn.net/jpg/00/14/31/21/360_F_14312160_noHLLbfSMsCzvckeNrMaI4KwPgkWxYqb.jpg",
       options: [
         { id: "a", text: "push()" },
         { id: "b", text: "pop()" },

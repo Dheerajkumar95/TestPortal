@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import CreateAccount from "../images/CreateAccount.png";
-import Logo from "../images/Logo.png";
 import { toast } from "react-hot-toast";
  
 import VerificationPage from './VerificationPage';

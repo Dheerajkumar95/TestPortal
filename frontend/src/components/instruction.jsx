@@ -1,7 +1,5 @@
 import React from 'react';
 import PassKeyImage from "../images/PassKey.png";
-import UserLogo from "../images/UserLogo.png";
-import Logo from "../images/Logo.png";
 import { Link } from "react-router-dom";
 const InstructionScreen = () => {
   return (

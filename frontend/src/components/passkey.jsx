@@ -1,6 +1,5 @@
 import React,{useState} from 'react';
 import PassKeyImage from "../images/PassKey.png";
-import  Logo from "../images/Logo.png";
 import { useAuthStore } from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
 const PasskeyPage = () => {
