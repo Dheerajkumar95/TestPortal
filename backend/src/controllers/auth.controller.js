@@ -243,6 +243,53 @@ const forgotPassword = async (req, res) => {
     res.status(500).json({ message: "Server Error", error: err.message });
   }
 };
+const verifyToken = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const tokenDoc = await forgot.findOne({ resetToken: token });
+
+    if (!tokenDoc || tokenDoc.resetTokenExpire < Date.now()) {
+      return res.status(400).json({ message: "Token is invalid or expired." });
+    }
+
+    res.status(200).json({ message: "Token verified. Set your new password." });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+const resetPassword = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const { password, confirmPassword } = req.body;
+
+    if (!password || !confirmPassword) {
+      return res.status(400).json({ message: "All fields are required." });
+    }
+    if (password !== confirmPassword) {
+      return res.status(400).json({ message: "Passwords do not match." });
+    }
+
+    const tokenDoc = await forgot.findOne({ resetToken: token });
+
+    if (!tokenDoc || tokenDoc.resetTokenExpire < Date.now()) {
+      return res.status(400).json({ message: "Invalid or expired token." });
+    }
+
+    const user = await User.findOne({ email: tokenDoc.email });
+    if (!user) {
+      return res.status(400).json({ message: "User not found." });
+    }
+
+    user.password = await bcrypt.hash(password, 10);
+    await user.save();
+
+    await forgot.deleteOne({ _id: tokenDoc._id });
+
+    res.status(200).json({ message: "Password reset successful!" });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
 const questions = async (req, res) => {
   try {
     const questions = await Question.find();
@@ -305,4 +352,6 @@ module.exports = {
   verifyOtpAndRegister,
   questions,
   forgotPassword,
+  verifyToken,
+  resetPassword,
 };
