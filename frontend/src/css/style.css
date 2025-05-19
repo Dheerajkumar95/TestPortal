@@ -511,14 +511,14 @@ input:focus {
   flex-direction: column;
   align-items: flex-start;
   margin-top: 5px;
-  margin-left: 35rem;
+  margin-left: 38rem;
 }
 
 .checkbox {
   display: fixed;
   align-items: center;
   font-size: 1rem;
-  gap: 0.2rem;
+  gap: 0.1rem;
 }
 
 .checkbox input[type="checkbox"] {
@@ -528,7 +528,7 @@ input:focus {
 }
 
 .start-wrapper {
-  margin-top: 0.5rem;
+  margin-top: 0.1rem;
 }
 
 .Button {
@@ -541,7 +541,7 @@ input:focus {
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.2s;
-  margin-top: -2rem;
+  margin-top: -5rem;
 }
 
 .Button:hover {
