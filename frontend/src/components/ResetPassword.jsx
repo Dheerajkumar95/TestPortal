@@ -67,7 +67,7 @@ const ResetPassword = () => {
         {error && <div className="message error">{error}</div>}
 
         <form onSubmit={handleSubmit}>
-          <label htmlFor="password">New Password</label>
+          <label style={{ marginRight: "-10px"}} htmlFor="password">New Password</label>
           <input
             id="password"
             type="password"

@@ -908,21 +908,20 @@ input:focus {
 /* ResetPassword.css */
 
 .reset-container {
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f7f9fc;
+  background-color: #ffffff;
   padding: 20px;
 }
 
 .reset-box {
-  background-color: #ffffff;
+  background-color: #e6ffed;
   padding: 30px 40px;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 400px;
+  width: 500px;
 }
 
 .reset-box h2 {
@@ -958,8 +957,9 @@ form {
 
 form label {
   font-size: 14px;
-  margin-bottom: 6px;
+  margin-bottom: -1px;
   margin-top: 15px;
+  margin-right: -25px;
   color: #333;
 }
 
@@ -984,7 +984,7 @@ form input:focus {
   width: 100%;
   padding: 10px;
   font-size: 15px;
-  background-color: #1976d2;
+  background: linear-gradient(90deg, rgb(6, 72, 9), rgb(24, 182, 74));
   color: white;
   border: none;
   border-radius: 6px;
@@ -993,12 +993,14 @@ form input:focus {
 }
 
 .button-group button:disabled {
-  background-color: #90caf9;
+  border: none;
+  background-color: linear-gradient(90deg, rgb(24, 182, 74), rgb(6, 72, 9));
   cursor: not-allowed;
 }
 
 .button-group button:hover:not(:disabled) {
-  background-color: #1565c0;
+  border: none;
+  background: linear-gradient(90deg, rgb(24, 182, 74), rgb(6, 72, 9));
 }
 
 .login-link {
