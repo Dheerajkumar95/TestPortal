@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from "react-hot-toast";
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+
 const QuizPage = () => {
   const [questions, setQuestions] = useState([]);
   const [current, setCurrent] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [statuses, setStatuses] = useState({});
-  const [timeLeft, setTimeLeft] = useState(50* 60); // 20 minutes
+  const [timeLeft, setTimeLeft] = useState(30* 60); // 20 minutes
 
   const navigate = useNavigate();
   const handleSubmit = () => {
@@ -76,6 +79,18 @@ const handleNext = () => {
 
   if (questions.length === 0) return <p>Loading...</p>;
   const currentQ = questions[current];
+ 
+const totalTime = 30 * 60;  
+
+const getColor = () => {
+  if (timeLeft <= 5 * 60) return "#FF3131";
+  if (timeLeft <= 15 * 60) return "#FFFF00";
+  return "rgb(24, 182, 74)";
+ 
+};
+
+const percentage = (timeLeft / totalTime) * 100;
+
 
   return (
     <>
@@ -105,9 +120,18 @@ const handleNext = () => {
 
       {/* Main Content */}
       <div className="quiz-content">
-        <div className="timer">
-          ⏱️ Time Left: <strong>{formatTime(timeLeft)}</strong>
-        </div>
+       <div className="timer">
+  <CircularProgressbar
+    value={percentage}
+    text={formatTime(timeLeft)}
+    styles={buildStyles({
+      pathColor: getColor(),
+      textColor: "#000",
+      trailColor: "#eee",
+    })}
+  />
+</div>
+
         <h2 className="quiz-title">Front-End Logic</h2>
        <div className="question-container">
       {currentQ.image && (
