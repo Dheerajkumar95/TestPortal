@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PassKeyImage from "../images/PassKey.png";
 import { useNavigate } from "react-router-dom";
+import toast from 'react-hot-toast';
 
 const Guideline = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -13,11 +14,13 @@ const Guideline = () => {
   const handleStartTest = () => {
     if (isChecked) {
       navigate("/quiz");
-    } else {
-      alert("Please accept the terms and conditions before starting the test.");
-    }
-  };
-
+    }  
+     else {
+  toast.success("Please accept the terms and conditions before starting the test.", {
+    duration: 5000, 
+  });
+}
+  }
   return (
     <section className="instruction-section">
       <div className="instruction-container">
