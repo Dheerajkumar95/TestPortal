@@ -1,5 +1,5 @@
 import React,{useState}from "react";
-import Login from "../images/Login.png"; // Replace with your image path
+import Login from "../images/Login.png"; 
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
