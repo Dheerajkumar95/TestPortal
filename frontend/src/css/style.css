@@ -506,7 +506,7 @@ input:focus {
   display: flex;
   justify-content: center;
   margin-top: 10px;
-  margin-left: 35rem;
+  margin-left: 33rem;
 }
 
 /* guidline */
@@ -514,7 +514,7 @@ input:focus {
   display: grid;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 38rem;
+  margin-left: 36rem;
 }
 
 .checkbox {
