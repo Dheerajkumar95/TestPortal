@@ -40,7 +40,7 @@ const Guideline = () => {
             <li>Submit your answers before the timer runs out.</li>
             <li>If the exam is being supervised, follow all proctoring guidelines.</li>
             <li>Do not take screenshots, screen record, or switch to another tab during the exam.</li>
-            <li>The test duration is 2 hours and 30 minutes with no extra time allowed.</li>
+            <li>The test duration is 2 hours and 30 minutes with no extra time allowed. here add</li>
           </ul>
         </div>
       </div>
