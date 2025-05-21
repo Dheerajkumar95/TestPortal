@@ -7,6 +7,7 @@ const optionSchema = new mongoose.Schema({
 
 const questionSchema = new mongoose.Schema({
   id: Number,
+  section: String,
   question: String,
   image: String,
   options: [optionSchema],
