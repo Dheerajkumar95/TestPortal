@@ -132,7 +132,7 @@ const QuizPage = () => {
     }
   };
 
-  if (waiting) return <h2 style={{ textAlign: "center" }}>Loading next section in {waitingTimeLeft} seconds...</h2>;
+  if (waiting) return <h2 style={{ textAlign: "center" }}>Next section in {waitingTimeLeft} seconds...</h2>;
   if (sectionQuestions.length === 0) return <p>Loading questions...</p>;
 
   const currentQ = sectionQuestions[current];
@@ -214,7 +214,7 @@ const QuizPage = () => {
             onClick={() => handleSubmitSection(false)}
             className={`nav-btn ${sectionQuestions.some(q => !selectedOptions[q.id]) ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
-            Submit Section
+            Submit
           </h1>
         ) : (
           <h1 onClick={handleNext} className="nav-btn">Save & Next</h1>
