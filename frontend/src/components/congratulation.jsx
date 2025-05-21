@@ -1,20 +1,24 @@
-const congratulation=()=> {
-    return (
-    <>
-    <section>
-    <div className="container">
-      <h1>congratulation</h1>
-      <div className="stars">
-        <span className="star filled">★</span>
-        <span className="star filled">★</span>
-        <span className="star filled">★</span>
-        <span className="star filled">★</span>
-        <span className="star filled">★</span>
-      </div>
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+
+const Congratulations = () => {
+  const location = useLocation();
+  const { score, total } = location.state || {};
+
+  return (
+    <div className="congrats-page">
+      <h1>🎉 Congratulations! 🎉</h1>
+      {score !== undefined ? (
+        <>
+          <h2>Your Score: {score} / {total}</h2>
+          <p>Percentage: {((score / total) * 100).toFixed(2)}%</p>
+          <p>{score / total >= 0.8 ? "Excellent work! 💯" : score / total >= 0.5 ? "Good job! Keep practicing." : "Don't worry! Practice makes perfect."}</p>
+        </>
+      ) : (
+        <p>Result data not available.</p>
+      )}
     </div>
-    </section>
-    </>
   );
 };
 
-export default congratulation;
+export default Congratulations;
