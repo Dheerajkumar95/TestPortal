@@ -218,17 +218,28 @@ const forgotPassword = async (req, res) => {
     if (!user)
       return res.status(400).json({ message: "Email not registered." });
 
-    const token = await bcrypt.hash(email, 10); //
-    console.log(token);
+    const token = await bcrypt.hash(email, 10);
+    console.log("Generated token:", token);
 
     const resetToken = token;
     const resetTokenExpire = Date.now() + 15 * 60 * 1000;
 
-    const newUser = await forgot.create({
-      email,
-      resetToken,
-      resetTokenExpire,
-    });
+    // Check if a reset request already exists for this email
+    let existingRequest = await forgot.findOne({ email });
+
+    if (existingRequest) {
+      // Update existing token and expiry
+      existingRequest.resetToken = resetToken;
+      existingRequest.resetTokenExpire = resetTokenExpire;
+      await existingRequest.save();
+    } else {
+      // Create a new reset record
+      existingRequest = await forgot.create({
+        email,
+        resetToken,
+        resetTokenExpire,
+      });
+    }
 
     const link = `http://localhost:5173/reset-password/${encodeURIComponent(
       token
@@ -240,16 +251,18 @@ const forgotPassword = async (req, res) => {
     return res.status(201).json({
       message: "Reset link sent to your email.",
       data: {
-        _id: newUser._id,
-        email: newUser.email,
-        resetToken: newUser.resetToken,
-        resetTokenExpire: newUser.resetTokenExpire,
+        _id: existingRequest._id,
+        email: existingRequest.email,
+        resetToken: existingRequest.resetToken,
+        resetTokenExpire: existingRequest.resetTokenExpire,
       },
     });
   } catch (err) {
+    console.error("Forgot Password Error:", err);
     res.status(500).json({ message: "Server Error" });
   }
 };
+
 const verifyToken = async (req, res) => {
   try {
     const { token } = req.params;
@@ -279,7 +292,7 @@ const resetPassword = async (req, res) => {
     const tokenDoc = await forgot.findOne({ resetToken: token });
 
     if (!tokenDoc || tokenDoc.resetTokenExpire < Date.now()) {
-      return res.status(400).json({ message: "Invalid or expired token." });
+      return res.status(400).json({ message: "Invalid or Link expired." });
     }
 
     const user = await User.findOne({ email: tokenDoc.email });

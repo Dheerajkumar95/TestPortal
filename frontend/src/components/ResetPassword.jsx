@@ -22,41 +22,37 @@ const ResetPassword = () => {
           setMessage(res.data.message);
         }
       } catch (err) {
-        setError(err.response?.data?.message || "Invalid or expired token.");
+        setError(err.response?.data?.message || "Invalid or Link expired.");
       }
     };
     verifyToken();
   }, [token]);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError("");
+  setMessage("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setMessage("");
+  // ✅ Password validation using toast
+  if (!password) return toast.error("Password is required");
+  if (password.length < 8) return toast.error("Password must be at least 8 characters");
+  if (password !== confirmPassword) return toast.error("Passwords do not match");
 
-    // ✅ Validation
-    if (!password || !confirmPassword) {
-      return setError("Please fill in both password fields.");
-    }
-    if (password !== confirmPassword) {
-      return setError("Passwords do not match.");
-    }
+  try {
+    setLoading(true);
 
-    try {
-      setLoading(true);
+    const response = await axiosInstance.post(`/auth/reset-password/${token}`, {
+      password,
+      confirmPassword,
+    });
 
-      const response = await axiosInstance.post(`/auth/reset-password/${token}`, {
-        password,
-        confirmPassword,
-      });
-
-      toast.success(response.data.message || "Password reset successful!");
-      setTimeout(() => navigate("/login"),10);
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Password reset failed.");
-    } finally {
-      setLoading(false);
-    }
-  };
+    toast.success(response.data.message || "Password reset successful!");
+    setTimeout(() => navigate("/login"), 1500); // Wait 1.5 seconds before redirecting
+  } catch (error) {
+    toast.error(error.response?.data?.message || "Password reset failed.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="reset-container">
