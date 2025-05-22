@@ -3,8 +3,10 @@ const { generateToken } = require("../lib/utils.js");
 const User = require("../models/user.model.js");
 const NPasskey = require("../models/passkey.model.js");
 const Otp = require("../models/otp.model.js");
+const Result = require("../models/result.model.js");
 const forgot = require("../models/forgot.model.js");
 const Question = require("../models/Question.model.js");
+
 const {
   sendVerificationEamil,
   senWelcomeEmail,
@@ -170,37 +172,43 @@ const resendotp = async (req, res) => {
 };
 const login = async (req, res) => {
   const { email, password } = req.body;
+
   try {
     if (!email || !password) {
       return res
         .status(400)
-        .json({ message: "Email and password are required" });
+        .json({ message: "Email and password are required." });
     }
 
     const user = await User.findOne({ email });
 
-    console.log(user);
     if (!user) {
-      return res.status(400).json({ message: "Invalid Email" });
+      return res.status(401).json({ message: "Invalid email or password." });
     }
 
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
     if (!isPasswordCorrect) {
-      return res.status(400).json({ message: "Invalid Password" });
+      return res.status(401).json({ message: "Invalid email or password." });
     }
 
+    // Generate and set cookie
     generateToken(user._id, res);
-
+    console.log(generateToken);
     res.status(200).json({
-      _id: user._id,
-      fullName: user.fullName,
-      email: user.email,
+      message: "Login successful",
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+      },
     });
   } catch (error) {
-    console.log("Error in login controller:", error.message);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("Login Error:", error.message);
+    res.status(500).json({ message: "Internal server error." });
   }
 };
+
 const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
@@ -306,6 +314,33 @@ const logout = (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+// controllers/quizController.js
+
+const saveResult = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { score, total } = req.body;
+
+    if (score === undefined || total === undefined) {
+      return res.status(400).json({ message: "Score and total are required" });
+    }
+
+    const newResult = new Result({
+      user: userId,
+      score,
+      total,
+    });
+
+    await newResult.save();
+
+    res
+      .status(200)
+      .json({ message: "Result saved successfully", result: newResult });
+  } catch (error) {
+    console.error("Error saving result:", error);
+    res.status(500).json({ message: "Failed to save result" });
+  }
+};
 
 const updateProfile = async (req, res) => {
   try {
@@ -329,21 +364,10 @@ const updateProfile = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
-
-const checkAuth = (req, res) => {
-  try {
-    res.status(200).json(req.user);
-  } catch (error) {
-    console.log("Error in checkAuth controller", error.message);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-};
-
 module.exports = {
   login,
   logout,
   updateProfile,
-  checkAuth,
   createpasskey,
   passkey,
   sendotp,
@@ -353,4 +377,5 @@ module.exports = {
   forgotPassword,
   verifyToken,
   resetPassword,
+  saveResult,
 };

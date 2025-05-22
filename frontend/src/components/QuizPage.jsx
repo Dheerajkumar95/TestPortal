@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import { useAuthStore } from "../store/useAuthStore";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import usePreventCopyBlur from "./usePreventCopyBlur";
 import 'react-circular-progressbar/dist/styles.css';
 
 const sections = [
@@ -14,6 +16,8 @@ const sections = [
 ];
 
 const QuizPage = () => {
+  const { saveScore } = useAuthStore();
+    usePreventCopyBlur();
   const [allQuestions, setAllQuestions] = useState([]);
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const [sectionQuestions, setSectionQuestions] = useState([]);
@@ -26,6 +30,31 @@ const QuizPage = () => {
   const [waitingTimeLeft, setWaitingTimeLeft] = useState(10);
 
   const navigate = useNavigate();
+
+const [tabSwitchCount, setTabSwitchCount] = useState(0);
+
+useEffect(() => {
+  const handleVisibilityChange = () => {
+    if (document.hidden) {
+      setTabSwitchCount(count => count + 1);
+      toast.error("Warning: Tab switch detected!");
+    }
+  };
+
+  document.addEventListener("visibilitychange", handleVisibilityChange);
+
+  return () => {
+    document.removeEventListener("visibilitychange", handleVisibilityChange);
+  };
+}, []);
+
+useEffect(() => {
+  if (tabSwitchCount >= 3) {
+    toast.error("Too many tab switches! Your quiz will be submitted.");
+    navigate('/congratulations');
+  }
+}, [tabSwitchCount]);
+
 
   useEffect(() => {
     axios.get('http://localhost:7007/api/auth/questions')
@@ -80,8 +109,8 @@ const QuizPage = () => {
   const goToQuestion = (index) => {
     setCurrent(index);
   };
-
-  const handleSubmitSection = (forced = false) => {
+ 
+  const handleSubmitSection =  async (forced = false) => {
     const unanswered = sectionQuestions.filter(q => !selectedOptions[q.id]);
     if (!forced && unanswered.length > 0) {
       toast.error("Please answer all questions before submitting the section.");
@@ -123,6 +152,7 @@ const QuizPage = () => {
         });
       }, 1000);
     } else {
+       await saveScore(updatedScore, allQuestions.length);
       navigate('/congratulations', {
         state: {
           score: updatedScore,
@@ -143,6 +173,7 @@ const QuizPage = () => {
     return "rgb(24, 182, 74)";
   };
 
+  
   return (
     <>
       <div className="quiz-app">
