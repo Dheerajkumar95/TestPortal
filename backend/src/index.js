@@ -6,7 +6,7 @@ const cors = require("cors");
 const path = require("path");
 const { connectDB } = require("./lib/db.js");
 const authRoutes = require("./routes/auth.route.js");
-
+const resultRoutes = require("./routes/result");
 dotenv.config();
 const PORT = process.env.PORT || 7007;
 app.use(
@@ -15,10 +15,12 @@ app.use(
     credentials: true,
   })
 );
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use("/api/auth", authRoutes);
+app.use("/api/result", resultRoutes);
 app.listen(PORT, () => {
   console.log("server is running on PORT:" + PORT);
   connectDB();

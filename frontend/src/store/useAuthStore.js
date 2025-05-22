@@ -36,18 +36,44 @@ export const useAuthStore = create((set) => ({
     }
   },
   login: async (formData, navigate) => {
-    console.log("formData sent to backend:", formData); // ✅ check this
+    console.log("formData sent to backend:", formData);
     try {
-      await axiosInstance.post("/auth/login", {
-        email: formData.email,
-        password: formData.password,
-      });
+      await axiosInstance.post(
+        "/auth/login",
+        {
+          email: formData.email,
+          password: formData.password,
+        },
+        {
+          withCredentials: true, // ✅ allow cookies (JWT) to be sent/received
+        }
+      );
+
       navigate("/instructions");
     } catch (error) {
       console.log("Login error:", error.response?.data);
       toast.error(
         error.response?.data?.message || "Invalid Email and Password"
       );
+    }
+  },
+  saveScore: async (updatedScore, totalQuestions) => {
+    try {
+      await axiosInstance.post(
+        "/result/save",
+        {
+          score: updatedScore,
+          total: totalQuestions,
+        },
+        { withCredentials: true }
+      );
+      toast.success("Score saved successfully!");
+    } catch (error) {
+      console.error(
+        "Error saving score:",
+        error.response?.data || error.message
+      );
+      toast.error("Failed to save score.");
     }
   },
 }));
