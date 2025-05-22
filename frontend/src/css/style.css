@@ -1020,14 +1020,15 @@ form input:focus {
 .login-link {
   margin-top: 15px;
   text-align: center;
+  underline: none;
 }
 
 .login-link a {
-  color: #1976d2;
+  color: #000000;
   text-decoration: none;
   font-size: 14px;
 }
 
 .login-link a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
