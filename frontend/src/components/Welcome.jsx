@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
+import Header from './Layout/Header';
 import dsa from "../images/dsa.png";
 import java from "../images/java.png";
 import tech from "../images/tech.png";
 const  Welcome= () => {
   return (
+    <>
+<Header/>
     <div className="courses-container">
       <h1>Hello, What Do You Want To Learn?</h1>
       <div className="search-section">
@@ -23,7 +26,7 @@ const  Welcome= () => {
           <img src={dsa} alt="image"/>
           <h3>DSA to Development: A Complete Guide</h3>
           <p>Beginner to Advance</p>
-          <p>575k+ interested Geeks</p>
+          <p>575k+ interested</p>
           <button>Explore now</button>
         </div>
 
@@ -32,7 +35,7 @@ const  Welcome= () => {
           <img src={java} alt="image"/>
           <h3>JAVA Backend Development - Live</h3>
           <p>Intermediate and Advance</p>
-          <p>309k+ interested Geeks</p>
+          <p>309k+ interested</p>
           <button>Explore now</button>
         </div>
 
@@ -41,7 +44,7 @@ const  Welcome= () => {
           <img src={tech} alt="image"/>
           <h3>Tech Interview 101 - From DSA to System Design</h3>
           <p>Beginner to Advance</p>
-          <p>335k+ interested Geeks</p>
+          <p>335k+ interested</p>
           <button>Explore now</button>
         </div>
       </div>
@@ -49,6 +52,7 @@ const  Welcome= () => {
       <Link className="weekly-btn" to="passkey">Weekly Test</Link>
       </div>
     </div>
+    </>
   );
 };
 

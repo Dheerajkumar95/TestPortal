@@ -40,3 +40,476 @@
 .read-the-docs {
   color: #888;
 }
+/* Profile Page Styles */
+
+@media (min-width: 768px) {
+  .profile-header {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.profile-details {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .profile-details {
+    margin-top: 0;
+    margin-left: 2rem;
+    text-align: left;
+  }
+}
+
+.profile-name {
+  font-size: 2rem;
+  font-weight: 700;
+  color: rgb(30, 59, 43);
+  margin-bottom: 0.5rem;
+}
+
+.profile-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .profile-contact {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.contact-item svg {
+  margin-right: 0.5rem;
+  color: rgb(22, 233, 32);
+}
+
+/* Score Section Styles */
+
+.score-card {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 1.5rem;
+}
+
+.score-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.score-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.score-value {
+  font-weight: 700;
+  color: rgb(84, 246, 15);
+}
+
+.score-bar-container {
+  height: 10px;
+  background-color: #f1f5f9;
+  border-radius: 5px;
+  margin-top: 0.5rem;
+  overflow: hidden;
+}
+
+.score-bar {
+  height: 100%;
+  border-radius: 5px;
+  animation: score-fill 1.5s ease-out forwards;
+}
+
+.score-bar.excellent {
+  background-color: #10b981;
+}
+
+.score-bar.good {
+  background-color: #3b82f6;
+}
+
+.score-bar.average {
+  background-color: #f59e0b;
+}
+
+.score-bar.poor {
+  background-color: #ef4444;
+}
+
+/* Goblet Score Styles */
+.goblet-score {
+  margin-top: 3rem;
+  background: linear-gradient(135deg, rgb(204, 225, 240), rgb(204, 242, 207));
+  color: #000000;
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.goblet-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.goblet-value {
+  font-size: 3.5rem;
+  font-weight: 700;
+  background: linear-gradient(to right, rgb(20, 241, 109), rgb(49, 239, 11));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  margin: 1rem 0;
+}
+
+.goblet-subtitle {
+  font-size: 1rem;
+  opacity: 0.9;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+/* Loading and Error States */
+.loading,
+.error {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.25rem;
+  color: #64748b;
+}
+
+.loading svg {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes score-fill {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--score-width);
+  }
+}
+/* Container styling */
+.Header {
+  background: linear-gradient(to right, rgb(204, 225, 240), rgb(204, 242, 207));
+  padding: 1.5rem 10%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.Header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.Header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Title section */
+.Header-title {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #1f2937; /* gray-800 */
+}
+
+.Header-title-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 0.5rem;
+  color: rgb(8, 222, 51); /* blue-500 */
+}
+
+.Header-title-text {
+  font-size: 1.25rem;
+}
+
+/* Navigation */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+}
+.nav-link {
+  color: rgb(0, 2, 4); /* gray-500 */
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  color: rgb(59, 246, 59); /* blue-500 */
+}
+
+/* User actions */
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: transform 0.2s ease;
+}
+
+.user-icon-btn:hover {
+  transform: scale(1.1);
+}
+
+.logout-btn .user-icon {
+  color: rgb(21, 236, 42); /* red-500 */
+}
+/* Main container for the profile page */
+.profile-container {
+  width: 1700px;
+  margin: auto;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-top: -4rem;
+}
+
+/* Loading and error states */
+.loading,
+.error {
+  text-align: center;
+  padding: 2rem;
+  color: #374151; /* gray-700 */
+}
+
+.loading svg {
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+  color: rgb(59, 246, 62); /* blue-500 */
+}
+
+/* Spinner animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Error message styling */
+.error {
+  color: #ef4444; /* red-500 */
+  font-weight: 500;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb; /* Tailwind's gray-200 */
+}
+
+.profile-image-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 3px solid rgb(54, 243, 25); /* blue-500 */
+  transition: transform 0.3s;
+}
+
+.profile-image:hover {
+  transform: scale(1.05);
+}
+
+.image-overlay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: rgb(21, 240, 43); /* blue-500 */
+  border-radius: 50%;
+  padding: 0.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.camera-icon {
+  color: white;
+  width: 16px;
+  height: 16px;
+}
+
+.hidden-input {
+  display: none;
+}
+
+.profile-details {
+  flex: 1;
+}
+
+.profile-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937; /* gray-800 */
+}
+
+.profile-position {
+  font-size: 1rem;
+  color: #6b7280; /* gray-500 */
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.profile-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #374151; /* gray-700 */
+}
+
+.scores-container {
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-top: 2rem;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937; /* gray-800 */
+  margin-bottom: 1.5rem;
+}
+
+.score-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.25rem;
+}
+
+.score-card {
+  background-color: #f9fafb;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.score-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.score-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #374151; /* gray-700 */
+  font-weight: 500;
+}
+
+.score-name {
+  font-size: 0.95rem;
+}
+
+.score-value {
+  font-size: 0.9rem;
+  color: #4b5563; /* gray-600 */
+}
+
+.score-bar-container {
+  background-color: #e5e7eb; /* gray-200 */
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.score-bar {
+  height: 100%;
+  width: var(--score-width);
+  transition: width 0.3s ease-in-out;
+}
+
+.score-bar.excellent {
+  background-color: #10b981; /* green-500 */
+}
+
+.score-bar.good {
+  background-color: #3b82f6; /* blue-500 */
+}
+
+.score-bar.average {
+  background-color: #fbbf24; /* yellow-400 */
+}
+
+.score-bar.poor {
+  background-color: #ef4444; /* red-500 */
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
