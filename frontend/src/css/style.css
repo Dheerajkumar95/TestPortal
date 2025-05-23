@@ -10,18 +10,141 @@
   text-decoration: none;
 }
 body {
-  background-color: white;
-  color: #000; /* Optional: Ensure text is visible on white background */
+  background-color: #ffffff;
+  color: #000;
 }
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
+/* Header Styling */
+.header {
+  background: linear-gradient(to right, rgb(204, 225, 240), rgb(204, 242, 207));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 10%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.header h1 {
+  color: rgb(24, 182, 74);
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.signin-btn {
+  font-size: 1rem;
+  padding: 8px 20px;
+  background: linear-gradient(90deg, rgb(6, 72, 9), rgb(24, 182, 74));
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.signin-btn:hover {
+  background: linear-gradient(90deg, rgb(24, 182, 74), rgb(6, 72, 9));
+  color: #ffffff;
+}
+
+/* Main Content Styling */
+.main-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 8rem;
+  flex-wrap: wrap;
+}
+
+.image-box {
+  height: 15rem;
+  width: 30rem;
+  margin: 2rem;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Border Styles */
+.green-border {
+  border: 4px solid #00c853;
+  box-shadow: 0 0 12px rgba(0, 200, 83, 0.5);
+}
+
+.red-border {
+  border: 4px solid #d50000;
+  box-shadow: 0 0 12px rgba(213, 0, 0, 0.5);
+}
+
+.image-box:hover {
+  transform: scale(1.5);
+}
+/* Quote Section Styling */
+.quote-section {
+  margin-top: 6.5rem;
+  padding: 1.5rem 10%;
+  background: linear-gradient(
+    to right,
+    rgb(152, 237, 237),
+    rgb(199, 200, 198),
+    rgb(248, 146, 126)
+  );
+  text-align: center;
+  font-style: italic;
+  font-size: 2rem;
+  color: rgb(4, 1, 1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 40px;
+  border-left: 5px solid #66bb6a;
+  border-right: 5px solid #66bb6a;
+  overflow: hidden;
+}
+
+/* Looping Animation */
+.quote-section p {
+  display: inline-block;
+  white-space: nowrap;
+  animation: slideIn 20s linear infinite;
+}
+
+/* Keyframes */
+@keyframes slideIn {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
 .blurred {
   filter: blur(5px);
-  pointer-events: none; /* Prevent interaction while blurred */
-  user-select: none; /* Disable text selection */
+  pointer-events: none;
+  user-select: none;
   transition: filter 0.3s ease;
 }
 
@@ -1031,4 +1154,82 @@ form input:focus {
 
 .login-link a:hover {
   text-decoration: none;
+}
+
+.dashboard-container {
+  padding: 40px;
+}
+
+.dashboard-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.dashboard-box {
+  position: relative;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  height: 400px;
+  padding: 20px;
+}
+
+.user-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.tree-area {
+  text-align: center;
+  color: gray;
+  font-size: 24px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-details-container {
+  padding: 40px;
+}
+
+.user-details-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.user-details-box {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  background: black;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.user-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.user-email {
+  color: gray;
+  font-size: 14px;
 }
