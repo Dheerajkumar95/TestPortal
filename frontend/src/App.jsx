@@ -30,7 +30,7 @@ function App() {
       <Routes>
         <Route path="/" element={authUser ? <Welcome /> : <Navigate to="/dashboard"/>}/>
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/user-details" element={<UserDetails />} />
+        <Route path="/wel/user-details" element={<UserDetails />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/wel" element={<Welcome />} />
         <Route path="/wel/passkey" element={<Passkey />} />

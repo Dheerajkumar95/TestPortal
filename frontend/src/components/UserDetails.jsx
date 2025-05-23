@@ -1,20 +1,12 @@
-import React from "react";
-
-const UserDetails = () => {
+import Header from './Layout/Header';
+import ProfilePage from './Profile/ProfilePage';
+function UserDetails (){
   return (
-    <div className="user-details-container">
-      <h2 className="user-details-title">User Details</h2>
-      <div className="user-details-box">
-        <div className="user-info">
-          <div className="user-avatar"></div>
-          <div>
-            <h3 className="user-name">John Doe</h3>
-            <p className="user-email">john@example.com</p>
-          </div>
-        </div>
-        <p><strong>Role:</strong> Admin</p>
-        <p><strong>Status:</strong> Active</p>
-      </div>
+     <div className="app-container">
+      <Header />
+      <main className="main-content">
+        <ProfilePage />
+      </main>
     </div>
   );
 };

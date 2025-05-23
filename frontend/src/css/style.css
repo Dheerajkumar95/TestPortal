@@ -179,7 +179,9 @@ body {
     transform: rotate(360deg);
   }
 }
-
+.courses-container {
+  margin-top: 5rem;
+}
 .search-section {
   display: flex;
   margin-top: 1rem;
