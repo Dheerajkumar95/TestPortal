@@ -126,8 +126,8 @@ body {
 /* Keyframes */
 @keyframes slideIn {
   0% {
-    transform: translateX(100%);
-    opacity: 0;
+    transform: translateX(50%);
+    opacity: 1;
   }
   20% {
     opacity: 1;
@@ -137,7 +137,7 @@ body {
   }
   100% {
     transform: translateX(-100%);
-    opacity: 0;
+    opacity: 1;
   }
 }
 
