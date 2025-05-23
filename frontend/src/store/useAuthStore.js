@@ -5,10 +5,19 @@ import { toast } from "react-hot-toast";
 export const useAuthStore = create((set) => ({
   authUser: null,
   pendingUser: null,
+  checkAuth: async () => {
+    try {
+      const res = await axiosInstance.get("/auth/check");
+      set({ authUser: res.data });
+    } catch (error) {
+      console.log("Error in checkAuth:", error);
+      set({ authUser: null });
+    }
+  },
   passkey: async (formData, navigate) => {
     try {
       await axiosInstance.post("/auth/passkey", { Passkey: formData.Passkey });
-      navigate("/login");
+      navigate("/instructions");
     } catch (error) {
       toast.error(error.response?.data?.message || "Invalid Passkey");
     }
@@ -38,7 +47,7 @@ export const useAuthStore = create((set) => ({
   login: async (formData, navigate) => {
     console.log("formData sent to backend:", formData);
     try {
-      await axiosInstance.post(
+      const res = await axiosInstance.post(
         "/auth/login",
         {
           email: formData.email,
@@ -48,8 +57,8 @@ export const useAuthStore = create((set) => ({
           withCredentials: true, // ✅ allow cookies (JWT) to be sent/received
         }
       );
-
-      navigate("/instructions");
+      set({ authUser: res.data });
+      navigate("/wel");
     } catch (error) {
       console.log("Login error:", error.response?.data);
       toast.error(

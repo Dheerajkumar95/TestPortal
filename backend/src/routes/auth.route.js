@@ -4,6 +4,7 @@ const {
   createpasskey,
   passkey,
   login,
+  checkAuth,
   verifyOtpAndRegister,
   sendotp,
   resendotp,
@@ -20,6 +21,7 @@ router.post("/sendotp", sendotp);
 router.post("/resendotp", resendotp);
 router.post("/verifyOtpAndRegister", verifyOtpAndRegister);
 router.post("/login", login);
+router.get("/check", authenticate, checkAuth);
 router.get("/questions", questions);
 router.post("/forgotPassword", forgotPassword);
 router.get("/verify-token/:token", verifyToken);

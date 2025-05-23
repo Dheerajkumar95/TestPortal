@@ -25,7 +25,7 @@ const QuizPage = () => {
   const [statuses, setStatuses] = useState({});
   const [current, setCurrent] = useState(0);
   const [score, setScore] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(2 * 60);
+  const [timeLeft, setTimeLeft] = useState(10 * 60);
   const [waiting, setWaiting] = useState(false);
   const [waitingTimeLeft, setWaitingTimeLeft] = useState(10);
 
@@ -145,7 +145,7 @@ useEffect(() => {
             setStatuses(newStatuses);
             setSelectedOptions({});
             setCurrent(0);
-            setTimeLeft(2 * 60);
+            setTimeLeft(10 * 60);
             setWaiting(false);
           }
           return prev - 1;
@@ -166,11 +166,11 @@ useEffect(() => {
   if (sectionQuestions.length === 0) return <p>Loading questions...</p>;
 
   const currentQ = sectionQuestions[current];
-  const percentage = (timeLeft / (2 * 60)) * 100;
+  const percentage = (timeLeft / (10 * 60)) * 100;
   const getColor = () => {
     if (timeLeft <= 60) return "#FF3131";
     if (timeLeft <= 5 * 60) return "#FFFF00";
-    return "rgb(24, 182, 74)";
+    return "rgb(100, 221, 23)";
   };
 
   
