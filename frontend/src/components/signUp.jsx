@@ -27,11 +27,7 @@ const SignUp = () => {
     if (!email.trim()) return toast.error("Email is required");
     if (!/\S+@\S+\.\S+/.test(email)) return toast.error("Invalid email format");
     if (!password) return toast.error("Password is required");
-    if (password.length < 8)
-      return toast.error("Password must be at least 8 characters");
-    if (password !== confirmPassword)
-      return true;
-
+    if (!confirmPassword) return toast.error("confirmPassword is required");
     return true;
   };
 
