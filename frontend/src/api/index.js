@@ -11,20 +11,6 @@ const api = axios.create({
 });
 
 // Get profile data
-export const getProfileData = async () => {
-  try {
-    const response = await api.get("/profile");
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      return {
-        success: false,
-        error: error.response?.data?.error || "Failed to fetch profile data",
-      };
-    }
-    return { success: false, error: "An unexpected error occurred" };
-  }
-};
 
 // Get score data
 export const getScoreData = async () => {

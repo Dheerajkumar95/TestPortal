@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs");
+const cloudinary = require("../lib/cloudinary.js");
 const { generateToken } = require("../lib/utils.js");
 const User = require("../models/user.model.js");
 const NPasskey = require("../models/passkey.model.js");
@@ -209,6 +210,39 @@ const login = async (req, res) => {
   }
 };
 
+const profile = async (req, res) => {
+  try {
+    res.json(req.user); // just return the req.user set by middleware
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+};
+const updateProfileImage = async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    if (!req.file) {
+      return res.status(400).json({ error: "No image uploaded" });
+    }
+
+    // Convert image to base64
+    const base64Image = `data:${
+      req.file.mimetype
+    };base64,${req.file.buffer.toString("base64")}`;
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { profileImage: base64Image },
+      { new: true }
+    ).select("-password");
+
+    res.json(updatedUser);
+  } catch (err) {
+    console.error("Image upload error:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
 const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
@@ -357,17 +391,17 @@ const saveResult = async (req, res) => {
 
 const updateProfile = async (req, res) => {
   try {
-    const { profilePic } = req.body;
+    const { profileImage } = req.body;
     const userId = req.user._id;
 
-    if (!profilePic) {
+    if (!profileImage) {
       return res.status(400).json({ message: "Profile pic is required" });
     }
-
-    const uploadResponse = await cloudinary.uploader.upload(profilePic);
+    const uploadResponse = await cloudinary.uploader.upload(profileImage);
+    console.log("hey");
     const updatedUser = await User.findByIdAndUpdate(
       userId,
-      { profilePic: uploadResponse.secure_url },
+      { profileImage: uploadResponse.secure_url },
       { new: true }
     );
 
@@ -387,6 +421,8 @@ const checkAuth = (req, res) => {
 };
 module.exports = {
   login,
+  profile,
+  updateProfileImage,
   logout,
   checkAuth,
   updateProfile,

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-
+import toast from 'react-hot-toast';
 const usePreventCopyBlur = () => {
   useEffect(() => {
     const handleBlurEffect = () => {
@@ -17,7 +17,8 @@ const usePreventCopyBlur = () => {
       if (
         (event.ctrlKey || event.metaKey) &&
         (event.key.toLowerCase() === "c" || event.key.toLowerCase() === "u")
-      ) {
+       
+      )  toast.error("you can't copy");{
         event.preventDefault();
       }
 
