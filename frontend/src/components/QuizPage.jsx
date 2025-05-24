@@ -9,15 +9,13 @@ import 'react-circular-progressbar/dist/styles.css';
 
 const sections = [
   "Basic Programming",
-  "Front-End Logic",
-  "Back-End Logic",
-  "Database",
-  "General Computer Knowledge",
+  "Verbal and Reasoning",
+  "General Aptitude",
 ];
 
 const QuizPage = () => {
-  const { saveScore } = useAuthStore();
-    usePreventCopyBlur();
+  const { saveScore, saveSectionScore } = useAuthStore();
+  usePreventCopyBlur();
   const [allQuestions, setAllQuestions] = useState([]);
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const [sectionQuestions, setSectionQuestions] = useState([]);
@@ -31,30 +29,26 @@ const QuizPage = () => {
 
   const navigate = useNavigate();
 
-const [tabSwitchCount, setTabSwitchCount] = useState(0);
+  const [tabSwitchCount, setTabSwitchCount] = useState(0);
 
-useEffect(() => {
-  const handleVisibilityChange = () => {
-    if (document.hidden) {
-      setTabSwitchCount(count => count + 1);
-      toast.error("Warning: Tab switch detected!");
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        setTabSwitchCount(count => count + 1);
+        toast.error("Warning: Tab switch detected!");
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, []);
+
+  useEffect(() => {
+    if (tabSwitchCount >= 3) {
+      toast.error("Too many tab switches! Your quiz will be submitted.");
+      navigate('/congratulations');
     }
-  };
-
-  document.addEventListener("visibilitychange", handleVisibilityChange);
-
-  return () => {
-    document.removeEventListener("visibilitychange", handleVisibilityChange);
-  };
-}, []);
-
-useEffect(() => {
-  if (tabSwitchCount >= 3) {
-    toast.error("Too many tab switches! Your quiz will be submitted.");
-    navigate('/congratulations');
-  }
-}, [tabSwitchCount]);
-
+  }, [tabSwitchCount]);
 
   useEffect(() => {
     axios.get('http://localhost:7007/api/auth/questions')
@@ -83,11 +77,7 @@ useEffect(() => {
     return () => clearInterval(timer);
   }, [sectionQuestions]);
 
-  const formatTime = (secs) => {
-    const min = Math.floor(secs / 60);
-    const sec = secs % 60;
-    return `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
-  };
+  const formatTime = (secs) => `${String(Math.floor(secs / 60)).padStart(2, '0')}:${String(secs % 60).padStart(2, '0')}`;
 
   const handleOptionSelect = (qid, optId) => {
     setSelectedOptions(prev => ({ ...prev, [qid]: optId }));
@@ -95,22 +85,14 @@ useEffect(() => {
   };
 
   const handleNext = () => {
-    setStatuses(prev => ({
-      ...prev,
-      [current]: prev[current] === 'Marked' ? 'Marked' : 'Visited',
-    }));
+    setStatuses(prev => ({ ...prev, [current]: prev[current] === 'Marked' ? 'Marked' : 'Visited' }));
     setCurrent(prev => Math.min(prev + 1, sectionQuestions.length - 1));
   };
 
-  const handleBack = () => {
-    setCurrent(prev => Math.max(prev - 1, 0));
-  };
+  const handleBack = () => setCurrent(prev => Math.max(prev - 1, 0));
+  const goToQuestion = (index) => setCurrent(index);
 
-  const goToQuestion = (index) => {
-    setCurrent(index);
-  };
- 
-  const handleSubmitSection =  async (forced = false) => {
+  const handleSubmitSection = async (forced = false) => {
     const unanswered = sectionQuestions.filter(q => !selectedOptions[q.id]);
     if (!forced && unanswered.length > 0) {
       toast.error("Please answer all questions before submitting the section.");
@@ -120,6 +102,12 @@ useEffect(() => {
     let sectionScore = 0;
     sectionQuestions.forEach(q => {
       if (selectedOptions[q.id] === q.correct) sectionScore += 1;
+    });
+
+    await saveSectionScore({
+      section: sections[currentSectionIndex],
+      score: sectionScore,
+      total: sectionQuestions.length
     });
 
     const updatedScore = score + sectionScore;
@@ -133,7 +121,6 @@ useEffect(() => {
         setWaitingTimeLeft(prev => {
           if (prev === 1) {
             clearInterval(countdown);
-
             const nextIndex = currentSectionIndex + 1;
             const nextQuestions = allQuestions.filter(q => q.section === sections[nextIndex]);
 
@@ -152,7 +139,7 @@ useEffect(() => {
         });
       }, 1000);
     } else {
-       await saveScore(updatedScore, allQuestions.length);
+      await saveScore(updatedScore, allQuestions.length);
       navigate('/congratulations', {
         state: {
           score: updatedScore,
@@ -167,13 +154,8 @@ useEffect(() => {
 
   const currentQ = sectionQuestions[current];
   const percentage = (timeLeft / (10 * 60)) * 100;
-  const getColor = () => {
-    if (timeLeft <= 60) return "#FF3131";
-    if (timeLeft <= 5 * 60) return "#FFFF00";
-    return "rgb(100, 221, 23)";
-  };
+  const getColor = () => timeLeft <= 60 ? "#FF3131" : timeLeft <= 5 * 60 ? "#FFFF00" : "rgb(100, 221, 23)";
 
-  
   return (
     <>
       <div className="quiz-app">
@@ -204,11 +186,7 @@ useEffect(() => {
             <CircularProgressbar
               value={percentage}
               text={formatTime(timeLeft)}
-              styles={buildStyles({
-                pathColor: getColor(),
-                textColor: "#000",
-                trailColor: "#eee",
-              })}
+              styles={buildStyles({ pathColor: getColor(), textColor: "#000", trailColor: "#eee" })}
             />
           </div>
 

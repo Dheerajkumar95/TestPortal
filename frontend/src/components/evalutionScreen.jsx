@@ -2,11 +2,9 @@ import React from 'react';
 import { Link } from "react-router-dom";
 const evaluationScreen=()=> {
   const topics = [
-  { id: 1, name: "Basic programming", time: "30 minutes", questions: "20 Questions" },
-  { id: 2, name: "Front - End Logic", time: "30 minutes", questions: "20 Questions" },
-  { id: 3, name: "Back-End Logic", time: "30 minutes", questions: "20 Questions" },
-  { id: 4, name: "Database Concepts", time: "30 minutes", questions: "20 Questions" },
-  { id: 5, name: "QA Testing", time: "30 minutes", questions: "20 Questions" },
+  { id: 1, name: "Basic programming", time: "10 minutes", questions: "5 Questions" },
+  { id: 2, name: "Verbal and Reasoning", time: "10 minutes", questions: "5 Questions" },
+  { id: 3, name: "General Aptitude", time: "10 minutes", questions: "5 Questions" },
 ];
   return (
     <>
@@ -14,7 +12,7 @@ const evaluationScreen=()=> {
       <h2 className="evtitle">Technical Aptitude Evaluation</h2>
       <div className="evtopic-container">
   {topics.map((topic) => (
-    <div key={topic.id} className={`evtopic ${topic.id === 2 ? 'active' : ''}`}>
+    <div key={topic.id} className={`evtopic ${topic.id === 1 ? 'active' : ''}`}>
       <span className="topic-name">{topic.id}. {topic.name}</span>
       <span>{topic.time}</span>
       <span>{topic.questions}</span>

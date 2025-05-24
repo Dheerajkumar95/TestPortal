@@ -90,7 +90,22 @@ export const useAuthStore = create((set) => ({
       );
       toast.success("Score saved successfully!");
     } catch (error) {
-      toast.error("Failed to save score.");
+      toast.error(error.response.data.message);
+    }
+  },
+  saveSectionScore: async ({ section, score, total }) => {
+    try {
+      await axiosInstance.post(
+        "/result/savesection",
+        {
+          section,
+          score,
+          total,
+        },
+        { withCredentials: true }
+      );
+    } catch (error) {
+      toast.error(error.response.data.message);
     }
   },
 }));
