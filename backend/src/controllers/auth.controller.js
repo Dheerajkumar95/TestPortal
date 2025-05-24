@@ -85,6 +85,11 @@ const sendotp = async (req, res) => {
   if (uexists) return res.status(400).json({ message: "User already exists" });
   const exists = await Otp.findOne({ email });
   if (exists) return res.status(400).json({ message: "User already exists" });
+  if (password.length < 8) {
+    return res
+      .status(400)
+      .json({ message: "Password must be at least 8 characters long" });
+  }
   if (password !== confirmPassword) {
     return res.status(400).json({ message: "Passwords do not match" });
   }
@@ -108,10 +113,6 @@ const verifyOtpAndRegister = async (req, res) => {
   const { otp, user } = req.body;
   const { fullName, email, contact, password, confirmPassword } = user;
   try {
-    if (password !== confirmPassword) {
-      return res.status(400).json({ message: "Passwords do not match" });
-    }
-
     const otpRecord = await Otp.findOne({ email });
     if (!otpRecord) return res.status(400).json({ message: "OTP not found" });
 
