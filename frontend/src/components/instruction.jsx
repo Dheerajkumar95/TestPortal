@@ -3,7 +3,7 @@ import PassKeyImage from "../images/PassKey.png";
 import { Link } from "react-router-dom";
 const InstructionScreen = () => {
   return (
-    <section className="instruction-section">
+    <section className="instruction-section1">
       
       <div className="instruction-container">
         <div className="illustration">
