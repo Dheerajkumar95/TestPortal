@@ -22,13 +22,13 @@ const Guideline = () => {
 }
   }
   return (
-    <section className="instruction-section">
+    <section className="instruction-section1">
       <div className="instruction-container">
         <div className="illustration">
           <img src={PassKeyImage} alt="Exam Illustration" />
         </div>
         <div className="instruction-box">
-          <h2>Read the instructions carefully before proceeding further.</h2>
+          <h2>Read the Guideline carefully before proceeding further.</h2>
           <ul>
             <li>Each section has 20 questions and a 30-minute time limit.</li>
             <li>Complete all questions within the time limit for each section.</li>

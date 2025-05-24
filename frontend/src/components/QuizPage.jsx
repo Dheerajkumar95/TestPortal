@@ -162,7 +162,7 @@ useEffect(() => {
     }
   };
 
-  if (waiting) return <h2 style={{ textAlign: "center" }}>Next section in {waitingTimeLeft} seconds...</h2>;
+  if (waiting) return <h2 className='nextSection'>Next section in {waitingTimeLeft} seconds...</h2>;
   if (sectionQuestions.length === 0) return <p>Loading questions...</p>;
 
   const currentQ = sectionQuestions[current];

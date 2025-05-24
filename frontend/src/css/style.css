@@ -594,7 +594,7 @@ input:focus {
   height: 100px;
   width: 500px;
   margin-left: 39.2rem;
-  margin-top: -35rem;
+  margin-top: -30rem;
 }
 .Spasskey-left {
   flex: 1;
@@ -673,8 +673,12 @@ input:focus {
 
 .instruction-section {
   height: auto;
+  margin-top: 10rem;
 }
-
+.instruction-section1 {
+  height: auto;
+  margin-top: 3rem;
+}
 .header {
   display: flex;
   justify-content: space-between;
@@ -798,6 +802,8 @@ input:focus {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   text-align: center;
   width: 350px;
+  margin-left: 23rem;
+  margin-top: 10rem;
 }
 
 .otp-box h2 {
@@ -1132,6 +1138,27 @@ input:focus {
   background: linear-gradient(90deg, rgb(24, 182, 74), rgb(6, 72, 9));
   color: #ffffff;
   border-color: #ffffff;
+}
+.nextSection {
+  height: 10rem;
+  width: 50rem;
+  background-color: #4caf50; /* richer green */
+  color: #ffffff;
+  text-align: center;
+  margin: 20rem auto 0 auto; /* center horizontally */
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.congrats-page {
+  height: auto;
+  margin-top: 20rem;
 }
 
 /* Responsive styles */
