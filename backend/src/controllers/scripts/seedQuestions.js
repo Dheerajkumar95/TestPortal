@@ -1,4 +1,4 @@
-require("dotenv").config(); // if using .env
+require("dotenv").config(); // optional if using .env
 const mongoose = require("mongoose");
 const Question = require("../../models/Question.model.js");
 
@@ -7,7 +7,7 @@ mongoose
     "mongodb+srv://dheerajk35973:FotHrcIyN3kuATwp@cluster0.wcpxfmk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
   )
   .then(async () => {
-    console.log("Connected to MongoDB");
+    console.log("✅ Connected to MongoDB");
 
     const sampleQuestions = [
       {
@@ -71,260 +71,148 @@ mongoose
         ],
         correct: "c",
       },
+    ];
 
+    const verbalAndReasoningQuestions = [
       {
-        id: 6,
-        section: "Front-End Logic",
-        question: "What does JSX stand for?",
-        options: [
-          { id: "a", text: "JavaScript XML" },
-          { id: "b", text: "Java Syntax Extension" },
-          { id: "c", text: "JSON XML" },
-          { id: "d", text: "Java Simple XML" },
-        ],
-        correct: "a",
-      },
-      {
-        id: 7,
-        section: "Front-End Logic",
-        question: "Which hook is used to manage state in React?",
-        options: [
-          { id: "a", text: "useRef" },
-          { id: "b", text: "useState" },
-          { id: "c", text: "useEffect" },
-          { id: "d", text: "useMemo" },
-        ],
-        correct: "b",
-      },
-      {
-        id: 8,
-        section: "Front-End Logic",
+        id: 1,
+        section: "Verbal and Reasoning",
         question:
-          "How do you pass data from parent to child component in React?",
+          "Choose the word that is most nearly the same in meaning to 'Rapid'.",
         options: [
-          { id: "a", text: "Props" },
-          { id: "b", text: "State" },
-          { id: "c", text: "Context" },
-          { id: "d", text: "useEffect" },
-        ],
-        correct: "a",
-      },
-      {
-        id: 9,
-        section: "Front-End Logic",
-        question: "What is the default port for React development server?",
-        options: [
-          { id: "a", text: "8000" },
-          { id: "b", text: "3000" },
-          { id: "c", text: "5000" },
-          { id: "d", text: "8080" },
+          { id: "a", text: "Slow" },
+          { id: "b", text: "Swift" },
+          { id: "c", text: "Calm" },
+          { id: "d", text: "Weak" },
         ],
         correct: "b",
       },
       {
-        id: 10,
-        section: "Front-End Logic",
+        id: 2,
+        section: "Verbal and Reasoning",
         question:
-          "Which lifecycle method is used to fetch data after the component mounts in class-based components?",
+          "Complete the analogy: Book is to Reading as Fork is to ____?",
         options: [
-          { id: "a", text: "componentDidMount" },
-          { id: "b", text: "componentWillUnmount" },
-          { id: "c", text: "render" },
-          { id: "d", text: "constructor" },
+          { id: "a", text: "Drawing" },
+          { id: "b", text: "Stirring" },
+          { id: "c", text: "Writing" },
+          { id: "d", text: "Eating" },
         ],
-        correct: "a",
-      },
-
-      {
-        id: 11,
-        section: "Back-End Logic",
-        question: "Which of the following is a Node.js framework?",
-        options: [
-          { id: "a", text: "Laravel" },
-          { id: "b", text: "Django" },
-          { id: "c", text: "Express" },
-          { id: "d", text: "Spring" },
-        ],
-        correct: "c",
+        correct: "d",
       },
       {
-        id: 12,
-        section: "Back-End Logic",
-        question: "Which HTTP method is used to update a resource?",
+        id: 3,
+        section: "Verbal and Reasoning",
+        question: "Which word does NOT belong to the group?",
         options: [
-          { id: "a", text: "GET" },
-          { id: "b", text: "POST" },
-          { id: "c", text: "PUT" },
-          { id: "d", text: "DELETE" },
+          { id: "a", text: "Apple" },
+          { id: "b", text: "Banana" },
+          { id: "c", text: "Carrot" },
+          { id: "d", text: "Mango" },
         ],
         correct: "c",
       },
       {
-        id: 13,
-        section: "Back-End Logic",
-        question: "What does REST stand for?",
-        options: [
-          { id: "a", text: "Representational State Transfer" },
-          { id: "b", text: "Remote Execution Stack Transfer" },
-          { id: "c", text: "Random Event State Transmission" },
-          { id: "d", text: "Real-time Secure Transfer" },
-        ],
-        correct: "a",
-      },
-      {
-        id: 14,
-        section: "Back-End Logic",
-        question: "Which status code means 'Not Found'?",
-        options: [
-          { id: "a", text: "500" },
-          { id: "b", text: "403" },
-          { id: "c", text: "404" },
-          { id: "d", text: "401" },
-        ],
-        correct: "c",
-      },
-      {
-        id: 15,
-        section: "Back-End Logic",
+        id: 4,
+        section: "Verbal and Reasoning",
         question:
-          "What is the default file name for starting an Express server?",
+          "Rearrange the following to form a meaningful sentence: 'Always / punctual / he / is'",
         options: [
-          { id: "a", text: "index.js" },
-          { id: "b", text: "app.js" },
-          { id: "c", text: "server.js" },
-          { id: "d", text: "start.js" },
+          { id: "a", text: "He is punctual always" },
+          { id: "b", text: "Always he is punctual" },
+          { id: "c", text: "He always is punctual" },
+          { id: "d", text: "He is always punctual" },
         ],
-        correct: "b",
-      },
-
-      {
-        id: 16,
-        section: "Database",
-        question: "Which of the following is a NoSQL database?",
-        options: [
-          { id: "a", text: "MySQL" },
-          { id: "b", text: "PostgreSQL" },
-          { id: "c", text: "MongoDB" },
-          { id: "d", text: "Oracle" },
-        ],
-        correct: "c",
+        correct: "d",
       },
       {
-        id: 17,
-        section: "Database",
-        question: "Which command is used to retrieve data from a SQL database?",
+        id: 5,
+        section: "Verbal and Reasoning",
+        question: "Find the missing number in the series: 2, 4, 8, 16, __?",
         options: [
-          { id: "a", text: "GET" },
-          { id: "b", text: "SELECT" },
-          { id: "c", text: "PULL" },
-          { id: "d", text: "FETCH" },
-        ],
-        correct: "b",
-      },
-      {
-        id: 18,
-        section: "Database",
-        question: "What does CRUD stand for?",
-        options: [
-          { id: "a", text: "Create, Read, Update, Delete" },
-          { id: "b", text: "Copy, Run, Undo, Deploy" },
-          { id: "c", text: "Create, Run, Update, Drop" },
-          { id: "d", text: "Connect, Read, Upload, Drop" },
-        ],
-        correct: "a",
-      },
-      {
-        id: 19,
-        section: "Database",
-        question: "Which MongoDB method is used to insert a document?",
-        options: [
-          { id: "a", text: "addOne()" },
-          { id: "b", text: "insert()" },
-          { id: "c", text: "insertOne()" },
-          { id: "d", text: "push()" },
-        ],
-        correct: "c",
-      },
-      {
-        id: 20,
-        section: "Database",
-        question: "Which keyword is used in SQL to remove duplicate values?",
-        options: [
-          { id: "a", text: "REMOVE DUPLICATE" },
-          { id: "b", text: "DISTINCT" },
-          { id: "c", text: "UNIQUE" },
-          { id: "d", text: "DELETE DISTINCT" },
-        ],
-        correct: "b",
-      },
-
-      {
-        id: 21,
-        section: "General Computer Knowledge",
-        question: "Which of the following is an input device?",
-        options: [
-          { id: "a", text: "Monitor" },
-          { id: "b", text: "Mouse" },
-          { id: "c", text: "Printer" },
-          { id: "d", text: "Speaker" },
-        ],
-        correct: "b",
-      },
-      {
-        id: 22,
-        section: "General Computer Knowledge",
-        question: "Which company developed the Windows operating system?",
-        options: [
-          { id: "a", text: "Google" },
-          { id: "b", text: "Microsoft" },
-          { id: "c", text: "Apple" },
-          { id: "d", text: "IBM" },
-        ],
-        correct: "b",
-      },
-      {
-        id: 23,
-        section: "General Computer Knowledge",
-        question: "What does CPU stand for?",
-        options: [
-          { id: "a", text: "Central Processing Unit" },
-          { id: "b", text: "Computer Processing Unit" },
-          { id: "c", text: "Central Power Unit" },
-          { id: "d", text: "Control Processing Unit" },
-        ],
-        correct: "a",
-      },
-      {
-        id: 24,
-        section: "General Computer Knowledge",
-        question: "Which of these is a type of non-volatile memory?",
-        options: [
-          { id: "a", text: "RAM" },
-          { id: "b", text: "ROM" },
-          { id: "c", text: "Cache" },
-          { id: "d", text: "Register" },
-        ],
-        correct: "b",
-      },
-      {
-        id: 25,
-        section: "General Computer Knowledge",
-        question: "Which unit is used to measure data size?",
-        options: [
-          { id: "a", text: "Kilogram" },
-          { id: "b", text: "Hertz" },
-          { id: "c", text: "Watt" },
-          { id: "d", text: "Byte" },
+          { id: "a", text: "18" },
+          { id: "b", text: "20" },
+          { id: "c", text: "24" },
+          { id: "d", text: "32" },
         ],
         correct: "d",
       },
     ];
 
+    const generalAptitudeQuestions = [
+      {
+        id: 1,
+        section: "General Aptitude",
+        question:
+          "If a train travels 60 km in 1.5 hours, what is its average speed?",
+        options: [
+          { id: "a", text: "30 km/h" },
+          { id: "b", text: "40 km/h" },
+          { id: "c", text: "50 km/h" },
+          { id: "d", text: "60 km/h" },
+        ],
+        correct: "b",
+      },
+      {
+        id: 2,
+        section: "General Aptitude",
+        question:
+          "A man bought a watch for ₹800 and sold it for ₹1000. What is his profit percentage?",
+        options: [
+          { id: "a", text: "20%" },
+          { id: "b", text: "25%" },
+          { id: "c", text: "30%" },
+          { id: "d", text: "15%" },
+        ],
+        correct: "b",
+      },
+      {
+        id: 3,
+        section: "General Aptitude",
+        question: "What is the next number in the series: 3, 6, 11, 18, __?",
+        options: [
+          { id: "a", text: "25" },
+          { id: "b", text: "27" },
+          { id: "c", text: "26" },
+          { id: "d", text: "30" },
+        ],
+        correct: "c",
+      },
+      {
+        id: 4,
+        section: "General Aptitude",
+        question: "What is 15% of 200?",
+        options: [
+          { id: "a", text: "25" },
+          { id: "b", text: "30" },
+          { id: "c", text: "35" },
+          { id: "d", text: "40" },
+        ],
+        correct: "b",
+      },
+      {
+        id: 5,
+        section: "General Aptitude",
+        question: "If 5x = 20, what is the value of x?",
+        options: [
+          { id: "a", text: "2" },
+          { id: "b", text: "3" },
+          { id: "c", text: "4" },
+          { id: "d", text: "5" },
+        ],
+        correct: "c",
+      },
+    ];
+
     try {
       await Question.deleteMany({});
-      await Question.insertMany(sampleQuestions);
+      await Question.insertMany([
+        ...sampleQuestions,
+        ...verbalAndReasoningQuestions,
+        ...generalAptitudeQuestions,
+      ]);
       console.log("Questions seeded successfully.");
-      process.exit(); // Exit script
+      process.exit();
     } catch (err) {
       console.error("Error seeding questions:", err);
       process.exit(1);

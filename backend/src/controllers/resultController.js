@@ -1,4 +1,5 @@
 const Result = require("../models/result.model.js");
+const SectionScore = require("../models/SectionScore.model.js");
 const saveResult = async (req, res) => {
   try {
     if (!req.user) {
@@ -24,4 +25,23 @@ const saveResult = async (req, res) => {
   }
 };
 
-module.exports = { saveResult };
+const saveScore = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { section, score, total } = req.body;
+
+    await SectionScore.create({
+      userId: userId,
+      sectionName: section,
+      score: score,
+      totalQuestions: total,
+    });
+
+    res.status(200).json();
+  } catch (err) {
+    console.error("Score save error:", err);
+    res.status(500).json({ error: "Internal server error." });
+  }
+};
+
+module.exports = { saveResult, saveScore };

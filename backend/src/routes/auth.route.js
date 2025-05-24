@@ -15,6 +15,7 @@ const {
   saveResult,
   profile,
   updateProfile,
+  saveScore,
 } = require("../controllers/auth.controller.js");
 const router = express.Router();
 router.post("/createpasskey", createpasskey);
@@ -30,5 +31,4 @@ router.get("/questions", questions);
 router.post("/forgotPassword", forgotPassword);
 router.get("/verify-token/:token", verifyToken);
 router.post("/reset-password/:token", resetPassword);
-router.post("/save-result", authenticate, saveResult);
 module.exports = router;

@@ -4,7 +4,6 @@ const { generateToken } = require("../lib/utils.js");
 const User = require("../models/user.model.js");
 const NPasskey = require("../models/passkey.model.js");
 const Otp = require("../models/otp.model.js");
-const Result = require("../models/result.model.js");
 const forgot = require("../models/forgot.model.js");
 const Question = require("../models/Question.model.js");
 
@@ -362,34 +361,6 @@ const logout = (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
-// controllers/quizController.js
-
-const saveResult = async (req, res) => {
-  try {
-    const userId = req.user.id;
-    const { score, total } = req.body;
-
-    if (score === undefined || total === undefined) {
-      return res.status(400).json({ message: "Score and total are required" });
-    }
-
-    const newResult = new Result({
-      user: userId,
-      score,
-      total,
-    });
-
-    await newResult.save();
-
-    res
-      .status(200)
-      .json({ message: "Result saved successfully", result: newResult });
-  } catch (error) {
-    console.error("Error saving result:", error);
-    res.status(500).json({ message: "Failed to save result" });
-  }
-};
-
 const updateProfile = async (req, res) => {
   try {
     const { profileImage } = req.body;
@@ -436,5 +407,4 @@ module.exports = {
   forgotPassword,
   verifyToken,
   resetPassword,
-  saveResult,
 };
