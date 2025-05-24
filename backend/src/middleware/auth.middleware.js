@@ -5,7 +5,7 @@ const User = require("../models/user.model.js");
 const protect = async (req, res, next) => {
   try {
     const token = req.cookies.jwt;
-    console.log("Token from cookie:", token); // 👈 log this
+    console.log("Token from cookie:", token);
 
     if (!token) {
       return res.status(401).json({ message: "Not authorized, no token" });

@@ -1,30 +1,39 @@
-import React, { useRef } from 'react';
-import { Mail, Phone, Briefcase, Camera } from 'lucide-react';
+import React, { useRef, useState } from "react";
+import { Mail, Phone, Camera } from "lucide-react";
+import { useAuthStore } from "../../store/useAuthStore";
+import defaultImage from "../../images/avatar.png";
 
-const ProfileHeader = ({ profile, onUpdateImage }) => {
+const ProfileHeader = () => {
+  const { authUser, updateProfile } = useAuthStore();
+  const [selectedImg, setSelectedImg] = useState(null);
   const fileInputRef = useRef(null);
 
   const handleImageClick = () => {
     fileInputRef.current?.click();
   };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files?.[0];
-    if (file && onUpdateImage) {
-      onUpdateImage(file);
-    }
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = async () => {
+      const base64Image = reader.result;
+      setSelectedImg(base64Image);
+      await updateProfile({ profileImage: base64Image }); // Must match backend field name
+    };
+    reader.readAsDataURL(file);
   };
 
   return (
     <div className="profile-header">
-      <div className="profile-image-wrapper">
+      <div className="profile-image-wrapper" onClick={handleImageClick}>
         <img
-          src={profile.profileImage}
-          alt={`${profile.name}'s profile`}
+          src={selectedImg || authUser?.profileImage || defaultImage}
+          alt="Profile"
           className="profile-image"
-          onClick={handleImageClick}
         />
-        <div className="image-overlay" onClick={handleImageClick}>
+        <div className="image-overlay">
           <Camera className="camera-icon" />
         </div>
         <input
@@ -32,26 +41,20 @@ const ProfileHeader = ({ profile, onUpdateImage }) => {
           ref={fileInputRef}
           className="hidden-input"
           accept="image/*"
-          onChange={handleFileChange}
+          onChange={handleImageUpload}
         />
       </div>
 
       <div className="profile-details">
-        <h1 className="profile-name">{profile.name}</h1>
-        <p className="profile-position">{profile.position}</p>
-
+        <h1 className="profile-name">{authUser?.fullName}</h1>
         <div className="profile-contact">
           <div className="contact-item">
             <Mail size={18} />
-            <span>{profile.email}</span>
+            <span>{authUser?.email}</span>
           </div>
           <div className="contact-item">
             <Phone size={18} />
-            <span>{profile.phone}</span>
-          </div>
-          <div className="contact-item">
-            <Briefcase size={18} />
-            <span>Employee ID: EMP-{profile.id}</span>
+            <span>{authUser?.contact}</span>
           </div>
         </div>
       </div>

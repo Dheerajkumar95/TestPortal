@@ -18,7 +18,7 @@ const usePreventCopyBlur = () => {
         (event.ctrlKey || event.metaKey) &&
         (event.key.toLowerCase() === "c" || event.key.toLowerCase() === "u")
        
-      )  toast.error("you can't copy anthings");{
+      )  toast.error("you can't copy");{
         event.preventDefault();
       }
 

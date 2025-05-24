@@ -54,16 +54,28 @@ export const useAuthStore = create((set) => ({
           password: formData.password,
         },
         {
-          withCredentials: true, // ✅ allow cookies (JWT) to be sent/received
+          withCredentials: true,
         }
       );
       set({ authUser: res.data });
       navigate("/wel");
     } catch (error) {
-      console.log("Login error:", error.response?.data);
       toast.error(
         error.response?.data?.message || "Invalid Email and Password"
       );
+    }
+  },
+  updateProfile: async (data) => {
+    set({ isUpdatingProfile: true });
+    try {
+      const res = await axiosInstance.put("/auth/update-profile", data);
+      set({ authUser: res.data });
+      toast.success("Profile updated successfully");
+    } catch (error) {
+      console.log("error in update profile:", error);
+      toast.error(error.response.data.message);
+    } finally {
+      set({ isUpdatingProfile: false });
     }
   },
   saveScore: async (updatedScore, totalQuestions) => {
@@ -78,10 +90,6 @@ export const useAuthStore = create((set) => ({
       );
       toast.success("Score saved successfully!");
     } catch (error) {
-      console.error(
-        "Error saving score:",
-        error.response?.data || error.message
-      );
       toast.error("Failed to save score.");
     }
   },
