@@ -172,8 +172,8 @@
 }
 
 .circle-2 {
-  bottom: -2rem;
-  right: -7rem;
+  bottom: -3.1rem;
+  right: -2.8rem;
   width: 8rem;
   height: 8rem;
 }
@@ -181,7 +181,7 @@
 .hero-image {
   border-radius: 0.5rem;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  width: 110%;
+  width: 100%;
   position: relative;
   z-index: 10;
 }
