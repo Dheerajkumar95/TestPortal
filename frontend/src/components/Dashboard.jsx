@@ -42,13 +42,6 @@ const Dashboard = () => {
             <p>&nbsp;Experience our vibrant campus community</p>
           </div>
         </div>
-        <div className="image-box red-border">
-          <img src={tit} alt="TIT College" />
-          <div className="image-overlay">
-            <h3>Academic Excellence</h3>
-            <p>Discover our world-class programs</p>
-          </div>
-        </div>
       </main>
     
        
