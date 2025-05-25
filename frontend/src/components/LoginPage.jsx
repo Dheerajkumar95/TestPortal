@@ -21,7 +21,7 @@ const LoginPage = () => {
       
           <div className="login-container">
         <div className="passkey-left">
-          <img src={Login} alt="Passkey Illustration" />
+          <img src={Login} alt="image" />
         </div>
         <div className="passkey-right">
           <h1 className="title">Login</h1>
