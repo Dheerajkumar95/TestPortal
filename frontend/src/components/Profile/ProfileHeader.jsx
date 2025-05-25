@@ -33,7 +33,7 @@ const ProfileHeader = () => {
           alt="Profile"
           className="profile-image"
         />
-        <div className="image-overlay">
+        <div className="image-overlay1">
           <Camera className="camera-icon" />
         </div>
         <input
