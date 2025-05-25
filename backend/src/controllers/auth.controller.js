@@ -248,10 +248,6 @@ const forgotPassword = async (req, res) => {
     const { email } = req.body;
     console.log(email);
 
-    const user = await User.findOne({ email });
-    if (!user)
-      return res.status(400).json({ message: "Email not registered." });
-
     const token = await bcrypt.hash(email, 10);
     console.log("Generated token:", token);
 
