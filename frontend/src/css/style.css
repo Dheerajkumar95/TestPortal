@@ -329,8 +329,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f0f0f0;
+  background: #ffffff;
   border-radius: 10px;
+  margin-top: 12rem;
 }
 
 .forgot-box {
@@ -437,8 +438,8 @@ body {
   display: flex;
   height: 95vh;
   box-sizing: border-box;
-  gap: 108px;
-  margin-top: -8rem;
+  gap: 2px;
+  margin-top: -5rem;
 }
 .passkey-left {
   flex: 1;
@@ -451,7 +452,7 @@ body {
   height: auto;
   object-fit: contain;
   margin-top: 10rem;
-  margin-right: 3.2rem;
+  margin-left: 5rem;
 }
 
 .passkey-right {
@@ -467,7 +468,7 @@ body {
   background-color: #c8e6c9;
   max-height: 400px;
   margin-top: 13rem;
-  margin-right: 4.2rem;
+  margin-right: 10rem;
 }
 
 .title {
@@ -556,6 +557,7 @@ input:focus {
   color: rgb(24, 182, 74);
   text-align: center;
   height: auto;
+  margin-top: 3rem;
 }
 
 /*congratulation*/
@@ -1234,6 +1236,7 @@ input:focus {
   align-items: center;
   background-color: #ffffff;
   padding: 20px;
+  margin-top: 5rem;
 }
 
 .reset-box {
