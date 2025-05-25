@@ -197,7 +197,7 @@ body {
 
 .search-icon {
   padding: 0.5rem 1rem;
-  height: 2.4rem;
+  height: 2.3rem;
   background-color: #00c853;
   color: white;
   border: none;
@@ -226,22 +226,72 @@ body {
   flex-wrap: wrap;
 }
 
+.courses-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
 .course-card {
   flex: 1;
   min-width: 250px;
+  max-width: 320px;
   border: 1px solid #eee;
   border-radius: 10px;
   padding: 1rem;
   background-color: #f9f9f9;
   position: relative;
 }
+
 .course-card img {
-  height: 10rem;
-  width: 23.9rem;
-  margin-left: -1rem;
-  margin-top: -1rem;
-  border-radius: 10px 5px 0 0;
+  width: 111%;
+  height: auto;
+  max-height: 160px;
+  object-fit: cover;
+  margin: -1rem -1rem 1rem -1rem;
+  border-radius: 10px 10px 0 0;
 }
+
+.course-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.course-card p {
+  color: #555;
+  font-size: 0.95rem;
+  margin: 0.2rem 0;
+}
+
+.course-card .rating {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.7rem;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.course-card button {
+  margin-top: 0.8rem;
+  background-color: #16a34a;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.course-card button:hover {
+  background-color: #15803d;
+}
+
 .rating {
   position: absolute;
   top: 2px;
