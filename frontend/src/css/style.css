@@ -729,7 +729,7 @@ input:focus {
 }
 .instruction-section1 {
   height: auto;
-  margin-top: 3rem;
+  margin-top: 1rem;
 }
 .header {
   display: flex;
@@ -946,6 +946,7 @@ input:focus {
 
 /* Sidebar styles */
 .sidebar {
+  height: 50rem;
   width: 300px;
   border: 1px solid #e0e0e0;
   padding: 15px;
@@ -1012,20 +1013,20 @@ input:focus {
 .quiz-content {
   flex: 1;
   padding: 20px;
-  background-color: white;
+  background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   width: 200rem;
-  height: 42rem;
+  height: 50rem;
   margin-right: -8rem;
 }
 
 .timer {
   position: absolute;
-  top: 26px;
+  top: 15px;
   right: 30px;
   width: 80px;
-  height: 80px;
+  height: 120px;
   padding: 8px;
   text-align: center;
   font-size: 24px;
@@ -1042,6 +1043,7 @@ input:focus {
 
 .quiz-title {
   color: #2c3e50;
+  margin-top: 2rem;
   margin-bottom: 20px;
   padding-bottom: 10px;
   border-bottom: 1px solid #eee;
@@ -1419,4 +1421,42 @@ form input:focus {
 .user-email {
   color: gray;
   font-size: 14px;
+}
+
+//full screen modal code//
+
+.fullscreen-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.modal-content {
+  background: #fff;
+  color: #000;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 0 20px #000;
+  margin-left: 26rem;
+  margin-top: 15rem;
+}
+
+.modal-content button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background: #00c851;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
 }
