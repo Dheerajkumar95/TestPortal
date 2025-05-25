@@ -1,52 +1,53 @@
-import tit from "../images/titgif.gif";
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import "../css/styles.css"
-const Dashboard = () => {
-  const quotes = [
-    "Education is the key to the future; prepare today to own tomorrow..",
-    "The roots of education are bitter, but the fruit is sweet.",
-    "Education is the most powerful weapon which you can use to change the world.",
-    "Learning is a treasure that will follow its owner everywhere."
-  ];
+import React from 'react';
+import { ChevronRight } from 'lucide-react';
+import gif from "../images/design.gif";
+import Navbar from './Navbar';
 
-  const [currentQuote, setCurrentQuote] = useState(quotes[0]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const randomIndex = Math.floor(Math.random() * quotes.length);
-      setCurrentQuote(quotes[randomIndex]);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
+const Dasboard= () => {
   return (
     <>
-      <header className="header">
-        <h1>TIT COLLEGE</h1>
-        <Link className="signin-btn" to="/login">Log In</Link>
-      </header>
+    <Navbar/>
+    <section id="home" className="hero-section">
+      <div className="hero-container">
+        <div className="hero-flex">
+          {/* Left Content */}
+          <div className="hero-left">
+            <h1 className="hero-title">
+              Boost Your Grades with Our
+              <span> Smart Test Portal</span>
+            </h1>
+            <p className="hero-description">
+              Prepare effectively with our adaptive testing platform. Practice, learn, and excel with thousands of curated questions across multiple subjects.
+            </p>
+            <div className="hero-buttons">
+              <a href="#get-started" className="btn-primary">
+                Get Started Free
+                <ChevronRight size={20} className="ml-1" />
+              </a>
+              <a href="#demo" className="btn-secondary">
+                View Demo
+              </a>
+            </div>
+            
+          </div>
 
-      {/* Hero Section */}
-      
-      {/* Quote Section */}
-      <section className="quote-section">
-        <p>"{currentQuote}"</p>
-      </section>
-
-      <main className="main-content">
-        <div className="image-box green-border">
-          <img src={tit} alt="TIT College" />
-          <div className="image-overlay">
-            <h3>Campus Life&nbsp;</h3>
-            <p>&nbsp;Experience our vibrant campus community</p>
+          {/* Right Image */}
+          <div className="hero-right">
+            <div className="hero-img-wrapper">
+              <div className="circle-1"></div>
+              <div className="circle-2"></div>
+              <img 
+                src={gif} 
+                alt="Students using test portal"
+                className="hero-image"
+              />
+            </div>
           </div>
         </div>
-      </main>
-    
-       
+      </div>
+    </section>
     </>
   );
 };
 
-export default Dashboard;
+export default Dasboard;

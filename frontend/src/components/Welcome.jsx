@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import Header from './Layout/Header';
 import dsa from "../images/dsa.png";
 import java from "../images/java.png";
+import backend from "../images/backend.png";
 import tech from "../images/tech.png";
 const  Welcome= () => {
   return (
@@ -32,7 +32,7 @@ const  Welcome= () => {
 
         <div className="course-card">
           <span className="rating">⭐4.7</span>
-          <img src={java} alt="image"/>
+          <img src={backend} alt="image"/>
           <h3>JAVA Backend Development - Live</h3>
           <p>Intermediate and Advance</p>
           <p>309k+ interested</p>
@@ -47,9 +47,15 @@ const  Welcome= () => {
           <p>335k+ interested</p>
           <button>Explore now</button>
         </div>
-      </div>
-      <div className="week">
-      <Link className="weekly-btn" to="passkey">Weekly Test</Link>
+         <div className="course-card">
+          <span className="rating">⭐4.4</span>
+          <img src={java} alt="image"/>
+          <h3>Java Programming Online Course Complete</h3>
+          <p>Beginner to Advance</p>
+          <p>395k+ interested</p>
+          <button>Explore now</button>
+        </div>
+        
       </div>
     </div>
     </>

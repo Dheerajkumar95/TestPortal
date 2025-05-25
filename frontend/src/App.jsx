@@ -1,6 +1,8 @@
 import './App.css';
 import "./css/style.css";
 import "./css/profile.css";
+import "./css/styles.css";
+import "./css/Navbar.css";
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { Routes, Route,Navigate  } from "react-router-dom";
