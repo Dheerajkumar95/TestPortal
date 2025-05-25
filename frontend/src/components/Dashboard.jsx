@@ -20,11 +20,11 @@ const Dasboard= () => {
               Prepare effectively with our adaptive testing platform. Practice, learn, and excel with thousands of curated questions across multiple subjects.
             </p>
             <div className="hero-buttons">
-              <a href="#get-started" className="btn-primary">
+              <a href="#" className="btn-primary">
                 Get Started Free
                 <ChevronRight size={20} className="ml-1" />
               </a>
-              <a href="#demo" className="btn-secondary">
+              <a href="#" className="btn-secondary">
                 View Demo
               </a>
             </div>
