@@ -556,6 +556,7 @@ input:focus {
   color: rgb(24, 182, 74);
   text-align: center;
   height: auto;
+  margin-top: 3rem;
 }
 
 /*congratulation*/
