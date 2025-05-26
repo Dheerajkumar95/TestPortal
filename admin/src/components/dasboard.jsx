@@ -16,6 +16,7 @@ const Dashboard = () => {
       <div className="header">
         <h2>TIT College Test Submission</h2>
         <div className="user-info">
+          <Link className='logout-btn' type="submit" to="/add-passkey">Add Passkey</Link>
           <Link className='logout-btn' type="submit" to="/add-question">Add Question</Link>
         </div>
       </div>

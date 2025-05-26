@@ -385,3 +385,54 @@ button {
 button:hover {
   background-color: #189f50;
 }
+
+///////
+.passkey-form-container {
+  width: 40px;
+  margin: 80px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgb(24, 182, 74);
+  text-align: center;
+}
+
+.passkey-form-container h2 {
+  font-size: 24px;
+  margin-bottom: -60px;
+  color: rgb(24, 182, 74);
+}
+
+.passkey-form input {
+  width: 20%;
+  margin: 80px auto;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.passkey-form button {
+  width: 20%;
+  padding: 12px 0;
+  background-color: rgb(24, 182, 74);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.passkey-form button:hover {
+  background-color: #189f50;
+}
+
+.message {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #189f50;
+}

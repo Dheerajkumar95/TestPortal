@@ -57,24 +57,25 @@ const passkey = async (req, res) => {
       return res.status(400).json({ message: "Passkey is required" });
     }
 
-    const checkPasskey = await NPasskey.findOne(); // You can filter here if needed
+    const allPasskeys = await NPasskey.find();
 
-    if (!checkPasskey) {
-      return res.status(404).json({ message: "No passkey found in database" });
+    for (const item of allPasskeys) {
+      const isMatch = await bcrypt.compare(Passkey, item.Passkey);
+      if (isMatch) {
+        return res
+          .status(200)
+          .json({ message: "Passkey verified successfully" });
+      }
     }
 
-    const isMatch = await bcrypt.compare(Passkey, checkPasskey.Passkey);
-
-    if (isMatch) {
-      return res.status(200).json({ message: "Passkey verified successfully" });
-    } else {
-      return res.status(401).json({ message: "Invalid Passkey" });
-    }
+    // If none matched
+    return res.status(401).json({ message: "Invalid Passkey" });
   } catch (error) {
     console.log("Error in Passkey controller", error.message);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
 const sendotp = async (req, res) => {
   const { email, password, confirmPassword, fullName } = req.body;
   console.log("Email received:", email);

@@ -18,7 +18,7 @@ const {
   saveScore,
 } = require("../controllers/auth.controller.js");
 const router = express.Router();
-router.post("/createpasskey", createpasskey);
+router.post("/passkey/create", createpasskey);
 router.post("/passkey", passkey);
 router.post("/sendotp", sendotp);
 router.post("/resendotp", resendotp);
