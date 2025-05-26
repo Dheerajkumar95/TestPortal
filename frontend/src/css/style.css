@@ -1134,7 +1134,11 @@ input:focus {
     grid-template-columns: repeat(4, 1fr);
   }
 }
-
+@media (max-width: 766px) {
+  .signUp {
+    margin-top: -3.5rem;
+  }
+}
 @media (max-width: 480px) {
   .question-grid {
     grid-template-columns: repeat(3, 1fr);
