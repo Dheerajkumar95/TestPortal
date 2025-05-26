@@ -15,8 +15,8 @@ const sendVerificationEamil = async (email, verificationCode, name) => {
       from: '"DheerajKumar"<dheerajk35973@gmail.com>',
 
       to: email,
-      subject: "Verify your Email",
-      text: "Verify your Email",
+      subject: "Verify your Email on TIT.TestPortal.in",
+      text: "Verify your Email on TIT.TestPortal.in",
       html: htmlContent,
     });
     console.log("Email send Successfully", response);
@@ -30,8 +30,8 @@ const senWelcomeEmail = async (email, name) => {
       from: '"Dheeraj" <dheerajk35973@gmail.com>',
 
       to: email,
-      subject: "Welcome Email",
-      text: "Welcome Email",
+      subject: "Welcome Email on TIT.TestPortal.in",
+      text: "Welcome Email on TIT.TestPortal.in",
       html: Welcome_Email_Template.replace("{name}", name),
     });
     console.log("Email send Successfully", response);
@@ -39,15 +39,19 @@ const senWelcomeEmail = async (email, name) => {
     console.log("Email error", error);
   }
 };
-const ResetPasswordEmail = async (email, link) => {
+const ResetPasswordEmail = async (email, name, link) => {
   try {
+    const htmlContent = ResetPasswordEmail_Template.replace("{email}", email)
+      .replace("{name}", name)
+      .replace("{link}", link);
+
     const response = await transporter.sendMail({
       from: '"Dheeraj" <dheerajk35973@gmail.com>',
 
       to: email,
-      subject: "Welcome Email",
-      text: "Welcome Email",
-      html: ResetPasswordEmail_Template.replace("{link}", link),
+      subject: "Password reset on TIT.TestPortal.in",
+      text: "Password reset on TIT.TestPortal.in",
+      html: htmlContent,
     });
     console.log("Email send Successfully", response);
   } catch (error) {

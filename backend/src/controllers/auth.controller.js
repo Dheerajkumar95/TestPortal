@@ -79,11 +79,13 @@ const sendotp = async (req, res) => {
   const { email, password, confirmPassword, fullName } = req.body;
   console.log("Email received:", email);
 
-  // 1. Check if already registered
+  // 1. Check if already registered in User collection
   const uexists = await User.findOne({ email });
-  if (uexists) return res.status(400).json({ message: "User already exists" });
-  const exists = await Otp.findOne({ email });
-  if (exists) return res.status(400).json({ message: "User already exists" });
+  if (uexists) {
+    return res.status(400).json({ message: "User already exists" });
+  }
+
+  // 2. Basic validations
   if (password.length < 8) {
     return res
       .status(400)
@@ -92,19 +94,33 @@ const sendotp = async (req, res) => {
   if (password !== confirmPassword) {
     return res.status(400).json({ message: "Passwords do not match" });
   }
-  // 2. Generate OTP
+
+  // 3. Generate new OTP
   const otp = Math.floor(100000 + Math.random() * 900000);
+  const expiresAt = Date.now() + 5 * 60 * 1000; // 5 minutes
 
-  // 3. Save OTP in temp DB or in-memory storage
-  await Otp.create({
-    email,
-    otp,
-    expiresAt: Date.now() + 300000,
-  });
+  // 4. Check if user exists in Otp collection
+  const existingOtp = await Otp.findOne({ email });
 
-  // 4. Send OTP (e.g. via email/SMS)
+  if (existingOtp) {
+    // Update the OTP and expiration
+    existingOtp.otp = otp;
+    existingOtp.expiresAt = expiresAt;
+    await existingOtp.save();
+    console.log("OTP updated for existing email:", email);
+  } else {
+    // Create a new OTP entry
+    await Otp.create({
+      email,
+      otp,
+      expiresAt,
+    });
+    console.log("New OTP created for email:", email);
+  }
+
+  // 5. Send OTP via email
   await sendVerificationEamil(email, otp, fullName);
-  console.log("Email received:", email);
+
   return res.status(200).json({ message: "OTP sent successfully" });
 };
 
@@ -246,24 +262,30 @@ const updateProfileImage = async (req, res) => {
 const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res
+        .status(404)
+        .json({ message: "User not found with this email" });
+    }
+
+    const fullName = user.fullName; // or user.name based on your schema
     console.log(email);
 
     const token = await bcrypt.hash(email, 10);
     console.log("Generated token:", token);
 
     const resetToken = token;
-    const resetTokenExpire = Date.now() + 15 * 60 * 1000;
+    const resetTokenExpire = Date.now() + 5 * 60 * 1000;
 
-    // Check if a reset request already exists for this email
     let existingRequest = await forgot.findOne({ email });
 
     if (existingRequest) {
-      // Update existing token and expiry
       existingRequest.resetToken = resetToken;
       existingRequest.resetTokenExpire = resetTokenExpire;
       await existingRequest.save();
     } else {
-      // Create a new reset record
       existingRequest = await forgot.create({
         email,
         resetToken,
@@ -276,7 +298,7 @@ const forgotPassword = async (req, res) => {
     )}`;
     console.log("Reset link:", link);
 
-    await ResetPasswordEmail(email, link);
+    await ResetPasswordEmail(email, fullName, link);
 
     return res.status(201).json({
       message: "Reset link sent to your email.",

@@ -19,10 +19,10 @@ const Verification_Email_Template = `
               border-radius: 8px;
               box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
               overflow: hidden;
-              border: 1px solid rgb(213, 0, 0);
+              border: 1px solid  rgb(24, 182, 74);
           }
           .header {
-              background-color:rgb(213, 0, 0);
+              background-color: rgb(24, 182, 74);
               color: white;
               padding: 20px;
               text-align: center;
@@ -49,7 +49,7 @@ const Verification_Email_Template = `
               font-size: 22px;
               color:rgb(0, 0, 0);
               background: #e8f5e9;
-              border: 1px dashed rgb(213, 0, 0);
+              border: 1px dashed  rgb(24, 182, 74);
               padding: 10px;
               text-align: center;
               border-radius: 5px;
@@ -66,6 +66,7 @@ const Verification_Email_Template = `
           }
           p {
               margin: 0 0 15px;
+              font-size: 16px;
           }
       </style>
   </head>
@@ -74,9 +75,12 @@ const Verification_Email_Template = `
           <div class="header">Verify Your Email</div>
           <div class="content">
               <p class="name">Dear {name}</p>
-              <p>Thank you for signing up! Please confirm your email address by entering the code below:</p>
+              <h3>Greetings from TIT.TestPortal.in</h3>
               <span class="verification-code">{verificationCode}</span>
-              <p>If you did not create an account, no further action is required. If you have any questions, feel free to contact our support team.</p>
+              <p>This OTP is valid for the next 5 minutes. Please use this code to complete your verification process.</p>
+              <p>For your security, never share this OTP with anyone, including company representatives. If you did not request this code, please contact our support team immediately.</p>
+              <h2>Best Regards</h2>
+              <h2>TIT.TestPortal.in</h2>
           </div>
           <div class="footer">
               <p>&copy; ${new Date().getFullYear()} DheerajKumar. All rights reserved.</p>
@@ -108,10 +112,10 @@ const Welcome_Email_Template = `
               border-radius: 8px;
               box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
               overflow: hidden;
-              border: 1px solid rgb(213, 0, 0);
+              border: 1px solid  rgb(24, 182, 74);
           }
           .header {
-              background-color: rgb(213, 0, 0);
+              background-color:  rgb(24, 182, 74);
               color: white;
               padding: 20px;
               text-align: center;
@@ -130,7 +134,7 @@ const Welcome_Email_Template = `
               display: inline-block;
               padding: 12px 25px;
               margin: 20px 0;
-              background-color: rgb(213, 0, 0);
+              background-color:  rgb(24, 182, 74);
               color:#000000;
               text-decoration: none;
               border-radius: 5px;
@@ -140,7 +144,7 @@ const Welcome_Email_Template = `
               transition: background-color 0.3s;
           }
           .button:hover {
-              background-color: linear-gradient(90deg, rgb(108, 47, 17), rgb(213, 0, 0));
+              background-color: linear-gradient(90deg, rgb(108, 47, 17),  rgb(24, 182, 74));
           }
           .footer {
               background-color: #f4f4f4;
@@ -184,7 +188,7 @@ const ResetPasswordEmail_Template = `
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Welcome to Our Community</title>
+      <title>Password Reset</title>
       <style>
           body {
               font-family: Arial, sans-serif;
@@ -196,14 +200,14 @@ const ResetPasswordEmail_Template = `
           .container {
               max-width: 600px;
               margin: 30px auto;
-              background:  #ffffff;
+              background: #ffffff;
               border-radius: 8px;
               box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
               overflow: hidden;
-              border: 1px solid rgb(213, 0, 0);
+              border: 1px solid rgb(24, 182, 74);
           }
           .header {
-              background-color: rgb(213, 0, 0);
+              background-color: rgb(24, 182, 74);
               color: white;
               padding: 20px;
               text-align: center;
@@ -222,8 +226,8 @@ const ResetPasswordEmail_Template = `
               display: inline-block;
               padding: 12px 25px;
               margin: 20px 0;
-              background-color: rgb(213, 0, 0);
-              color:#000000;
+              background-color: rgb(24, 182, 74);
+              color: #000000;
               text-decoration: none;
               border-radius: 5px;
               text-align: center;
@@ -232,7 +236,7 @@ const ResetPasswordEmail_Template = `
               transition: background-color 0.3s;
           }
           .button:hover {
-              background-color: linear-gradient(90deg, rgb(108, 47, 17), rgb(213, 0, 0));
+              background-color: #189f50;
           }
           .footer {
               background-color: #f4f4f4;
@@ -249,26 +253,26 @@ const ResetPasswordEmail_Template = `
   </head>
   <body>
       <div class="container">
-          <div class="header">Welcome to Our Community!</div>
+          <div class="header">Password Reset Request</div>
           <div class="content">
-              <p class="welcome-message">Hello {link},</p>
-              <p>We’re thrilled to have you join us! Your registration was successful, and we’re committed to providing you with the best experience possible.</p>
-              <p>Here’s how you can get started:</p>
-              <ul>
-                  <li>Explore our features and customize your experience.</li>
-                  <li>Stay informed by checking out our blog for the latest updates and tips.</li>
-                  <li>Reach out to our support team if you have any questions or need assistance.</li>
-              </ul>
-              <a href="#" class="button">Get Started</a>
-              <p>If you need any help, don’t hesitate to contact us. We’re here to support you every step of the way.</p>
+              <p class="welcome-message">Dear {name},</p>
+               <h3>Greetings from TIT.TestPortal.in</h3>
+              <p>To initiate the password reset process for your CRTD Technologies' Exam Portal, please click the Reset Password button below:</p>
+             <div style="text-align: center;">
+            <a href="{link}" class="button">Reset Password</a>
+           </div>
+              <h2>Best Regards</h2>
+              <h2>TIT.TestPortal.in</h2>
+              <p>If you did not request this, you can safely ignore this email.</p>
           </div>
           <div class="footer">
-              <p>&copy; ${new Date().getFullYear()}DheerajKumar. All rights reserved.</p>
+              <p>&copy; ${new Date().getFullYear()} DheerajKumar. All rights reserved.</p>
           </div>
       </div>
   </body>
   </html>
 `;
+
 module.exports = {
   Verification_Email_Template,
   Welcome_Email_Template,

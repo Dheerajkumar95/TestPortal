@@ -31,7 +31,7 @@ const LoginPage = () => {
               type="text"
               name="email"
               value={formData.email}
-              onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
+              onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value.toLowerCase() })}
               placeholder="Enter email ID"
               required />
             <h1 style={{ marginRight: "20.5rem",fontSize:"1rem" ,fontFamily:"monospace" }}>Password</h1>
