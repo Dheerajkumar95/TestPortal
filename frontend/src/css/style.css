@@ -1126,6 +1126,9 @@ input:focus {
   .otp-box {
     margin-top: 7rem;
   }
+  .instruction-section1 {
+    margin-top: -5.5rem;
+  }
   .quiz-app {
     flex-direction: column;
   }
