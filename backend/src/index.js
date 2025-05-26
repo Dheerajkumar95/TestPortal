@@ -7,6 +7,7 @@ const path = require("path");
 const { connectDB } = require("./lib/db.js");
 const authRoutes = require("./routes/auth.route.js");
 const resultRoutes = require("./routes/result");
+const questionsRoutes = require("./routes/questions");
 dotenv.config();
 const PORT = process.env.PORT || 7007;
 app.use(
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/result", resultRoutes);
+app.use("/api/questions", questionsRoutes);
 app.listen(PORT, () => {
   console.log("server is running on PORT:" + PORT);
   connectDB();
