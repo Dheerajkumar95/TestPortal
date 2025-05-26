@@ -439,7 +439,7 @@ body {
   height: 95vh;
   box-sizing: border-box;
   gap: 2px;
-  margin-top: -5rem;
+  margin-top: -8rem;
 }
 .passkey-left {
   flex: 1;
@@ -447,14 +447,28 @@ body {
 }
 
 .passkey-left img {
-  max-width: 400px;
-  width: 100%;
-  height: auto;
+  width: 500px;
+  height: 400px;
   object-fit: contain;
-  margin-top: 10rem;
+  margin-top: 15rem;
   margin-left: 5rem;
 }
 
+.passkey-rightp {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  max-width: 450px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0.2, 0.2, 0.2, 0.2);
+  border-radius: 8px;
+  background-color: #c8e6c9;
+  height: 400px;
+  margin-top: 13rem;
+  margin-right: 5rem;
+}
 .passkey-right {
   flex: 1;
   display: flex;
@@ -466,9 +480,9 @@ body {
   box-shadow: 0 4px 8px rgba(0.2, 0.2, 0.2, 0.2);
   border-radius: 8px;
   background-color: #c8e6c9;
-  max-height: 400px;
+  height: 400px;
   margin-top: 13rem;
-  margin-right: 10rem;
+  margin-right: 5rem;
 }
 
 .title {
@@ -812,6 +826,7 @@ input:focus {
   align-items: center;
   font-size: 1rem;
   margin-left: 12rem;
+  margin-top: -1.4rem;
 }
 
 .checkbox input[type="checkbox"] {
@@ -823,7 +838,7 @@ input:focus {
   margin-top: 1.5rem;
 }
 .start-wrapper {
-  margin-top: -0.5rem;
+  margin-top: -1rem;
 }
 .checkbox label {
   margin-left: 0.5rem;
@@ -946,7 +961,7 @@ input:focus {
 
 /* Sidebar styles */
 .sidebar {
-  height: 49.9rem;
+  height: 49rem;
   width: 300px;
   border: 1px solid #e0e0e0;
   padding: 15px;
@@ -1013,11 +1028,11 @@ input:focus {
 .quiz-content {
   flex: 1;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: #f8f9fa;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   width: 200rem;
-  height: 49.9rem;
+  height: 49rem;
   margin-right: -8rem;
 }
 
@@ -1120,19 +1135,60 @@ input:focus {
   background-color: #45a049;
 }
 /* Responsive design */
-@media (max-width: 768px) {
-  .quiz-app {
-    flex-direction: column;
+@media (max-width: 1280px) {
+  .signUp {
+    margin-top: -3.5rem;
+  }
+  .otp-box {
+    margin-top: 7rem;
+  }
+  .forgot-container {
+    margin-top: 6rem;
+  }
+  .instruction-section1 {
+    margin-top: -6.5rem;
   }
 
   .sidebar {
-    width: 100%;
-    margin-right: 0;
+    width: 20%;
+    height: 49rem;
+    margin-left: -0.1rem;
     margin-bottom: 20px;
   }
+  .nav-buttons-container {
+    display: flex;
+    justify-content: right;
+    gap: 36.5rem;
+    width: 100%;
+    padding: 20px;
+    margin-top: -6rem;
+    box-sizing: border-box;
+  }
 
+  .nav-btn {
+    width: 10rem;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: #4caf50;
+    color: white;
+    user-select: none;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    margin-right: -1rem;
+  }
+  .quiz-content {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 250rem;
+    height: 49rem;
+    margin-right: -1rem;
+  }
   .question-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 

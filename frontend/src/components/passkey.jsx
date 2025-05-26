@@ -20,7 +20,7 @@ const PasskeyPage = () => {
   <div className="passkey-left">
     <img src={PassKeyImage} alt="image" />
   </div>
-  <div className="passkey-right">
+  <div className="passkey-rightp">
     <h1 className="title">PassKey Verification</h1>
     <p className="instruction">Please enter the passkey provided by the company to begin the test</p>
     <form  onSubmit={handleSubmit}>

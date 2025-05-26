@@ -1,13 +1,11 @@
 /* Hero.css */
 .hero-section {
   padding-top: 8rem;
-  padding-bottom: 4rem;
 }
 
 @media (min-width: 768px) {
   .hero-section {
-    padding-top: 8rem;
-    padding-bottom: 6rem;
+    padding-top: 6rem;
   }
 }
 
