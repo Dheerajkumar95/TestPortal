@@ -1151,7 +1151,7 @@ input:focus {
 
   .sidebar {
     width: 20%;
-    height: 49rem;
+    height: 41rem;
     margin-left: -0.1rem;
     margin-bottom: 20px;
   }
@@ -1184,7 +1184,7 @@ input:focus {
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     width: 250rem;
-    height: 49rem;
+    height: 41rem;
     margin-right: -1rem;
   }
   .question-grid {
