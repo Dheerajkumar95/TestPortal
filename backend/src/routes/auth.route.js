@@ -12,7 +12,6 @@ const {
   forgotPassword,
   verifyToken,
   resetPassword,
-  saveResult,
   profile,
   updateProfile,
   saveScore,

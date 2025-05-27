@@ -27,14 +27,13 @@ const QuizPage = () => {
   const [timeLeft, setTimeLeft] = useState(10 * 60);
   const [waiting, setWaiting] = useState(false);
   const [waitingTimeLeft, setWaitingTimeLeft] = useState(10);
-
   const [tabSwitchCount, setTabSwitchCount] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showFullscreenPrompt, setShowFullscreenPrompt] = useState(true);
 
   const navigate = useNavigate();
 
-  // Tab Switch Detection
+  // Tab switch detection
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.hidden) {
@@ -194,10 +193,10 @@ const QuizPage = () => {
   const currentQ = sectionQuestions[current];
   const percentage = (timeLeft / (10 * 60)) * 100;
   const getColor = () => timeLeft <= 60 ? "#FF3131" : timeLeft <= 5 * 60 ? "#FFFF00" : "rgb(100, 221, 23)";
+  const imageUrl = currentQ.image?.startsWith('http') ? currentQ.image : `http://localhost:7007/${currentQ.image?.replace(/^\/+/, '')}`;
 
   return (
     <>
-      {/* Fullscreen Prompt Modal */}
       {showFullscreenPrompt && (
         <div className="fullscreen-modal">
           <div className="modal-content">
@@ -217,17 +216,17 @@ const QuizPage = () => {
               <h4>Active <span>1</span></h4>
 
               <div className="question-grid">
-                {sectionQuestions.map((_, idx) => (
+                {sectionQuestions.map((_, _idx) => (
                   <button
-                    key={idx}
-                    onClick={() => goToQuestion(idx)}
+                    key={_idx}
+                    onClick={() => goToQuestion(_idx)}
                     className={
-                      current === idx ? 'question-btn active' :
-                        statuses[idx] === 'Marked' ? 'question-btn marked' :
+                      current === _idx ? 'question-btn active' :
+                        statuses[_idx] === 'Marked' ? 'question-btn marked' :
                           'question-btn not-visited'
                     }
                   >
-                    {idx + 1}
+                    {_idx + 1}
                   </button>
                 ))}
               </div>
@@ -246,7 +245,12 @@ const QuizPage = () => {
 
               <div className="question-container">
                 {currentQ.image && (
-                  <img src={currentQ.image} alt={`Q${current + 1}`} className="question-image" />
+                  <img
+                    src={imageUrl}
+                    alt={`Q${current + 1}`}
+                    className="question-image"
+                    style={{ maxWidth: "100%", height: "auto", marginBottom: "10px" }}
+                  />
                 )}
                 <p className="question-text">Q{current + 1}. {currentQ.question}</p>
               </div>

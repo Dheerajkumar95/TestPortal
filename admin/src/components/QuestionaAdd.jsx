@@ -1,14 +1,14 @@
-// dasboard.jsx
 import React, { useState } from "react";
 import { axiosInstance } from "../lib/axios.js";
 
-const dasboard = () => {
+const Dasboard = () => {
   const [form, setForm] = useState({
     section: "",
     question: "",
     options: ["", "", "", ""],
     correct: "",
   });
+  const [image, setImage] = useState(null); // for holding image file
 
   const handleOptionChange = (index, value) => {
     const updatedOptions = [...form.options];
@@ -18,35 +18,49 @@ const dasboard = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const formattedOptions = form.options.map((text, index) => ({
-      id: String.fromCharCode(97 + index), // a, b, c, d
+      id: String.fromCharCode(97 + index),
       text,
     }));
 
-    const payload = {
-      section: form.section,
-      question: form.question,
-      options: formattedOptions,
-      correct: form.correct,
-    };
+    const formData = new FormData();
+    formData.append("section", form.section);
+    formData.append("question", form.question);
+    formData.append("correct", form.correct);
+    formData.append("options", JSON.stringify(formattedOptions)); // serialize options
+    if (image) formData.append("image", image);
 
-    await axiosInstance.post("/questions/add", payload);
+    await axiosInstance.post("/questions/add", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
     alert("Question added successfully!");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} encType="multipart/form-data">
       <input
         type="text"
         placeholder="Section"
         value={form.section}
         onChange={(e) => setForm({ ...form, section: e.target.value })}
       />
+
       <textarea
         placeholder="Enter your question"
         value={form.question}
         onChange={(e) => setForm({ ...form, question: e.target.value })}
       />
+
+      <input
+        type="file"
+        accept="image/*"
+        onChange={(e) => setImage(e.target.files[0])}
+      />
+
       {form.options.map((opt, i) => (
         <input
           key={i}
@@ -56,15 +70,17 @@ const dasboard = () => {
           onChange={(e) => handleOptionChange(i, e.target.value)}
         />
       ))}
+
       <input
         type="text"
         placeholder="Correct option (a/b/c/d)"
         value={form.correct}
         onChange={(e) => setForm({ ...form, correct: e.target.value })}
       />
+
       <button type="submit">Add Question</button>
     </form>
   );
 };
 
-export default dasboard;
+export default Dasboard;

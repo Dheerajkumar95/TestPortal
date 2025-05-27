@@ -234,31 +234,6 @@ const profile = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
-const updateProfileImage = async (req, res) => {
-  try {
-    const userId = req.user._id;
-
-    if (!req.file) {
-      return res.status(400).json({ error: "No image uploaded" });
-    }
-
-    // Convert image to base64
-    const base64Image = `data:${
-      req.file.mimetype
-    };base64,${req.file.buffer.toString("base64")}`;
-
-    const updatedUser = await User.findByIdAndUpdate(
-      userId,
-      { profileImage: base64Image },
-      { new: true }
-    ).select("-password");
-
-    res.json(updatedUser);
-  } catch (err) {
-    console.error("Image upload error:", err);
-    res.status(500).json({ error: "Server error" });
-  }
-};
 
 const forgotPassword = async (req, res) => {
   try {
@@ -389,7 +364,7 @@ const updateProfile = async (req, res) => {
       return res.status(400).json({ message: "Profile pic is required" });
     }
     const uploadResponse = await cloudinary.uploader.upload(profileImage);
-    console.log("hey");
+
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       { profileImage: uploadResponse.secure_url },
@@ -413,7 +388,7 @@ const checkAuth = (req, res) => {
 module.exports = {
   login,
   profile,
-  updateProfileImage,
+
   logout,
   checkAuth,
   updateProfile,
