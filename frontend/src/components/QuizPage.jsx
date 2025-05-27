@@ -33,7 +33,7 @@ const QuizPage = () => {
 
   const navigate = useNavigate();
 
-  // Tab switch detection
+  // Detect tab switches
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.hidden) {
@@ -50,24 +50,28 @@ const QuizPage = () => {
       toast.error("Too many tab switches! Your quiz will be submitted.");
       navigate('/congratulations');
     }
-  }, [tabSwitchCount]);
+  }, [tabSwitchCount, navigate]);
 
-  // Load Questions
+  // Load all questions & initialize first section
   useEffect(() => {
     axios.get('http://localhost:7007/api/auth/questions')
       .then(res => {
         setAllQuestions(res.data);
-        const sectionQ = res.data.filter(q => q.section === sections[0]);
-        setSectionQuestions(sectionQ);
+        const firstSectionQs = res.data.filter(q => q.section === sections[0]);
+        setSectionQuestions(firstSectionQs);
+
         const initialStatuses = {};
-        sectionQ.forEach((_, idx) => initialStatuses[idx] = 'Not Visited');
+        firstSectionQs.forEach(q => {
+          initialStatuses[q._id] = 'Not Visited';
+        });
         setStatuses(initialStatuses);
       })
       .catch(err => console.error(err));
   }, []);
 
-  // Timer
+  // Timer for current section
   useEffect(() => {
+    if (waiting) return; // pause timer when waiting between sections
     const timer = setInterval(() => {
       setTimeLeft(prev => {
         if (prev <= 1) {
@@ -79,12 +83,17 @@ const QuizPage = () => {
       });
     }, 1000);
     return () => clearInterval(timer);
-  }, [sectionQuestions]);
+  }, [sectionQuestions, waiting]);
 
-  // Fullscreen Listener
+  // Fullscreen mode listener
   useEffect(() => {
     const handleFullscreenChange = () => {
-      const isFull = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
+      const isFull = !!(
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement
+      );
       setIsFullscreen(isFull);
       setShowFullscreenPrompt(!isFull);
     };
@@ -102,6 +111,7 @@ const QuizPage = () => {
     };
   }, []);
 
+  // Request fullscreen mode
   const requestFullscreen = () => {
     const elem = document.documentElement;
     if (elem.requestFullscreen) {
@@ -115,37 +125,52 @@ const QuizPage = () => {
     }
   };
 
-  const formatTime = (secs) => `${String(Math.floor(secs / 60)).padStart(2, '0')}:${String(secs % 60).padStart(2, '0')}`;
+  // Format time in MM:SS
+  const formatTime = (secs) =>
+    `${String(Math.floor(secs / 60)).padStart(2, '0')}:${String(secs % 60).padStart(2, '0')}`;
 
+  // When option selected, mark question as "Marked" and save selected option
   const handleOptionSelect = (qid, optId) => {
     setSelectedOptions(prev => ({ ...prev, [qid]: optId }));
-    setStatuses(prev => ({ ...prev, [current]: 'Marked' }));
+    setStatuses(prev => ({ ...prev, [qid]: 'Marked' }));
   };
 
+  // On "Save & Next"
   const handleNext = () => {
-    setStatuses(prev => ({ ...prev, [current]: prev[current] === 'Marked' ? 'Marked' : 'Visited' }));
+    setStatuses(prev => {
+      // If not marked yet but visited, set to Visited, else keep Marked
+      if (prev[sectionQuestions[current]._id] !== 'Marked') {
+        return { ...prev, [sectionQuestions[current]._id]: 'Visited' };
+      }
+      return prev;
+    });
     setCurrent(prev => Math.min(prev + 1, sectionQuestions.length - 1));
   };
 
+  // On "Back"
   const handleBack = () => setCurrent(prev => Math.max(prev - 1, 0));
+
+  // Jump to question
   const goToQuestion = (index) => setCurrent(index);
 
+  // Submit current section
   const handleSubmitSection = async (forced = false) => {
-    const unanswered = sectionQuestions.filter(q => !selectedOptions[q.id]);
+    const unanswered = sectionQuestions.filter(q => !selectedOptions[q._id]);
     if (!forced && unanswered.length > 0) {
       toast.error("Please answer all questions before submitting the section.");
       return;
     }
 
+    // Calculate section score
     let sectionScore = 0;
     sectionQuestions.forEach(q => {
-      if (selectedOptions[q.id] === q.correct) sectionScore += 1;
+      if (selectedOptions[q._id] === q.correct) sectionScore += 1;
     });
 
     await saveSectionScore({
       section: sections[currentSectionIndex],
       score: sectionScore,
-      total: sectionQuestions.length
+      total: sectionQuestions.length,
     });
 
     const updatedScore = score + sectionScore;
@@ -155,6 +180,7 @@ const QuizPage = () => {
       setWaiting(true);
       setWaitingTimeLeft(10);
 
+      // Wait for 10 seconds before next section
       const countdown = setInterval(() => {
         setWaitingTimeLeft(prev => {
           if (prev === 1) {
@@ -163,7 +189,9 @@ const QuizPage = () => {
             const nextQuestions = allQuestions.filter(q => q.section === sections[nextIndex]);
 
             const newStatuses = {};
-            nextQuestions.forEach((_, idx) => newStatuses[idx] = 'Not Visited');
+            nextQuestions.forEach(q => {
+              newStatuses[q._id] = 'Not Visited';
+            });
 
             setCurrentSectionIndex(nextIndex);
             setSectionQuestions(nextQuestions);
@@ -177,6 +205,7 @@ const QuizPage = () => {
         });
       }, 1000);
     } else {
+      // Final submit - save total score and navigate
       await saveScore(updatedScore, allQuestions.length);
       navigate('/congratulations', {
         state: {
@@ -192,8 +221,12 @@ const QuizPage = () => {
 
   const currentQ = sectionQuestions[current];
   const percentage = (timeLeft / (10 * 60)) * 100;
-  const getColor = () => timeLeft <= 60 ? "#FF3131" : timeLeft <= 5 * 60 ? "#FFFF00" : "rgb(100, 221, 23)";
-  const imageUrl = currentQ.image?.startsWith('http') ? currentQ.image : `http://localhost:7007/${currentQ.image?.replace(/^\/+/, '')}`;
+  const getColor = () =>
+    timeLeft <= 60 ? "#FF3131" : timeLeft <= 5 * 60 ? "#FFFF00" : "rgb(100, 221, 23)";
+  const imageUrl =
+    currentQ.image?.startsWith('http')
+      ? currentQ.image
+      : `http://localhost:7007/${currentQ.image?.replace(/^\/+/, '')}`;
 
   return (
     <>
@@ -216,17 +249,23 @@ const QuizPage = () => {
               <h4>Active <span>1</span></h4>
 
               <div className="question-grid">
-                {sectionQuestions.map((_, _idx) => (
+                {sectionQuestions.map((question, idx) => (
                   <button
-                    key={_idx}
-                    onClick={() => goToQuestion(_idx)}
+                    key={question._id}
+                    onClick={() => goToQuestion(idx)}
                     className={
-                      current === _idx ? 'question-btn active' :
-                        statuses[_idx] === 'Marked' ? 'question-btn marked' :
-                          'question-btn not-visited'
+                      current === idx
+                        ? 'question-btn active'
+                        : statuses[question._id] === 'Marked'
+                        ? 'question-btn marked'
+                        : statuses[question._id] === 'Answered'
+                        ? 'question-btn answered'
+                        : statuses[question._id] === 'Visited'
+                        ? 'question-btn visited'
+                        : 'question-btn not-visited'
                     }
                   >
-                    {_idx + 1}
+                    {idx + 1}
                   </button>
                 ))}
               </div>
@@ -237,7 +276,11 @@ const QuizPage = () => {
                 <CircularProgressbar
                   value={percentage}
                   text={formatTime(timeLeft)}
-                  styles={buildStyles({ pathColor: getColor(), textColor: "#000", trailColor: "#eee" })}
+                  styles={buildStyles({
+                    pathColor: getColor(),
+                    textColor: "#000",
+                    trailColor: "#eee",
+                  })}
                 />
               </div>
 
@@ -252,18 +295,20 @@ const QuizPage = () => {
                     style={{ maxWidth: "100%", height: "auto", marginBottom: "10px" }}
                   />
                 )}
-                <p className="question-text">Q{current + 1}. {currentQ.question}</p>
+                <p className="question-text">
+                  Q{current + 1}. {currentQ.question}
+                </p>
               </div>
 
-              {currentQ.options.map((opt, idx) => (
-                <div className="option-container" key={idx}>
+              {currentQ.options.map(opt => (
+                <div className="option-container" key={opt.id}>
                   <label className="option-label">
                     <input
                       type="radio"
-                      name={`option-${currentQ.id}`}
+                      name={`option-${currentQ._id}`}
                       value={opt.id}
-                      checked={selectedOptions[currentQ.id] === opt.id}
-                      onChange={() => handleOptionSelect(currentQ.id, opt.id)}
+                      checked={selectedOptions[currentQ._id] === opt.id}
+                      onChange={() => handleOptionSelect(currentQ._id, opt.id)}
                     />
                     {opt.text}
                   </label>
@@ -273,16 +318,25 @@ const QuizPage = () => {
           </div>
 
           <div className="nav-buttons-container">
-            {current > 0 && <h1 onClick={handleBack} className="nav-btn">Back</h1>}
+            {current > 0 && (
+              <h1 onClick={handleBack} className="nav-btn">
+                Back
+              </h1>
+            )}
             {current === sectionQuestions.length - 1 ? (
               <h1
                 onClick={() => handleSubmitSection(false)}
-                className={`nav-btn ${sectionQuestions.some(q => !selectedOptions[q.id]) ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className="nav-btn submit-btn"
               >
                 Submit
               </h1>
             ) : (
-              <h1 onClick={handleNext} className="nav-btn">Save & Next</h1>
+              <h1
+                onClick={handleNext}
+                className="nav-btn"
+              >
+                Save & Next
+              </h1>
             )}
           </div>
         </>
