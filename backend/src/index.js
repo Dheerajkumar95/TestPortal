@@ -8,6 +8,7 @@ const { connectDB } = require("./lib/db.js");
 const authRoutes = require("./routes/auth.route.js");
 const resultRoutes = require("./routes/result");
 const questionsRoutes = require("./routes/questions");
+app.use("/uploads", express.static("uploads"));
 dotenv.config();
 const PORT = process.env.PORT || 7007;
 app.use(
