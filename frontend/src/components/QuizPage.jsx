@@ -33,6 +33,21 @@ const QuizPage = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+  const handlePopState = (e) => {
+      navigate("/wel");
+    window.history.pushState(null, null, window.location.pathname);
+    
+  };
+
+  window.history.pushState(null, null, window.location.pathname);
+  window.addEventListener('popstate', handlePopState);
+
+  return () => {
+    window.removeEventListener('popstate', handlePopState);
+  };
+}, []);
+
   // Detect tab switches
   useEffect(() => {
     const handleVisibilityChange = () => {

@@ -4,7 +4,7 @@ const resultSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // assuming User model exists
+      ref: "User",
       required: true,
     },
     score: {
@@ -21,7 +21,7 @@ const resultSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // adds createdAt and updatedAt fields
+    timestamps: true,
   }
 );
 

@@ -52,7 +52,8 @@ const createpasskey = async (req, res) => {
 const passkey = async (req, res) => {
   try {
     const { Passkey } = req.body;
-
+    const score = 0;
+    const total = 0;
     const userId = req.user?._id;
 
     if (!userId) {
@@ -74,16 +75,19 @@ const passkey = async (req, res) => {
     for (const item of allPasskeys) {
       const isMatch = await bcrypt.compare(Passkey, item.Passkey);
       if (isMatch) {
+        await Result.create({ user: userId, score, total });
         return res.status(200).json({
           message: "Passkey verified successfully",
         });
       }
     }
+
     return res.status(401).json({ message: "Invalid Passkey" });
   } catch (error) {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
 const sendotp = async (req, res) => {
   const { email, password, confirmPassword, fullName } = req.body;
   console.log("Email received:", email);
@@ -390,7 +394,6 @@ const checkAuth = (req, res) => {
 module.exports = {
   login,
   profile,
-
   logout,
   checkAuth,
   updateProfile,
