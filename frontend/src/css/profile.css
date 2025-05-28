@@ -95,66 +95,6 @@
   color: rgb(22, 233, 32);
 }
 
-/* Score Section Styles */
-
-.score-card {
-  background-color: white;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin-bottom: 1.5rem;
-}
-
-.score-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-}
-
-.score-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.score-value {
-  font-weight: 700;
-  color: rgb(84, 246, 15);
-}
-
-.score-bar-container {
-  height: 10px;
-  background-color: #f1f5f9;
-  border-radius: 5px;
-  margin-top: 0.5rem;
-  overflow: hidden;
-}
-
-.score-bar {
-  height: 100%;
-  border-radius: 5px;
-  animation: score-fill 1.5s ease-out forwards;
-}
-
-.score-bar.excellent {
-  background-color: #10b981;
-}
-
-.score-bar.good {
-  background-color: #3b82f6;
-}
-
-.score-bar.average {
-  background-color: #f59e0b;
-}
-
-.score-bar.poor {
-  background-color: #ef4444;
-}
-
 /* Goblet Score Styles */
 .goblet-score {
   margin-top: 3rem;
@@ -467,7 +407,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #374151; /* gray-700 */
+  color: rgb(10, 84, 202); /* gray-700 */
   font-weight: 500;
 }
 
@@ -494,15 +434,15 @@
 }
 
 .score-bar.excellent {
-  background-color: #10b981; /* green-500 */
+  background-color: rgb(21, 236, 42); /* green-500 */
 }
 
 .score-bar.good {
-  background-color: #3b82f6; /* blue-500 */
+  background-color: rgb(15, 100, 237); /* blue-500 */
 }
 
 .score-bar.average {
-  background-color: #fbbf24; /* yellow-400 */
+  background-color: rgb(243, 239, 12); /* yellow-400 */
 }
 
 .score-bar.poor {
@@ -510,6 +450,7 @@
 }
 
 .icon {
+  color: rgb(21, 236, 42); /* blue-600 */
   width: 16px;
   height: 16px;
 }

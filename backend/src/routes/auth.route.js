@@ -18,7 +18,7 @@ const {
 } = require("../controllers/auth.controller.js");
 const router = express.Router();
 router.post("/passkey/create", createpasskey);
-router.post("/passkey", passkey);
+router.post("/passkey", authenticate, passkey);
 router.post("/sendotp", sendotp);
 router.post("/resendotp", resendotp);
 router.post("/verifyOtpAndRegister", verifyOtpAndRegister);

@@ -13,12 +13,16 @@ const saveResult = async (req, res) => {
       return res.status(400).json({ message: "Score and total are required" });
     }
 
-    const newResult = new Result({ user: userId, score, total });
-    await newResult.save();
+    const updatedResult = await Result.findOneAndUpdate(
+      { user: userId },
+      { score, total },
+      { new: true }
+    );
 
-    res
-      .status(200)
-      .json({ message: "Result saved successfully", result: newResult });
+    res.status(200).json({
+      message: "Result saved successfully",
+      result: updatedResult,
+    });
   } catch (error) {
     console.error("Error saving result:", error);
     res.status(500).json({ message: "Failed to save result" });
@@ -44,4 +48,14 @@ const saveScore = async (req, res) => {
   }
 };
 
-module.exports = { saveResult, saveScore };
+const getUserSectionScores = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const scores = await SectionScore.find({ userId });
+    res.json(scores);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching section scores" });
+  }
+};
+
+module.exports = { saveResult, saveScore, getUserSectionScores };

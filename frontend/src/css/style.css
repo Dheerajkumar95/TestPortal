@@ -1055,7 +1055,11 @@ input:focus {
 .timer strong {
   color: inherit;
 }
-
+.time-text {
+  font-size: 20px;
+  margin-left: -5rem;
+  color: rgb(1, 4, 8);
+}
 .quiz-title {
   color: #2c3e50;
   margin-top: 2rem;

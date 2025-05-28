@@ -8,7 +8,7 @@ const Dasboard = () => {
     options: ["", "", "", ""],
     correct: "",
   });
-  const [image, setImage] = useState(null); // for holding image file
+  const [image, setImage] = useState(null);  
 
   const handleOptionChange = (index, value) => {
     const updatedOptions = [...form.options];
