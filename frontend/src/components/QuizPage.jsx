@@ -48,15 +48,17 @@ const QuizPage = () => {
   useEffect(() => {
     if (tabSwitchCount >= 3) {
       toast.error("Too many tab switches! Your quiz will be submitted.");
+      saveScore(0, allQuestions.length);  
       navigate('/congratulations', {
         state: {
-          score:0,
+          score: 0,
           total: allQuestions.length,
-        },})
+        },
+      });
     }
-  }, [tabSwitchCount, navigate]);
+  }, [tabSwitchCount, navigate, allQuestions.length, saveScore]);
 
-  // Load all questions & initialize first section
+  
   useEffect(() => {
     axios.get('http://localhost:7007/api/auth/questions')
       .then(res => {
@@ -72,10 +74,9 @@ const QuizPage = () => {
       })
       .catch(err => console.error(err));
   }, []);
-
-  // Timer for current section
+ 
   useEffect(() => {
-    if (waiting) return; // pause timer when waiting between sections
+    if (waiting) return;  
     const timer = setInterval(() => {
       setTimeLeft(prev => {
         if (prev <= 1) {
