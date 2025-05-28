@@ -36,7 +36,7 @@ const GobletScore = ({ score }) => {
         <h2 className="goblet-title">Goblet Score</h2>
       </div>
 
-      <div className="goblet-value">ATR {score}</div>
+      <div className="goblet-value">ATR 001</div>
       <div className="goblet-score-rating">{getScoreRating(score)}</div>
 
       <p className="goblet-subtitle">{getScoreDescription(score)}</p>

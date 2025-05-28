@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ProfileData, ScoreData, ApiResponse } from "../types";
 
 const API_URL = "http://localhost:5000/api";
 
@@ -11,11 +12,25 @@ const api = axios.create({
 });
 
 // Get profile data
+export const getProfileData = async (): Promise<ApiResponse<ProfileData>> => {
+  try {
+    const response = (await api.get) < ApiResponse < ProfileData >> "/profile";
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return {
+        success: false,
+        error: error.response?.data?.error || "Failed to fetch profile data",
+      };
+    }
+    return { success: false, error: "An unexpected error occurred" };
+  }
+};
 
 // Get score data
-export const getScoreData = async () => {
+export const getScoreData = async (): Promise<ApiResponse<ScoreData>> => {
   try {
-    const response = await api.get("/scores");
+    const response = (await api.get) < ApiResponse < ScoreData >> "/scores";
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -28,8 +43,8 @@ export const getScoreData = async () => {
   }
 };
 
-// Mock profile data
-export const getMockProfileData = () => {
+// For mock data in development
+export const getMockProfileData = (): ProfileData => {
   return {
     id: "1",
     name: "Alex Johnson",
@@ -41,8 +56,7 @@ export const getMockProfileData = () => {
   };
 };
 
-// Mock score data
-export const getMockScoreData = () => {
+export const getMockScoreData = (): ScoreData => {
   return {
     id: "1",
     userId: "1",

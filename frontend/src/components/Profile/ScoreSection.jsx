@@ -10,11 +10,11 @@ const getScoreClass = (score) => {
 
 const ScoreSection = ({ scores }) => {
   const scoreItems = [
-    { title: 'Technical Skills', value: scores.technicalSkills, icon: <GitBranch className="icon" /> },
-    { title: 'Communication', value: scores.communication, icon: <Mail className="icon" /> },
-    { title: 'Teamwork', value: scores.teamwork, icon: <Users className="icon" /> },
-    { title: 'Problem Solving', value: scores.problemSolving, icon: <LightbulbIcon className="icon" /> },
-    { title: 'Leadership Skills', value: scores.leadershipSkills, icon: <Zap className="icon" /> },
+    { title: 'Technical Skills', value:4.5, icon: <GitBranch className="icon" /> },
+    { title: 'Communication', value:3.2, icon: <Mail className="icon" /> },
+    { title: 'Teamwork', value:4.3, icon: <Users className="icon" /> },
+    { title: 'Problem Solving', value:5, icon: <LightbulbIcon className="icon" /> },
+    { title: 'Leadership Skills', value:4.1, icon: <Zap className="icon" /> },
   ];
 
   return (
