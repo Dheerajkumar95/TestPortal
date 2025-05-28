@@ -48,4 +48,14 @@ const saveScore = async (req, res) => {
   }
 };
 
-module.exports = { saveResult, saveScore };
+const getUserSectionScores = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const scores = await SectionScore.find({ userId });
+    res.json(scores);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching section scores" });
+  }
+};
+
+module.exports = { saveResult, saveScore, getUserSectionScores };

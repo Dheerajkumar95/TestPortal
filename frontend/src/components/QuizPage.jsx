@@ -7,17 +7,12 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import usePreventCopyBlur from "./usePreventCopyBlur";
 import 'react-circular-progressbar/dist/styles.css';
 
-const sections = [
-  "Basic Programming",
-  "Verbal and Reasoning",
-  "General Aptitude",
-];
-
 const QuizPage = () => {
   const { saveScore, saveSectionScore } = useAuthStore();
   usePreventCopyBlur();
 
   const [allQuestions, setAllQuestions] = useState([]);
+  const [sections, setSections] = useState([]);
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const [sectionQuestions, setSectionQuestions] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState({});
@@ -34,21 +29,19 @@ const QuizPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-  const handlePopState = (e) => {
+    const handlePopState = () => {
       navigate("/wel");
+      window.history.pushState(null, null, window.location.pathname);
+    };
+
     window.history.pushState(null, null, window.location.pathname);
-    
-  };
+    window.addEventListener('popstate', handlePopState);
 
-  window.history.pushState(null, null, window.location.pathname);
-  window.addEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
 
-  return () => {
-    window.removeEventListener('popstate', handlePopState);
-  };
-}, []);
-
-  // Detect tab switches
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.hidden) {
@@ -63,7 +56,7 @@ const QuizPage = () => {
   useEffect(() => {
     if (tabSwitchCount >= 3) {
       toast.error("Too many tab switches! Your quiz will be submitted.");
-      saveScore(0, allQuestions.length);  
+      saveScore(0, allQuestions.length);
       navigate('/congratulations', {
         state: {
           score: 0,
@@ -71,14 +64,18 @@ const QuizPage = () => {
         },
       });
     }
-  }, [tabSwitchCount, navigate, allQuestions.length, saveScore]);
+  }, [tabSwitchCount]);
 
-  
   useEffect(() => {
     axios.get('http://localhost:7007/api/auth/questions')
       .then(res => {
-        setAllQuestions(res.data);
-        const firstSectionQs = res.data.filter(q => q.section === sections[0]);
+        const questions = res.data;
+        setAllQuestions(questions);
+
+        const uniqueSections = [...new Set(questions.map(q => q.section))];
+        setSections(uniqueSections);
+
+        const firstSectionQs = questions.filter(q => q.section === uniqueSections[0]);
         setSectionQuestions(firstSectionQs);
 
         const initialStatuses = {};
@@ -89,9 +86,9 @@ const QuizPage = () => {
       })
       .catch(err => console.error(err));
   }, []);
- 
+
   useEffect(() => {
-    if (waiting) return;  
+    if (waiting) return;
     const timer = setInterval(() => {
       setTimeLeft(prev => {
         if (prev <= 1) {
@@ -105,7 +102,6 @@ const QuizPage = () => {
     return () => clearInterval(timer);
   }, [sectionQuestions, waiting]);
 
-  // Fullscreen mode listener
   useEffect(() => {
     const handleFullscreenChange = () => {
       const isFull = !!(
@@ -131,7 +127,6 @@ const QuizPage = () => {
     };
   }, []);
 
-  // Request fullscreen mode
   const requestFullscreen = () => {
     const elem = document.documentElement;
     if (elem.requestFullscreen) {
@@ -145,20 +140,16 @@ const QuizPage = () => {
     }
   };
 
-  // Format time in MM:SS
   const formatTime = (secs) =>
     `${String(Math.floor(secs / 60)).padStart(2, '0')}:${String(secs % 60).padStart(2, '0')}`;
 
-  // When option selected, mark question as "Marked" and save selected option
   const handleOptionSelect = (qid, optId) => {
     setSelectedOptions(prev => ({ ...prev, [qid]: optId }));
     setStatuses(prev => ({ ...prev, [qid]: 'Marked' }));
   };
 
-  // On "Save & Next"
   const handleNext = () => {
     setStatuses(prev => {
-      // If not marked yet but visited, set to Visited, else keep Marked
       if (prev[sectionQuestions[current]._id] !== 'Marked') {
         return { ...prev, [sectionQuestions[current]._id]: 'Visited' };
       }
@@ -167,13 +158,9 @@ const QuizPage = () => {
     setCurrent(prev => Math.min(prev + 1, sectionQuestions.length - 1));
   };
 
-  // On "Back"
   const handleBack = () => setCurrent(prev => Math.max(prev - 1, 0));
-
-  // Jump to question
   const goToQuestion = (index) => setCurrent(index);
 
-  // Submit current section
   const handleSubmitSection = async (forced = false) => {
     const unanswered = sectionQuestions.filter(q => !selectedOptions[q._id]);
     if (!forced && unanswered.length > 0) {
@@ -181,7 +168,6 @@ const QuizPage = () => {
       return;
     }
 
-    // Calculate section score
     let sectionScore = 0;
     sectionQuestions.forEach(q => {
       if (selectedOptions[q._id] === q.correct) sectionScore += 1;
@@ -200,7 +186,6 @@ const QuizPage = () => {
       setWaiting(true);
       setWaitingTimeLeft(10);
 
-      // Wait for 10 seconds before next section
       const countdown = setInterval(() => {
         setWaitingTimeLeft(prev => {
           if (prev === 1) {
@@ -225,7 +210,6 @@ const QuizPage = () => {
         });
       }, 1000);
     } else {
-      // Final submit - save total score and navigate
       await saveScore(updatedScore, allQuestions.length);
       navigate('/congratulations', {
         state: {
@@ -292,7 +276,8 @@ const QuizPage = () => {
             </div>
 
             <div className="quiz-content">
-              <div className="timer"><p className='time-text'>Time Left</p>
+              <div className="timer">
+                <p className='time-text'>Time Left</p>
                 <CircularProgressbar
                   value={percentage}
                   text={formatTime(timeLeft)}
@@ -303,7 +288,7 @@ const QuizPage = () => {
                   })}
                 />
               </div>
-              
+
               <h2 className="quiz-title">{sections[currentSectionIndex]}</h2>
 
               <div className="question-container">
@@ -351,10 +336,7 @@ const QuizPage = () => {
                 Submit
               </h1>
             ) : (
-              <h1
-                onClick={handleNext}
-                className="nav-btn"
-              >
+              <h1 onClick={handleNext} className="nav-btn">
                 Save & Next
               </h1>
             )}
