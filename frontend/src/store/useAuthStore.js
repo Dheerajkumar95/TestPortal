@@ -19,7 +19,7 @@ export const useAuthStore = create((set) => ({
       await axiosInstance.post("/auth/passkey", { Passkey: formData.Passkey });
       navigate("/instructions");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Invalid Passkey");
+      toast.success(error.response?.data?.message || "Invalid Passkey");
     }
   },
   Verification: async (otp, formData, navigate) => {

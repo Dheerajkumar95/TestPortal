@@ -6,7 +6,7 @@ const NPasskey = require("../models/passkey.model.js");
 const Otp = require("../models/otp.model.js");
 const forgot = require("../models/forgot.model.js");
 const Question = require("../models/Question.model.js");
-
+const Result = require("../models/result.model.js");
 const {
   sendVerificationEamil,
   senWelcomeEmail,
@@ -50,11 +50,23 @@ const createpasskey = async (req, res) => {
   }
 };
 const passkey = async (req, res) => {
-  const { Passkey } = req.body;
-
   try {
-    if (!Passkey) {
-      return res.status(400).json({ message: "Passkey is required" });
+    const { Passkey } = req.body;
+
+    const userId = req.user?._id;
+
+    if (!userId) {
+      return res
+        .status(401)
+        .json({ message: "Unauthorized: No user ID found" });
+    }
+
+    const existingResult = await Result.findOne({ user: userId });
+
+    if (existingResult) {
+      return res.status(403).json({
+        message: "You have already attempted the test",
+      });
     }
 
     const allPasskeys = await NPasskey.find();
@@ -62,31 +74,25 @@ const passkey = async (req, res) => {
     for (const item of allPasskeys) {
       const isMatch = await bcrypt.compare(Passkey, item.Passkey);
       if (isMatch) {
-        return res
-          .status(200)
-          .json({ message: "Passkey verified successfully" });
+        return res.status(200).json({
+          message: "Passkey verified successfully",
+        });
       }
     }
-
-    // If none matched
     return res.status(401).json({ message: "Invalid Passkey" });
   } catch (error) {
-    console.log("Error in Passkey controller", error.message);
-    res.status(500).json({ message: "Internal Server Error" });
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
 const sendotp = async (req, res) => {
   const { email, password, confirmPassword, fullName } = req.body;
   console.log("Email received:", email);
 
-  // 1. Check if already registered in User collection
   const uexists = await User.findOne({ email });
   if (uexists) {
     return res.status(400).json({ message: "User already exists" });
   }
 
-  // 2. Basic validations
   if (password.length < 8) {
     return res
       .status(400)
@@ -96,21 +102,17 @@ const sendotp = async (req, res) => {
     return res.status(400).json({ message: "Passwords do not match" });
   }
 
-  // 3. Generate new OTP
   const otp = Math.floor(100000 + Math.random() * 900000);
-  const expiresAt = Date.now() + 5 * 60 * 1000; // 5 minutes
+  const expiresAt = Date.now() + 5 * 60 * 1000;
 
-  // 4. Check if user exists in Otp collection
   const existingOtp = await Otp.findOne({ email });
 
   if (existingOtp) {
-    // Update the OTP and expiration
     existingOtp.otp = otp;
     existingOtp.expiresAt = expiresAt;
     await existingOtp.save();
     console.log("OTP updated for existing email:", email);
   } else {
-    // Create a new OTP entry
     await Otp.create({
       email,
       otp,

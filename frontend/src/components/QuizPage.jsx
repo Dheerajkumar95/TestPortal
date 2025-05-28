@@ -48,7 +48,11 @@ const QuizPage = () => {
   useEffect(() => {
     if (tabSwitchCount >= 3) {
       toast.error("Too many tab switches! Your quiz will be submitted.");
-      navigate('/congratulations');
+      navigate('/congratulations', {
+        state: {
+          score:0,
+          total: allQuestions.length,
+        },})
     }
   }, [tabSwitchCount, navigate]);
 
@@ -272,7 +276,7 @@ const QuizPage = () => {
             </div>
 
             <div className="quiz-content">
-              <div className="timer">
+              <div className="timer"><p className='time-text'>Time Left</p>
                 <CircularProgressbar
                   value={percentage}
                   text={formatTime(timeLeft)}
@@ -283,7 +287,7 @@ const QuizPage = () => {
                   })}
                 />
               </div>
-
+              
               <h2 className="quiz-title">{sections[currentSectionIndex]}</h2>
 
               <div className="question-container">

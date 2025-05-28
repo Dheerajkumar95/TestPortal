@@ -18,11 +18,11 @@ const AddPasskey = () => {
     try {
       setLoading(true);
       await axiosInstance.post("/auth/passkey/create", { Passkey: Passkey });
-      setMessage("✅ Passkey added successfully!");
+      setMessage("Passkey added successfully!");
       setPasskey("");
     } catch (err) {
       const errorMsg = err.response?.data?.message || "Something went wrong.";
-      setMessage(`❌ ${errorMsg}`);
+      setMessage(` ${errorMsg}`);
     } finally {
       setLoading(false);
     }
