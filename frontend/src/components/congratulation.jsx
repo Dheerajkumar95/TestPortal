@@ -1,8 +1,9 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-
+import usePreventCopyBlur from "./usePreventCopyBlur";
 const Congratulations = () => {
   const location = useLocation();
+    usePreventCopyBlur();
   const { score, total } = location.state || {};
 
   return (
