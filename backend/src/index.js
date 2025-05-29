@@ -9,6 +9,7 @@ const authRoutes = require("./routes/auth.route.js");
 const resultRoutes = require("./routes/result");
 const questionsRoutes = require("./routes/questions");
 app.use("/uploads", express.static("uploads"));
+const scoreRoutes = require("./routes/score.routes");
 dotenv.config();
 const PORT = process.env.PORT || 7007;
 app.use(
@@ -24,6 +25,7 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/result", resultRoutes);
 app.use("/api/questions", questionsRoutes);
+app.use("/api/score", scoreRoutes);
 app.listen(PORT, () => {
   console.log("server is running on PORT:" + PORT);
   connectDB();
