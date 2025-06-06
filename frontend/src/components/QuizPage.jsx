@@ -67,7 +67,7 @@ const QuizPage = () => {
   }, [tabSwitchCount]);
 
   useEffect(() => {
-    axios.get('http://localhost:7007/api/auth/questions')
+    axios.get('http://localhost:7007/api/auth/questions', { withCredentials: true })
       .then(res => {
         const questions = res.data;
         setAllQuestions(questions);

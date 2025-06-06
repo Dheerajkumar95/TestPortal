@@ -247,7 +247,7 @@ const login = async (req, res) => {
 
 const profile = async (req, res) => {
   try {
-    res.json(req.user); // just return the req.user set by middleware
+    res.json(req.user);
   } catch (error) {
     res.status(500).json({ error: "Server error" });
   }
@@ -357,13 +357,22 @@ const resetPassword = async (req, res) => {
   }
 };
 const questions = async (req, res) => {
+  console.log("Fetching batch-wise questions");
   try {
-    const questions = await Question.find();
+    const userBatch = req.user.batch;
+    if (!userBatch) {
+      return res.status(400).json({ error: "Batch not found in user token" });
+    }
+
+    const questions = await Question.find({ batch: userBatch });
+
     res.status(200).json(questions);
   } catch (error) {
+    console.error("Error fetching batch-wise questions:", error);
     res.status(500).json({ error: "Failed to fetch questions" });
   }
 };
+
 const logout = (req, res) => {
   try {
     res.cookie("jwt", "", { maxAge: 0 });
