@@ -56,7 +56,12 @@ const ProfileHeader = () => {
             <Phone size={18} />
             <span>{authUser?.contact}</span>
           </div>
-        </div>
+        </div>  
+      </div>
+       <div className="profile-right">
+        <div className="detail"><span className="detail-span">Roll No.</span>{authUser?.rollNumber}</div>
+        <div className="detail"><span className="detail-span">Batch</span>{authUser?.batch}</div>
+        <div className="detail"><span className="detail-span">Branch</span>{authUser?.branch}</div>
       </div>
     </div>
   );
