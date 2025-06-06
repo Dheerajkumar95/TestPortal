@@ -357,7 +357,6 @@ const resetPassword = async (req, res) => {
   }
 };
 const questions = async (req, res) => {
-  console.log("Fetching batch-wise questions");
   try {
     const userBatch = req.user.batch;
     if (!userBatch) {
