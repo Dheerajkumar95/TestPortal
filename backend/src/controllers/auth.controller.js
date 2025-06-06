@@ -133,7 +133,16 @@ const sendotp = async (req, res) => {
 
 const verifyOtpAndRegister = async (req, res) => {
   const { otp, user } = req.body;
-  const { fullName, email, contact, password, confirmPassword } = user;
+  const {
+    fullName,
+    email,
+    contact,
+    rollNumber,
+    batch,
+    branch,
+    password,
+    confirmPassword,
+  } = user;
   try {
     const otpRecord = await Otp.findOne({ email });
     if (!otpRecord) return res.status(400).json({ message: "OTP not found" });
@@ -154,6 +163,9 @@ const verifyOtpAndRegister = async (req, res) => {
       fullName,
       email,
       contact,
+      rollNumber,
+      batch,
+      branch,
       password: hashedPassword,
       confirmPassword: hashedConfirmPassword,
     });

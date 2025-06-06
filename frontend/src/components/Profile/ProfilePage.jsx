@@ -1,5 +1,4 @@
  
-import { Loader } from 'lucide-react';
 import ProfileHeader from './ProfileHeader';
 import ScoreSection from './ScoreSection';
 import GobletScore from './GobletScore';

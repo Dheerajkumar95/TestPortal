@@ -12,7 +12,6 @@ const Congratulations = () => {
   const handlePopState = (e) => {
       navigate("/wel");
     window.history.pushState(null, null, window.location.pathname);
-    alert("You cannot go back during the quiz.");
   };
 
   window.history.pushState(null, null, window.location.pathname);
