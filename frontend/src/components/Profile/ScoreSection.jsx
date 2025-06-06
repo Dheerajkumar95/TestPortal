@@ -1,6 +1,6 @@
 import{ useEffect, useState } from 'react';
 import axios from 'axios';
-import { GitBranch, Mail,Lightbulb } from 'lucide-react';
+import {Code,Lightbulb,Brain } from 'lucide-react';
 
 const getScoreClass = (score) => {
   if (score >= 4) return 'excellent';
@@ -9,11 +9,10 @@ const getScoreClass = (score) => {
   return 'poor';
 };
 
-// Icon mapping based on section name
 const iconsMap = {
-  'Basic Programming': <GitBranch className="icon" />,
-  'Verbal and Reasoning': <Mail className="icon" />,
-  'General Aptitude': <Lightbulb className="icon" />,
+  'Basic Programming': <Code className="icon"/>,
+  'Verbal and Reasoning': <Lightbulb className="icon"/>,
+  'General Aptitude': <Brain className="icon"/>,
 };
 
 const ScoreSection = () => {
