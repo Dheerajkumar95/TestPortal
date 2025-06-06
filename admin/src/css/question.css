@@ -1,0 +1,48 @@
+.Question-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.Question-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.Question-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.Question-container input,
+.Question-container textarea,
+.Question-container select,
+.Question-container button {
+  padding: 0.8rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.Question-container textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.Question-container button {
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s;
+}
+
+.Question-container button:hover {
+  background-color: #0056b3;
+}
