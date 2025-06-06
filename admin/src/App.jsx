@@ -1,5 +1,6 @@
 import './App.css';
 import "./css/style.css";
+import "./css/question.css";
 import { Routes, Route } from "react-router-dom";
 import LoginPage from './components/login';
 import Dashboard from './components/dasboard'; 

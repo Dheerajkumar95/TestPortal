@@ -23,11 +23,12 @@ router.post("/add", upload.single("image"), async (req, res) => {
       imageUrl = uploadResponse.secure_url;
     }
 
-    const { section, question, correct } = req.body;
+    const { section, batch, question, correct } = req.body;
     const options = JSON.parse(req.body.options);
 
     const newQ = new Question({
       section,
+      batch, // 👈 new field added here
       question,
       image: imageUrl,
       options,
