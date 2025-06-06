@@ -1,8 +1,34 @@
 import React, { useState ,useRef} from "react";
 import { axiosInstance } from "../lib/axios.js";
-
+import { Link } from "react-router-dom";
 const Question = () => {
     const fileInputRef = useRef(null);
+    const excelInputRef = useRef(null); // for Excel input
+
+const handleExcelClick = () => {
+  if (excelInputRef.current) {
+    excelInputRef.current.click();
+  }
+};
+
+const handleExcelUpload = async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  try {
+    await axiosInstance.post("/questions/upload-excel", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+      withCredentials: true,
+    });
+    alert("Questions uploaded successfully!");
+  } catch (err) {
+    console.error(err);
+    alert("Failed to upload Excel file.");
+  }
+};
   const [form, setForm] = useState({
     section: "",
     batch: "",
@@ -61,18 +87,27 @@ const Question = () => {
   };
 
   return (
+    <>
+    <button className='Excel-button' onClick={handleExcelClick}>📥 Upload Excel</button>
+  <input
+    type="file"
+    ref={excelInputRef}
+    onChange={handleExcelUpload}
+    accept=".xlsx, .xls"
+    style={{ display: "none" }}
+  />
     <div className="Question-container">
       <h2>Add Question</h2>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
        <select
-  value={form.section}
-  onChange={(e) => setForm({ ...form, section: e.target.value })}
->
-  <option value="">Select Section</option>
-  <option value="Basic Programming">Basic Programming</option>
-  <option value="Verbal and Reasoning">Verbal and Reasoning</option>
-  <option value="General Aptitude">General Aptitude</option>
-</select>
+          value={form.section}
+          onChange={(e) => setForm({ ...form, section: e.target.value })}
+        >
+          <option value="">Select Section</option>
+          <option value="Basic Programming">Basic Programming</option>
+          <option value="Verbal and Reasoning">Verbal and Reasoning</option>
+          <option value="Aptitude">Aptitude</option>
+        </select>
 
 
         <select
@@ -119,6 +154,7 @@ const Question = () => {
         <button type="submit">Add Question</button>
       </form>
     </div>
+    </>
   );
 };
 
