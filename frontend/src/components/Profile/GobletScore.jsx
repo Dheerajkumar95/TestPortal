@@ -21,7 +21,7 @@ const GobletScore = ( ) => {
     <div className="goblet-score">
       <div className="goblet-score-header">
         <Trophy className="goblet-score-icon" />
-        <h2 className="goblet-title">Goblet Rank</h2>
+        <h2 className="goblet-title">Rank</h2>
       </div>
 
       <div className="goblet-value">ATR {rankInfo.rank}</div>
