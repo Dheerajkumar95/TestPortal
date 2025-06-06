@@ -20,7 +20,7 @@ const ProfileHeader = () => {
     reader.onload = async () => {
       const base64Image = reader.result;
       setSelectedImg(base64Image);
-      await updateProfile({ profileImage: base64Image }); // Must match backend field name
+      await updateProfile({ profileImage: base64Image }); 
     };
     reader.readAsDataURL(file);
   };
