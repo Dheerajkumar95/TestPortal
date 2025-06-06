@@ -31,7 +31,7 @@ const Dasboard= () => {
             
           </div>
 
-          {/* Right Image */}
+           
           <div className="hero-right">
             <div className="hero-img-wrapper">
               <div className="circle-1"></div>

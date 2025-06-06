@@ -14,6 +14,19 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    rollNumber: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    batch: {
+      type: String,
+      required: true,
+    },
+    branch: {
+      type: String,
+      required: true,
+    },
     profileImage: {
       type: String,
       default: "",

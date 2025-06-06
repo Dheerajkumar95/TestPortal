@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import{ useEffect, useState } from 'react';
 import axios from 'axios';
-import { GitBranch, Mail, Users, Zap, Lightbulb } from 'lucide-react';
+import { GitBranch, Mail,Lightbulb } from 'lucide-react';
 
 const getScoreClass = (score) => {
   if (score >= 4) return 'excellent';

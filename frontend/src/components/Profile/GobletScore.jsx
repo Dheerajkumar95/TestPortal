@@ -16,7 +16,7 @@ const GobletScore = ( ) => {
 
     fetchRank();
   }, []);
-  if (!rankInfo) return <p>Loading rank...</p>;
+  if (!rankInfo) return;
   return (
     <div className="goblet-score">
       <div className="goblet-score-header">
