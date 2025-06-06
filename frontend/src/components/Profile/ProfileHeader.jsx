@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Mail, Phone, Camera } from "lucide-react";
+import { Mail, Phone, Camera ,Hash, CalendarRange, BookOpenText} from "lucide-react";
 import { useAuthStore } from "../../store/useAuthStore";
 import defaultImage from "../../images/avatar.png";
 
@@ -58,11 +58,20 @@ const ProfileHeader = () => {
           </div>
         </div>  
       </div>
-       <div className="profile-right">
-        <div className="detail"><span className="detail-span">Roll No.</span>{authUser?.rollNumber}</div>
-        <div className="detail"><span className="detail-span">Batch</span>{authUser?.batch}</div>
-        <div className="detail"><span className="detail-span">Branch</span>{authUser?.branch}</div>
-      </div>
+      <div className="profile-right">
+  <div className="detail">
+    <Hash className="icon" />
+    <span className="detail-span">Roll No.</span> {authUser?.rollNumber}
+  </div>
+  <div className="detail">
+    <CalendarRange className="icon" />
+    <span className="detail-span">Batch</span> {authUser?.batch}
+  </div>
+  <div className="detail">
+    <BookOpenText className="icon" />
+    <span className="detail-span">Branch</span> {authUser?.branch}
+  </div>
+</div>
     </div>
   );
 };

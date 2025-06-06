@@ -458,20 +458,28 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 6px;
-  font-size: 0.95rem;
+  gap: 0.6rem;
+  font-size: 1rem;
   color: #222;
   margin-right: 25rem;
 }
 
 .detail {
-  font-weight: 500;
-  gap: 0.5rem;
   display: flex;
   align-items: center;
-  margin-bottom: 0.2rem;
+  gap: 0.5rem;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
 }
+
 .detail-span {
-  font-weight: 800;
-  color: rgb(21, 236, 42);
+  font-weight: 700;
+  color: #16c60c; /* Bright green for visibility */
+  margin-right: 0.3rem;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  color: #16c60c;
 }
