@@ -4,7 +4,7 @@ const evaluationScreen=()=> {
   const topics = [
   { id: 1, name: "Basic programming", time: "10 minutes", questions: "5 Questions" },
   { id: 2, name: "Verbal and Reasoning", time: "10 minutes", questions: "5 Questions" },
-  { id: 3, name: "General Aptitude", time: "10 minutes", questions: "5 Questions" },
+  { id: 3, name: "Aptitude", time: "10 minutes", questions: "5 Questions" },
 ];
   return (
     <>

@@ -1,5 +1,5 @@
 .Question-container {
-  max-width: 600px;
+  max-width: 1200px;
   margin: 2rem auto;
   padding: 2rem;
   border: 1px solid #ccc;
@@ -36,13 +36,18 @@
 }
 
 .Question-container button {
-  background-color: #007bff;
-  color: white;
+  background-color: rgb(24, 182, 74);
+  color: #ffffff;
   cursor: pointer;
   border: none;
   transition: background 0.2s;
 }
 
 .Question-container button:hover {
-  background-color: #0056b3;
+  background-color: rgb(46, 201, 22);
+}
+.Excel-button {
+  background: linear-gradient(rgb(24, 182, 74));
+  color: #ffffff;
+  margin-left: 60rem;
 }
