@@ -104,7 +104,7 @@ const handleExcelUpload = async (e) => {
           onChange={(e) => setForm({ ...form, section: e.target.value })}
         >
           <option value="">Select Section</option>
-          <option value="Basic Programming">Basic Programming</option>
+          <option value="Programming">Programming</option>
           <option value="Verbal and Reasoning">Verbal and Reasoning</option>
           <option value="Aptitude">Aptitude</option>
         </select>

@@ -10,9 +10,9 @@ const getScoreClass = (score) => {
 };
 
 const iconsMap = {
-  'Basic Programming': <Code className="icon"/>,
+  'Programming': <Code className="icon"/>,
   'Verbal and Reasoning': <Lightbulb className="icon"/>,
-  'General Aptitude': <Brain className="icon"/>,
+  'Aptitude': <Brain className="icon"/>,
 };
 
 const ScoreSection = () => {
