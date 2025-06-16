@@ -1,8 +1,7 @@
 import Header from './Layout/Header';
-import dsa from "../images/dsa.png";
-import java from "../images/java.png";
-import backend from "../images/backend.png";
-import tech from "../images/tech.png";
+import verbal from "../images/Verbal.png";
+import aptitude from "../images/aptitude.png";
+import programming from "../images/Programming.png";
 const  Welcome= () => {
   return (
     <>
@@ -10,21 +9,21 @@ const  Welcome= () => {
     <div className="courses-container">
       <h1>Hello, What Do You Want To Learn?</h1>
       <div className="search-section">
-        <input type="text" placeholder="Data Structures and Algori" />
+        <input type="text" placeholder="Aptitude,Verbal Reasoning and Programming" />
         <button className="search-icon">🔍</button>
       </div>
 
       <div className="button-row">
-        <button>Full Stack Live Classes</button>
-        <button>DSA: Basic To Advanced Course</button>
-        <button>Master DS & ML</button>
+        <button>Aptitude</button>
+        <button>Verbal and Reasoning</button>
+        <button>Programming</button>
       </div>
 
       <div className="courses-list">
         <div className="course-card">
           <span className="rating">⭐4.4</span>
-          <img src={dsa} alt="image"/>
-          <h3>DSA to Development: A Complete Guide</h3>
+          <img src={aptitude} alt="image"/>
+          <h3>Aptitude : A Complete Guide</h3>
           <p>Beginner to Advance</p>
           <p>575k+ interested</p>
           <button>Explore now</button>
@@ -32,8 +31,8 @@ const  Welcome= () => {
 
         <div className="course-card">
           <span className="rating">⭐4.7</span>
-          <img src={backend} alt="image"/>
-          <h3>JAVA Backend Development - Live</h3>
+          <img src={verbal} alt="image"/>
+          <h3>Verbal and Reasoning : A Complete Guide</h3>
           <p>Intermediate and Advance</p>
           <p>309k+ interested</p>
           <button>Explore now</button>
@@ -41,21 +40,12 @@ const  Welcome= () => {
 
         <div className="course-card">
           <span className="rating">⭐4.9</span>
-          <img src={tech} alt="image"/>
-          <h3>Tech Interview 101 - From DSA to System Design</h3>
+          <img src={programming} alt="image"/>
+          <h3>Programming : A Complete Guide</h3>
           <p>Beginner to Advance</p>
           <p>335k+ interested</p>
           <button>Explore now</button>
         </div>
-         <div className="course-card">
-          <span className="rating">⭐4.4</span>
-          <img src={java} alt="image"/>
-          <h3>Java Programming Online Course Complete</h3>
-          <p>Beginner to Advance</p>
-          <p>395k+ interested</p>
-          <button>Explore now</button>
-        </div>
-        
       </div>
     </div>
     </>

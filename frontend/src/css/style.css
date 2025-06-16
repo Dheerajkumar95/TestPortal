@@ -226,17 +226,10 @@ body {
   flex-wrap: wrap;
 }
 
-.courses-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-}
-
 .course-card {
   flex: 1;
   min-width: 250px;
-  max-width: 320px;
+  max-width: 410px;
   border: 1px solid #eee;
   border-radius: 10px;
   padding: 1rem;
@@ -245,7 +238,7 @@ body {
 }
 
 .course-card img {
-  width: 111%;
+  width: 109%;
   height: auto;
   max-height: 160px;
   object-fit: cover;
@@ -267,8 +260,8 @@ body {
 
 .course-card .rating {
   position: absolute;
-  top: 0.5rem;
-  right: 0.7rem;
+  top: 0.1rem;
+  right: 0.1rem;
   background-color: #fff;
   border-radius: 20px;
   padding: 0.2rem 0.6rem;

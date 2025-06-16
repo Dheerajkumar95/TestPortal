@@ -7,7 +7,7 @@ const questionSchema = new mongoose.Schema({
   },
   batch: {
     type: String,
-    required: true, // 👈 now required to assign to specific batches
+    required: true,
   },
   question: {
     type: String,
