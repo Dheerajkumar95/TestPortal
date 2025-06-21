@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { axiosInstance } from "../lib/axios"; // adjust the path if needed
- 
+import { useAuthStore } from "../store/useAuthStore";
+
 
 const AddPasskey = () => {
   const [Passkey, setPasskey] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-
+ const { addPasskey } = useAuthStore();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -15,13 +15,18 @@ const AddPasskey = () => {
       return;
     }
 
+     if (Passkey.length < 8) {
+    setMessage("Passkey must be at least 8 characters long.");
+    return;
+  }
+  
     try {
       setLoading(true);
-      await axiosInstance.post("/auth/passkey/create", { Passkey: Passkey });
+       await addPasskey(Passkey);
       setMessage("Passkey added successfully!");
       setPasskey("");
     } catch (err) {
-      const errorMsg = err.response?.data?.message || "Something went wrong.";
+      const errorMsg = err.response?.data?.message || "Passkey already exists.";
       setMessage(` ${errorMsg}`);
     } finally {
       setLoading(false);
