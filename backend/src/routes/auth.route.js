@@ -1,7 +1,6 @@
 const express = require("express");
 const authenticate = require("../middleware/auth.middleware");
 const {
-  createpasskey,
   passkey,
   login,
   checkAuth,
@@ -16,7 +15,6 @@ const {
   updateProfile,
 } = require("../controllers/auth.controller.js");
 const router = express.Router();
-router.post("/passkey/create", createpasskey);
 router.post("/passkey", authenticate, passkey);
 router.post("/sendotp", sendotp);
 router.post("/resendotp", resendotp);
