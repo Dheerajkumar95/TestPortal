@@ -6,8 +6,8 @@ const ProfilePage = () => {
   return (
     <div className="profile-container">
       <ProfileHeader />
-        <ScoreSection  />
       <GobletScore />
+       <ScoreSection  />
     </div>
   );
 };

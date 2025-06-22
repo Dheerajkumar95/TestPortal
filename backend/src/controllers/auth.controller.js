@@ -7,11 +7,14 @@ const Otp = require("../models/otp.model.js");
 const forgot = require("../models/forgot.model.js");
 const Question = require("../models/Question.model.js");
 const Result = require("../models/result.model.js");
+const moment = require("moment-timezone");
+
 const {
   sendVerificationEamil,
   senWelcomeEmail,
   ResetPasswordEmail,
 } = require("../middleware/Email.js");
+
 const passkey = async (req, res) => {
   try {
     const { Passkey } = req.body;
@@ -25,28 +28,53 @@ const passkey = async (req, res) => {
         .json({ message: "Unauthorized: No user ID found" });
     }
 
-    const existingResult = await Result.findOne({ user: userId });
+    const nowIST = moment().tz("Asia/Kolkata");
 
-    if (existingResult) {
+    const dayOfWeek = nowIST.day();
+    if (dayOfWeek !== 0) {
       return res.status(403).json({
-        message: "You have already attempted the test",
+        message: "Test is only allowed on Sundays.",
+      });
+    }
+
+    const hour = nowIST.hour();
+    const minute = nowIST.minute();
+    const totalMinutes = hour * 60 + minute;
+
+    if (totalMinutes < 600 || totalMinutes >= 840) {
+      return res.status(403).json({
+        message: "Test is allowed only between 10:00 AM and 2:00 PM IST.",
+      });
+    }
+
+    const sundayStart = nowIST.clone().startOf("day").toDate();
+    const sundayEnd = nowIST.clone().endOf("day").toDate();
+
+    const alreadyAttempted = await Result.findOne({
+      user: userId,
+      createdAt: { $gte: sundayStart, $lte: sundayEnd },
+    });
+
+    if (alreadyAttempted) {
+      return res.status(403).json({
+        message: "You have already attempted the test this Sunday.",
       });
     }
 
     const allPasskeys = await NPasskey.find();
-
     for (const item of allPasskeys) {
       const isMatch = await bcrypt.compare(Passkey, item.Passkey);
       if (isMatch) {
         await Result.create({ user: userId, score, total });
         return res.status(200).json({
-          message: "Passkey verified successfully",
+          message: "Passkey verified. You may begin your test.",
         });
       }
     }
 
     return res.status(401).json({ message: "Invalid Passkey" });
   } catch (error) {
+    console.error("Passkey Error:", error);
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
