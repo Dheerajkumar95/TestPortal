@@ -1,7 +1,9 @@
 const Result = require("../models/result.model.js");
 const SectionScore = require("../models/SectionScore.model.js");
+const WeeklyStatus = require("../models/WeeklyStatus.model.js");
 const User = require("../models/user.model.js");
 const moment = require("moment-timezone");
+
 const saveResult = async (req, res) => {
   try {
     const userId = req.user?._id;
@@ -18,7 +20,7 @@ const saveResult = async (req, res) => {
     const nowIST = moment().tz("Asia/Kolkata");
     const sundayDate = nowIST.clone().startOf("day").toDate();
 
-    // Prevent multiple result saves for same Sunday
+    // ✅ Check if already submitted this Sunday
     const existingResult = await Result.findOne({ user: userId, sundayDate });
     if (existingResult) {
       return res.status(409).json({
@@ -28,6 +30,7 @@ const saveResult = async (req, res) => {
 
     const totalAttempts = await Result.countDocuments({ user: userId });
 
+    // ✅ Save current result
     const newResult = await Result.create({
       user: userId,
       score,
@@ -36,14 +39,40 @@ const saveResult = async (req, res) => {
       sundayDate,
     });
 
-    // Optional: Update totalScore in User model
+    // ✅ Update user's overall totalScore (optional)
     await User.findByIdAndUpdate(userId, {
       $inc: { totalScore: score },
     });
 
+    // ✅ Get previous Sunday score
+    const previousSunday = moment(sundayDate)
+      .subtract(7, "days")
+      .startOf("day")
+      .toDate();
+
+    const previousResult = await Result.findOne({
+      user: userId,
+      sundayDate: previousSunday,
+    });
+
+    const previousScore = previousResult?.score || 0;
+    const totalScore = score + previousScore;
+
+    // ✅ Save total score to WeeklyStats
+    await WeeklyStatus.findOneAndUpdate(
+      { user: userId },
+      {
+        user: userId,
+        totalScore,
+      },
+      { upsert: true, new: true }
+    );
+
+    // ✅ Final response
     res.status(201).json({
-      message: "Result saved successfully",
+      message: "Result & WeeklyStatus saved successfully",
       result: newResult,
+      totalScore,
     });
   } catch (error) {
     console.error("Error saving result:", error);
@@ -52,26 +81,71 @@ const saveResult = async (req, res) => {
 };
 
 const saveSectionScore = async (req, res) => {
-  const { section, score, total } = req.body;
-  const userId = req.user.id;
+  try {
+    const { section, score, total } = req.body;
+    const userId = req.user.id;
 
-  // Find latest attempt number
-  const last = await SectionScore.findOne({ userId }).sort({ attempt: -1 });
+    if (!section || score === undefined || total === undefined) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
 
-  const nextAttempt = last ? last.attempt : 1;
+    const allSections = ["Aptitude", "Verbal and Reasoning", "Programming"]; // 👈 Update this list if needed
 
-  const newScore = new SectionScore({
-    userId,
-    sectionName: section,
-    score,
-    totalQuestions: total,
-    attempt: nextAttempt,
-  });
+    // 🔍 Find last attempt
+    const last = await SectionScore.findOne({ userId }).sort({ attempt: -1 });
+    let currentAttempt = 1;
 
-  await newScore.save();
-  res
-    .status(201)
-    .json({ message: "Section score saved", attempt: nextAttempt });
+    if (last) {
+      const lastAttempt = last.attempt;
+
+      // Fetch how many sections are already saved in that attempt
+      const previousSections = await SectionScore.find({
+        userId,
+        attempt: lastAttempt,
+      });
+      const submittedSectionNames = previousSections.map((s) => s.sectionName);
+
+      // ✅ If all sections submitted, then start new attempt
+      if (allSections.every((sec) => submittedSectionNames.includes(sec))) {
+        currentAttempt = lastAttempt + 1;
+      } else {
+        // 🟡 Still in same test attempt
+        currentAttempt = lastAttempt;
+      }
+    }
+
+    // 🚫 Prevent duplicate section entry in same attempt
+    const alreadySubmitted = await SectionScore.findOne({
+      userId,
+      sectionName: section,
+      attempt: currentAttempt,
+    });
+
+    if (alreadySubmitted) {
+      return res
+        .status(400)
+        .json({ message: "This section already submitted in this attempt" });
+    }
+
+    // ✅ Save section score
+    const newScore = new SectionScore({
+      userId,
+      sectionName: section,
+      score,
+      totalQuestions: total,
+      attempt: currentAttempt,
+    });
+
+    await newScore.save();
+
+    res.status(201).json({
+      message: "Section score saved successfully",
+      attempt: currentAttempt,
+    });
+  } catch (error) {
+    console.error("Error saving section score:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 };
 
 const getUserSectionScores = async (req, res) => {

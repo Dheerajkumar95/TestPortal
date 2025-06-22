@@ -22,6 +22,7 @@ const SectionScoreSchema = new mongoose.Schema(
     attempt: {
       type: Number,
       required: true,
+      min: 1,
     },
   },
   { timestamps: true }

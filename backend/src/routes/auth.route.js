@@ -13,6 +13,7 @@ const {
   resetPassword,
   profile,
   updateProfile,
+  logout,
 } = require("../controllers/auth.controller.js");
 const router = express.Router();
 router.post("/passkey", authenticate, passkey);
@@ -27,4 +28,5 @@ router.get("/questions", authenticate, questions);
 router.post("/forgotPassword", forgotPassword);
 router.get("/verify-token/:token", verifyToken);
 router.post("/reset-password/:token", resetPassword);
+router.post("/logout", authenticate, logout);
 module.exports = router;
