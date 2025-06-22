@@ -19,6 +19,10 @@ const SectionScoreSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    attempt: {
+      type: Number,
+      required: true,
+    },
   },
   { timestamps: true }
 );

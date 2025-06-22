@@ -48,7 +48,7 @@ const VerificationPage = ({ email, formData }) => {
       return alert("Please enter the 6-digit OTP");
     }
 
-    setLoading(true); // ✅ Start loading
+    setLoading(true);  
     try {
       await Verification(otp, formData, navigate);
       console.log("Submitted OTP:", otp, "Form Data:", formData);
@@ -56,7 +56,7 @@ const VerificationPage = ({ email, formData }) => {
       console.error("Verification failed:", error);
       alert("Verification failed. Please try again.");
     } finally {
-      setLoading(false); // ✅ Stop loading
+      setLoading(false);  
     }
   };
 
