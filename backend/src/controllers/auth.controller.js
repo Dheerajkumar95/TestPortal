@@ -39,7 +39,7 @@ const passkey = async (req, res) => {
     const totalMinutes = nowIST.hour() * 60 + nowIST.minute();
     if (totalMinutes < 630 || totalMinutes >= 635) {
       return res.status(403).json({
-        message: "Test starts at 10:00 AM. Please wait.",
+        message: "Test starts at 10:00AM. Please wait.",
       });
     }
 
