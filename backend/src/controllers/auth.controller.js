@@ -18,8 +18,6 @@ const {
 const passkey = async (req, res) => {
   try {
     const { Passkey } = req.body;
-    const score = 0;
-    const total = 0;
     const userId = req.user?._id;
 
     if (!userId) {
@@ -31,24 +29,23 @@ const passkey = async (req, res) => {
     const nowIST = moment().tz("Asia/Kolkata");
 
     if (nowIST.day() !== 0) {
-      return res.status(403).json({
-        message: "Test is only allowed on Sundays.",
-      });
+      return res
+        .status(403)
+        .json({ message: "Test is only allowed on Sundays." });
     }
 
     const totalMinutes = nowIST.hour() * 60 + nowIST.minute();
-    if (totalMinutes < 630 || totalMinutes >= 635) {
-      return res.status(403).json({
-        message: "Test starts at 10:00AM. Please wait.",
-      });
+    if (totalMinutes < 1105 || totalMinutes >= 1130) {
+      return res
+        .status(403)
+        .json({ message: "Test starts at 10:00AM. Please wait." });
     }
 
-    const sundayStart = nowIST.clone().startOf("day").toDate();
-    const sundayEnd = nowIST.clone().endOf("day").toDate();
+    const sundayDate = nowIST.clone().startOf("day").toDate();
 
     const alreadyAttempted = await Result.findOne({
       user: userId,
-      createdAt: { $gte: sundayStart, $lte: sundayEnd },
+      sundayDate,
     });
 
     if (alreadyAttempted) {
@@ -61,15 +58,6 @@ const passkey = async (req, res) => {
     for (const item of allPasskeys) {
       const isMatch = await bcrypt.compare(Passkey, item.Passkey);
       if (isMatch) {
-        const totalAttempts = await Result.countDocuments({ user: userId });
-
-        await Result.create({
-          user: userId,
-          score,
-          total,
-          attempt: totalAttempts + 1,
-        });
-
         return res.status(200).json({
           message: "Passkey verified. You may begin your test.",
         });

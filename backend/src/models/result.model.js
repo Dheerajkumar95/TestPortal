@@ -15,14 +15,17 @@ const resultSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    date: {
+    sundayDate: {
       type: Date,
-      default: Date.now,
+      required: true, // ye ensure karega ki har test ek Sunday se linked ho
     },
   },
   {
     timestamps: true,
   }
 );
+
+// Ensure one result per user per Sunday
+resultSchema.index({ user: 1, sundayDate: 1 }, { unique: true });
 
 module.exports = mongoose.model("Result", resultSchema);
