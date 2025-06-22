@@ -8,6 +8,7 @@ const forgot = require("../models/forgot.model.js");
 const Question = require("../models/Question.model.js");
 const Result = require("../models/result.model.js");
 const moment = require("moment-timezone");
+const TestSession = require("../models/TestSession.model.js");
 
 const {
   sendVerificationEamil,
@@ -35,22 +36,27 @@ const passkey = async (req, res) => {
     }
 
     const totalMinutes = nowIST.hour() * 60 + nowIST.minute();
-    if (totalMinutes < 1130 || totalMinutes >= 1145) {
+    if (totalMinutes < 600 || totalMinutes >= 630) {
       return res
         .status(403)
         .json({ message: "Test starts at 10:00AM. Please wait." });
     }
 
-    const sundayDate = nowIST.clone().startOf("day").toDate();
+    const testDate = nowIST.clone().startOf("day").toDate();
 
-    const alreadyAttempted = await Result.findOne({
-      user: userId,
-      sundayDate,
-    });
+    // Check if already started session
+    const sessionExists = await TestSession.findOne({ user: userId, testDate });
+    if (sessionExists) {
+      return res
+        .status(403)
+        .json({ message: "You have already started the test." });
+    }
 
+    // Check if already submitted result
+    const alreadyAttempted = await Result.findOne({ user: userId, testDate });
     if (alreadyAttempted) {
       return res.status(403).json({
-        message: "You have already attempted the test this Sunday.",
+        message: "You have already submitted the test result.",
       });
     }
 
@@ -58,6 +64,9 @@ const passkey = async (req, res) => {
     for (const item of allPasskeys) {
       const isMatch = await bcrypt.compare(Passkey, item.Passkey);
       if (isMatch) {
+        // ✅ Save test session to lock this attempt
+        await TestSession.create({ user: userId, testDate });
+
         return res.status(200).json({
           message: "Passkey verified. You may begin your test.",
         });
@@ -356,13 +365,8 @@ const questions = async (req, res) => {
 };
 
 const logout = (req, res) => {
-  try {
-    res.cookie("jwt", "", { maxAge: 0 });
-    res.status(200).json({ message: "Logged out successfully" });
-  } catch (error) {
-    console.log("Error in logout controller", error.message);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
+  res.clearCookie("token");
+  res.status(200).json({ message: "Logged out successfully" });
 };
 const updateProfile = async (req, res) => {
   try {
