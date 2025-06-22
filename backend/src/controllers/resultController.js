@@ -1,30 +1,44 @@
 const Result = require("../models/result.model.js");
 const SectionScore = require("../models/SectionScore.model.js");
+const User = require("../models/user.model.js");
+const moment = require("moment-timezone");
 const saveResult = async (req, res) => {
   try {
-    if (!req.user) {
+    const userId = req.user?._id;
+    const { score, total } = req.body;
+
+    if (!userId) {
       return res.status(401).json({ message: "Not authorized" });
     }
-
-    const userId = req.user._id;
-    const { score, total } = req.body;
 
     if (score === undefined || total === undefined) {
       return res.status(400).json({ message: "Score and total are required" });
     }
 
-    // Find the latest attempt
-    const lastResult = await Result.findOne({ user: userId }).sort({
-      attempt: -1,
-    });
-    const nextAttempt = lastResult ? lastResult.attempt + 1 : 1;
+    const nowIST = moment().tz("Asia/Kolkata");
+    const sundayDate = nowIST.clone().startOf("day").toDate();
 
-    // Create a new result
+    // Prevent multiple result saves for same Sunday
+    const existingResult = await Result.findOne({ user: userId, sundayDate });
+    if (existingResult) {
+      return res.status(409).json({
+        message: "You have already submitted your test result this Sunday.",
+      });
+    }
+
+    const totalAttempts = await Result.countDocuments({ user: userId });
+
     const newResult = await Result.create({
       user: userId,
       score,
       total,
-      attempt: nextAttempt,
+      attempt: totalAttempts + 1,
+      sundayDate,
+    });
+
+    // Optional: Update totalScore in User model
+    await User.findByIdAndUpdate(userId, {
+      $inc: { totalScore: score },
     });
 
     res.status(201).json({
