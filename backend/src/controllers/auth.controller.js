@@ -30,20 +30,16 @@ const passkey = async (req, res) => {
 
     const nowIST = moment().tz("Asia/Kolkata");
 
-    const dayOfWeek = nowIST.day();
-    if (dayOfWeek !== 0) {
+    if (nowIST.day() !== 0) {
       return res.status(403).json({
         message: "Test is only allowed on Sundays.",
       });
     }
 
-    const hour = nowIST.hour();
-    const minute = nowIST.minute();
-    const totalMinutes = hour * 60 + minute;
-
-    if (totalMinutes < 600 || totalMinutes >= 840) {
+    const totalMinutes = nowIST.hour() * 60 + nowIST.minute();
+    if (totalMinutes < 630 || totalMinutes >= 635) {
       return res.status(403).json({
-        message: "Test is allowed only between 10:00 AM and 2:00 PM IST.",
+        message: "Test starts at 10:00 AM. Please wait.",
       });
     }
 
@@ -65,7 +61,15 @@ const passkey = async (req, res) => {
     for (const item of allPasskeys) {
       const isMatch = await bcrypt.compare(Passkey, item.Passkey);
       if (isMatch) {
-        await Result.create({ user: userId, score, total });
+        const totalAttempts = await Result.countDocuments({ user: userId });
+
+        await Result.create({
+          user: userId,
+          score,
+          total,
+          attempt: totalAttempts + 1,
+        });
+
         return res.status(200).json({
           message: "Passkey verified. You may begin your test.",
         });

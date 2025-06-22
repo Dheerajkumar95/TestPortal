@@ -183,9 +183,17 @@ const SignUp = () => {
       required
     >
       <option value="">Select</option>
-      <option value="CSE">CSE</option>
-      <option value="CSE-AIML">CSE-AIML</option>
-      <option value="CSE-AIDS">CSE-AIDS</option>
+     <option value="CSE">CSE</option>
+      <option value="CSE-AIML">CSE (AIML)</option>
+      <option value="CSE-AIDS">CSE (AIDS)</option>
+      <option value="CSE-AIDS">CSE (DS)</option>
+      <option value="CSE-AIDS">CSE (AI)</option>
+      <option value="CSE-AIDS">Cyber</option>
+      <option value="CSE-AIDS">IT</option>
+      <option value="CSE-AIDS">EC</option>
+      <option value="CSE-AIDS">EX</option>
+      <option value="CSE-AIDS">CIVIL</option>
+      <option value="CSE-AIDS">ME</option>
     </select>
   </div>
 </div>
