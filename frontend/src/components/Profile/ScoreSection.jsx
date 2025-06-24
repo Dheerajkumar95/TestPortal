@@ -39,7 +39,7 @@ const ScoreSection = () => {
 
       {attempts.map((attemptData, index) => (
         <div key={index} className="attempt-section">
-          <h3 className="attempt-title">Attempt {attemptData.attempt}</h3>
+          <h3 className="attempt-title">Test {attemptData.attempt}</h3>
 
           <div className="score-grid">
             {attemptData.sections.map((section, idx) => (
