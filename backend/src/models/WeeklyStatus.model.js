@@ -10,6 +10,12 @@ const weeklyStatsSchema = new mongoose.Schema({
   totalScore: {
     type: Number,
     required: true,
+    default: 0,
+  },
+  totalAttempts: {
+    type: Number,
+    required: true,
+    default: 0,
   },
 });
 
