@@ -43,19 +43,31 @@ const QuizPage = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        setTabSwitchCount(count => count + 1);
-        setShowTabWarning(true);
-        const sound = document.getElementById("warning-sound");
-        if (sound) sound.play();
-        setTimeout(() => setShowTabWarning(false), 8000);
-      }
-    };
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
-  }, []);
+ useEffect(() => {
+  let hideWarningTimeout;
+
+  const handleVisibilityChange = () => {
+    if (document.hidden) {
+      setTabSwitchCount(count => count + 1);
+      setShowTabWarning(true);
+
+      const sound = document.getElementById("warning-sound");
+      if (sound) sound.play();
+    } else {
+      // 👇 User returned to tab — hide warning after 8 seconds
+      hideWarningTimeout = setTimeout(() => {
+        setShowTabWarning(false);
+      }, 8000);
+    }
+  };
+
+  document.addEventListener("visibilitychange", handleVisibilityChange);
+
+  return () => {
+    document.removeEventListener("visibilitychange", handleVisibilityChange);
+    clearTimeout(hideWarningTimeout);
+  };
+}, []);
 
   useEffect(() => {
     if (tabSwitchCount >= 3) {
