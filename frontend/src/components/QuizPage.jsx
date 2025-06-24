@@ -25,6 +25,7 @@ const QuizPage = () => {
   const [tabSwitchCount, setTabSwitchCount] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showFullscreenPrompt, setShowFullscreenPrompt] = useState(true);
+  const [showTabWarning, setShowTabWarning] = useState(false);
 
   const navigate = useNavigate();
 
@@ -46,7 +47,10 @@ const QuizPage = () => {
     const handleVisibilityChange = () => {
       if (document.hidden) {
         setTabSwitchCount(count => count + 1);
-        toast.error("Warning: Tab switch detected!");
+        setShowTabWarning(true);
+        const sound = document.getElementById("warning-sound");
+        if (sound) sound.play();
+        setTimeout(() => setShowTabWarning(false), 8000);
       }
     };
     document.addEventListener("visibilitychange", handleVisibilityChange);
@@ -234,6 +238,27 @@ const QuizPage = () => {
 
   return (
     <>
+      <audio id="warning-sound" src="/warning.mp3" preload="auto" />
+
+      {showTabWarning && (
+        <div style={{
+          position: 'fixed',
+          top: 20,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          backgroundColor: '#ff4d4f',
+          color: 'white',
+          padding: '10px 20px',
+          borderRadius: '8px',
+          zIndex: 9999,
+          fontWeight: 'bold',
+          fontSize: '16px',
+          boxShadow: '0 0 10px rgba(0,0,0,0.25)'
+        }}>
+          🚫 Tab switch detected! Please stay on this page.
+        </div>
+      )}
+
       {showFullscreenPrompt && (
         <div className="fullscreen-modal">
           <div className="modal-content">
