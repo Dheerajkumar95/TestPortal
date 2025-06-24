@@ -58,12 +58,13 @@ const saveResult = async (req, res) => {
     const previousScore = previousResult?.score || 0;
     const totalScore = score + previousScore;
 
-    // ✅ Save total score to WeeklyStats
+    // ✅ Save total score and attempt count to WeeklyStatus
     await WeeklyStatus.findOneAndUpdate(
       { user: userId },
       {
         user: userId,
         totalScore,
+        totalAttempts: totalAttempts + 1, // 🟢 Save attempt count
       },
       { upsert: true, new: true }
     );
@@ -73,6 +74,7 @@ const saveResult = async (req, res) => {
       message: "Result & WeeklyStatus saved successfully",
       result: newResult,
       totalScore,
+      totalAttempts: totalAttempts + 1,
     });
   } catch (error) {
     console.error("Error saving result:", error);
