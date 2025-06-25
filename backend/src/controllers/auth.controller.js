@@ -29,14 +29,14 @@ const passkey = async (req, res) => {
 
     const nowIST = moment().tz("Asia/Kolkata");
 
-    if (nowIST.day() !== 2) {
+    if (nowIST.day() !== 4) {
       return res
         .status(403)
         .json({ message: "Test is only allowed on Sundays." });
     }
 
     const totalMinutes = nowIST.hour() * 60 + nowIST.minute();
-    if (totalMinutes < 1190 || totalMinutes >= 1300) {
+    if (totalMinutes < 120 || totalMinutes >= 180) {
       return res
         .status(403)
         .json({ message: "Test starts at 10:00AM. Please wait." });
@@ -44,7 +44,6 @@ const passkey = async (req, res) => {
 
     const testDate = nowIST.clone().startOf("day").toDate();
 
-    // Check if already started session
     const sessionExists = await TestSession.findOne({ user: userId, testDate });
     if (sessionExists) {
       return res
@@ -52,7 +51,6 @@ const passkey = async (req, res) => {
         .json({ message: "You have already started the test." });
     }
 
-    // Check if already submitted result
     const alreadyAttempted = await Result.findOne({ user: userId, testDate });
     if (alreadyAttempted) {
       return res.status(403).json({
@@ -64,7 +62,6 @@ const passkey = async (req, res) => {
     for (const item of allPasskeys) {
       const isMatch = await bcrypt.compare(Passkey, item.Passkey);
       if (isMatch) {
-        // ✅ Save test session to lock this attempt
         await TestSession.create({ user: userId, testDate });
 
         return res.status(200).json({
@@ -107,14 +104,12 @@ const sendotp = async (req, res) => {
     existingOtp.otp = otp;
     existingOtp.expiresAt = expiresAt;
     await existingOtp.save();
-    console.log("OTP updated for existing email:", email);
   } else {
     await Otp.create({
       email,
       otp,
       expiresAt,
     });
-    console.log("New OTP created for email:", email);
   }
 
   // 5. Send OTP via email
@@ -134,6 +129,15 @@ const verifyOtpAndRegister = async (req, res) => {
     branch,
     password,
     confirmPassword,
+    dob,
+    gender,
+    collegeName,
+    course,
+    tenthMarks,
+    tenthYearOfPassing,
+    twelfthMarks,
+    twelfthYearOfPassing,
+    cgpa,
   } = user;
   try {
     const otpRecord = await Otp.findOne({ email });
@@ -159,7 +163,15 @@ const verifyOtpAndRegister = async (req, res) => {
       batch,
       branch,
       password: hashedPassword,
-      confirmPassword: hashedConfirmPassword,
+      dob,
+      gender,
+      collegeName,
+      course,
+      tenthMarks,
+      tenthYearOfPassing,
+      twelfthMarks,
+      twelfthYearOfPassing,
+      cgpa,
     });
     await senWelcomeEmail(email, fullName);
 

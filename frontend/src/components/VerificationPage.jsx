@@ -11,7 +11,7 @@ const VerificationPage = ({ email, formData }) => {
   const navigate = useNavigate();
   const buttonRef = useRef(null);
 
-  // Timer countdown
+  // Timer countdown and OTP input clearing on expiry
   useEffect(() => {
     if (timer > 0) {
       const countdown = setInterval(() => {
@@ -20,6 +20,14 @@ const VerificationPage = ({ email, formData }) => {
       return () => clearInterval(countdown);
     } else {
       setIsResendEnabled(true);
+
+      // Clear inputs when OTP expires
+      inputsRef.current.forEach(input => {
+        if (input) input.value = "";
+      });
+
+      // Focus first input
+      inputsRef.current[0]?.focus();
     }
   }, [timer]);
 
@@ -60,10 +68,19 @@ const VerificationPage = ({ email, formData }) => {
     }
   };
 
-  // Resend OTP
+  // Resend OTP and clear inputs
   const resendOTP = () => {
     setTimer(30);
     setIsResendEnabled(false);
+
+    // Clear inputs
+    inputsRef.current.forEach(input => {
+      if (input) input.value = "";
+    });
+
+    // Focus first input
+    inputsRef.current[0]?.focus();
+
     console.log("OTP resent to:", email);
     resendotp(email, formData.fullName);
   };

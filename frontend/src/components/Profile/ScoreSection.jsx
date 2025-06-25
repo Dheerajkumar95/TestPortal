@@ -35,7 +35,7 @@ const ScoreSection = () => {
 
   return (
     <div className="scores-container">
-      <h2 className="section-title">Performance by Attempt</h2>
+      <h2 className="section-title">Performance by Test</h2>
 
       {attempts.map((attemptData, index) => (
         <div key={index} className="attempt-section">
