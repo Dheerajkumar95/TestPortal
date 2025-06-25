@@ -1,58 +1,137 @@
 import React, { useRef, useState } from "react";
-import CreateAccount from "../images/CreateAccount.png";
-import { toast } from "react-hot-toast";
- 
+import { toast } from 'react-hot-toast';
+import { User, Mail, Phone, GraduationCap, Calendar, Users, BookOpen, Award } from "lucide-react";
 import VerificationPage from './VerificationPage';
 import { axiosInstance } from "../lib/axios.js";
 const SignUp = () => {
- 
   const [showOTP, setShowOTP] = useState(false);
- 
-
   const [formData, setFormData] = useState({
-  fullName: "",
-  email: "",
-  contact: "",
-  rollNumber: "",
-  batch: "",
-  branch: "",
-  password: "",
-  confirmPassword: "",
-  
-});
+    fullName: "",
+    email: "",
+    contact: "",
+    rollNumber: "",
+    batch: "",
+    branch: "",
+    password: "",
+    confirmPassword: "",
+    dob: "",
+    gender: "",
+    collegeName: "",
+    course: "",
+    tenthMarks: "",
+    tenthYearOfPassing: "",
+    twelfthMarks: "",
+    twelfthYearOfPassing: "",
+    cgpa: {
+      sem1: "",
+      sem2: "",
+      sem3: "",
+      sem4: "",
+      sem5: "",
+      sem6: "",
+      sem7: "",
+      sem8: "",
+    },
+  });
 
   const buttonRef = useRef(null);
 
   const validateForm = () => {
-    const { fullName, contact, email, password, confirmPassword } = formData;
+    const { fullName, contact, email, password, 
+      confirmPassword, dob, gender, collegeName, course,
+      tenthMarks,tenthYearOfPassing,twelfthMarks,twelfthYearOfPassing,} = formData;
 
-    if (!fullName.trim()) return toast.error("Full name is required");
-    if (!contact.trim()) return toast.error("Contact is required");
-    if (!email.trim()) return toast.error("Email is required");
-    if (!/\S+@\S+\.\S+/.test(email)) return toast.error("Invalid email format");
-    if (!password) return toast.error("Password is required");
-    if (!confirmPassword) return toast.error("confirmPassword is required");
+    if (!fullName.trim()) {
+      toast.error("Full name is required");
+      return false;
+    }
+    if (!contact.trim()) {
+      toast.error("Contact is required");
+      return false;
+    }
+    if (!email.trim()) {
+      toast.error("Email is required");
+      return false;
+    }
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      toast.error("Invalid email format");
+      return false;
+    }
+    if (!password) {
+      toast.error("Password is required");
+      return false;
+    }
+    if (!confirmPassword) {
+      toast.error("Confirm password is required");
+      return false;
+    }
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return false;
+    }
+    if (!dob) {
+      toast.error("Date of birth is required");
+      return false;
+    }
+    if (!gender) {
+      toast.error("Gender is required");
+      return false;
+    }
+    if (!collegeName) {
+      toast.error("College name is required");
+      return false;
+    }
+    if (!course) {
+      toast.error("Course is required");
+      return false;
+    }
+    if (!formData.batch) {
+      toast.error("Batch is required");
+      return false;
+    }
+    if (!formData.rollNumber || formData.rollNumber.length !== 12) {
+      toast.error("Roll number must be exactly 12 characters");
+      return false;
+    }
+    if (!formData.branch) {
+      toast.error("Branch is required");
+      return false;
+    }
+
+     if (!tenthMarks.trim()) {
+    toast.error("10th Marks are required");
+    return false;
+  }
+  if (!tenthYearOfPassing.trim()) {
+    toast.error("10th Year of Passing is required");
+    return false;
+  }
+  if (!twelfthMarks.trim()) {
+    toast.error("12th Marks are required");
+    return false;
+  }
+  if (!twelfthYearOfPassing.trim()) {
+    toast.error("12th Year of Passing is required");
+    return false;
+  }
+
+    
     return true;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    const isValid = validateForm();  
-    if (!isValid) return;  
-  
+    
+    const isValid = validateForm();
+    if (!isValid) return;
+
     const btn = buttonRef.current;
     if (btn) {
       btn.disabled = true;
       btn.innerHTML = `<span class="loader"></span> Loading...`;
     }
-        if (!formData.batch) return toast.error("Batch is required");
-      if (!formData.rollNumber || formData.rollNumber.length !== 12)
-        return toast.error("Roll number must be exactly 12 characters");
-      if (!formData.branch) return toast.error("Branch is required");
 
-
-    try {
+     try {
       await axiosInstance.post("/auth/sendotp", 
         { email: formData.email,
           password: formData.password,
@@ -70,178 +149,308 @@ const SignUp = () => {
       }
     }
   };
-  
-  
 
+  const handleCGPAChange = (semester, value) => {
+    setFormData({
+      ...formData,
+      cgpa: {
+        ...formData.cgpa,
+        [semester]: value,
+      },
+    });
+  };
+
+   
   return (
-    <>
+         <>
     {showOTP ? (
       <VerificationPage email={formData.email}  formData={formData}/>
     ) : (
-    <section className="signUp" id="signUp"> 
-      <div className="signUp-left">
-        <img src={CreateAccount} alt="image" />
-      </div>
-      
-
-      <form onSubmit={handleSubmit}>
-        <div className="passkey-section1">
-           <h1 className="signUp-text">Create Account</h1>
-          <div className="InputMethodsignUp">
-            <h1  style={{ marginRight: "13.8rem",
-              fontSize:"1rem" ,
-              fontFamily:"monospace"}} 
-              className="passkey-text">Name</h1>
-            <div className="InputMethodPasskey">
-              <input
-                type="text"
-                placeholder="Enter Name"
-                value={formData.fullName}
-                onChange={(e) =>
-                  setFormData({ ...formData, fullName: e.target.value })
-                }
-                required
-              />
+    <section className="signUp" id="signUp">
+      <div className="signUp-container">
+        <form onSubmit={handleSubmit}>
+          <div className="passkey-section1">
+            <div className="header-section">
+              <div className="header-icon">
+                <User className="main-icon" />
+              </div>
+              <h1 className="signUp-text">Create Account</h1>
+              <p className="signUp-subtitle">Join us today and start your journey</p>
             </div>
+            
+            <div className="InputMethodsignUp">
+              {/* Personal Information Section */}
+              <div className="form-section">
+                <h2 className="section-title">
+                  <User className="section-icon" />
+                  Personal Information
+                </h2>
+                <div className="form-grid">
+                  <div className="form-field">
+                    <label style={{ marginRight: "-4rem"}}>Full Name</label>
+                    <input
+                      type="text"
+                      placeholder="Enter your full name"
+                      value={formData.fullName}
+                      onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div className="form-field">
+                    <label style={{ marginRight: "-5rem"}}>Date of Birth</label>
+                    <input
+                      type="date"
+                      value={formData.dob}
+                      onChange={(e) => setFormData({ ...formData, dob: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div className="form-field">
+                    <label style={{ marginRight: "-3rem"}}>Gender</label>
+                    <select
+                      value={formData.gender}
+                      onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+                      required
+                    >
+                      <option value="">Select Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Other</option>
+                      <option value="Prefer not to say">Prefer not to say</option>
+                    </select>
+                  </div>
+                  <div className="form-field">
+                    <label style={{ marginRight: "-6.5rem"}}>Contact Number</label>
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      maxLength="10"
+                      minLength="10"
+                      pattern="[0-9]*"
+                      placeholder="Enter contact number"
+                      value={formData.contact}
+                      onChange={(e) => {
+                        const onlyDigits = e.target.value.replace(/\D/g, "");
+                        setFormData({ ...formData, contact: onlyDigits });
+                      }}
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
 
-            <h1 style={{ marginRight: "11.7rem",
-              fontSize:"1rem" ,
-              fontFamily:"monospace"}} 
-              className="passkey-text">Email ID</h1>
-            <div className="InputMethodPasskey">
-              <input
-                type="email"
-                placeholder="Enter Email ID"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value.toLowerCase() })
-                }
-                required
-              />
+              {/* Account Information Section */}
+              <div className="form-section">
+                <h2 className="section-title">
+                  <Mail className="section-icon" />
+                  Account Information
+                </h2>
+                <div className="form-grid">
+                  <div className="form-field">
+                    <label style={{ marginRight: "-5.8rem"}}>Email Address</label>
+                    <input
+                      type="email"
+                      placeholder="Enter your email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value.toLowerCase() })}
+                      required
+                    />
+                  </div>
+                  <div className="form-field">
+                    <label style={{ marginRight: "-5rem"}}>Roll Number</label>
+                    <input
+                      type="text"
+                      placeholder="Enter roll number"
+                      value={formData.rollNumber}
+                      maxLength={12}
+                      minLength={12}
+                      onChange={(e) => setFormData({ ...formData, rollNumber: e.target.value.toUpperCase() })}
+                      required
+                    />
+                  </div>
+                  <div className="form-field">
+                    <label style={{ marginRight: "-7rem"}}>Create Password</label>
+                    <input
+                      type="password"
+                      placeholder="Create a strong password"
+                      value={formData.password}
+                      onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div className="form-field">
+                    <label style={{ marginRight: "-7.5rem"}}>Confirm Password</label>
+                    <input
+                      type="password"
+                      placeholder="Confirm your password"
+                      value={formData.confirmPassword}
+                      onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Academic Information Section */}
+              <div className="form-section">
+                <h2 className="section-title">
+                  <GraduationCap className="section-icon" />
+                  Academic Information
+                </h2>
+                <div className="form-grid">
+                  <div className="form-field">
+                    <label style={{ marginRight: "-5.5rem"}}>College Name</label>
+                    <select
+                      value={formData.collegeName}
+                      onChange={(e) => setFormData({ ...formData, collegeName: e.target.value })}
+                      required
+                    >
+                      <option value="">Select College</option>
+                      <option value="TIT Main">TIT Main</option>
+                      <option value="TIT Ex">TIT Ex</option>
+                      <option value="TIT Advance">TIT Advance</option>
+                    </select>
+                  </div>
+                  <div className="form-field">
+                    <label style={{ marginRight: "-2.5rem"}}>Course</label>
+                    <select
+                      value={formData.course}
+                      onChange={(e) => setFormData({ ...formData, course: e.target.value })}
+                      required
+                    >
+                      <option value="">Select Course</option>
+                      <option value="BTech">BTech</option>
+                      <option value="MBA">MBA</option>
+                      <option value="MCA">MCA</option>
+                    </select>
+                  </div>
+                  <div className="form-field">
+                    <label style={{ marginRight: "-2rem"}}>Batch</label>
+                    <select
+                      value={formData.batch}
+                      onChange={(e) => setFormData({ ...formData, batch: e.target.value })}
+                      required
+                    >
+                      <option value="">Select Batch</option>
+                      <option value="2022-26">2022-26</option>
+                      <option value="2023-27">2023-27</option>
+                      <option value="2024-28">2024-28</option>
+                      <option value="2025-29">2025-29</option>
+                    </select>
+                  </div>
+                  <div className="form-field">
+                    <label style={{ marginRight: "-2.5rem"}}>Branch</label>
+                    <select
+                      value={formData.branch}
+                      onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
+                      required
+                    >
+                      <option value="">Select Branch</option>
+                      <option value="CSE">CSE</option>
+                      <option value="CSE-AIML">CSE (AIML)</option>
+                      <option value="CSE-AIDS">CSE (AIDS)</option>
+                      <option value="CSE-DS">CSE (DS)</option>
+                      <option value="CSE-AI">CSE (AI)</option>
+                      <option value="Cyber">Cyber Security</option>
+                      <option value="IT">IT</option>
+                      <option value="EC">EC</option>
+                      <option value="EX">EX</option>
+                      <option value="CIVIL">Civil</option>
+                      <option value="ME">Mechanical</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              {/* Educational Background Section */}
+              <div className="form-section">
+                <h2 className="section-title">
+                  <BookOpen className="section-icon" />
+                  Educational Background
+                </h2>
+                <div className="education-grid">
+                  <div className="education-item">
+                    <label style={{ marginRight: "-6.5rem"}}>10th Marks (%)</label>
+                    <input
+                      type="number"
+                      placeholder="Enter 10th percentage"
+                      min="0"
+                      max="100"
+                      step="0.50"
+                      value={formData.tenthMarks}
+                      onChange={(e) => setFormData({ ...formData, tenthMarks: e.target.value })}
+                    />
+                  </div>
+                  <div className="education-item">
+                    <label style={{ marginRight: "-8rem"}}>10th Year of Passing</label>
+                    <input
+                      type="number"
+                      placeholder="Enter year"
+                      min="2000"
+                      max="2030"
+                      value={formData.tenthYearOfPassing}
+                      onChange={(e) => setFormData({ ...formData, tenthYearOfPassing: e.target.value })}
+                    />
+                  </div>
+                  <div className="education-item">
+                    <label style={{ marginRight: "-6.5rem"}}>12th Marks (%)</label>
+                    <input
+                      type="number"
+                      placeholder="Enter 12th percentage"
+                      min="0"
+                      max="100"
+                      step="0.01"
+                      value={formData.twelfthMarks}
+                      onChange={(e) => setFormData({ ...formData, twelfthMarks: e.target.value })}
+                    />
+                  </div>
+                  <div className="education-item">
+                    <label style={{ marginRight: "-8rem"}}>12th Year of Passing</label>
+                    <input
+                      type="number"
+                      placeholder="Enter year"
+                      min="2000"
+                      max="2030"
+                      value={formData.twelfthYearOfPassing}
+                      onChange={(e) => setFormData({ ...formData, twelfthYearOfPassing: e.target.value })}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* SGPA Section */}
+              <div className="form-section">
+                <h2 className="section-title">
+                  <Award className="section-icon" />
+                  Semester SGPA
+                </h2>
+                <div className="cgpa-grid">
+                  {Array.from({ length: 8 }, (_, i) => (
+                    <div key={i} className="sgpa-item">
+                      <label style={{ marginRight: "-16rem"}}>Sem {i + 1} SGPA</label>
+                      <input
+                        type="number"
+                        placeholder="0.00"
+                        min="0"
+                        max="10"
+                        step="0.01"
+                        value={formData.cgpa[`sem${i + 1}`]}
+                        onChange={(e) => handleCGPAChange(`sem${i + 1}`, e.target.value)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <button ref={buttonRef} className="createbutton" type="submit">
+                Create Account
+              </button>
             </div>
-
-            <h1 style={{ marginRight: "8.3rem",
-              fontSize:"1rem",
-              fontFamily:"monospace" }} 
-              className="passkey-text">Contact Number</h1>
-            <div className="InputMethodPasskey">
-              <input
-                type="text"
-                inputMode="numeric"
-                maxLength="10"
-                minLength="10"
-                pattern="[0-9]*"
-                placeholder="Enter Contact Number"
-                value={formData.contact}
-                onChange={(e) => {
-                  const onlyDigits = e.target.value.replace(/\D/g, "");
-                  setFormData({ ...formData, contact: onlyDigits });
-                }}
-                required
-              />
-            </div>
-
-            <h1 style={{ marginRight: "11.6rem", 
-              fontSize:"1rem", 
-              fontFamily:"monospace" }} 
-              className="passkey-text">Roll No.</h1>
-            <div className="InputMethodPasskey">
-              <input
-                type="text"
-                placeholder="Enter Roll Number"
-                value={formData.rollNumber}
-                maxLength={12}
-                minLength={12}
-                onChange={(e) => setFormData({ ...formData, rollNumber: e.target.value.toUpperCase() })}
-                required
-              />
-            </div>
-            <div className="passkey-batch-branch">
-             <div style={{display: "flex", gap: "1rem", marginTop: "-1rem", marginBottom: "1rem", marginLeft: "0.9rem" }}>
-  <div className="FormGroup">
-    <h1 className="FormLabel">Batch</h1>
-    <select
-      value={formData.batch}
-      onChange={(e) => setFormData({ ...formData, batch: e.target.value })}
-      className="StyledSelect"
-      required
-    >
-      <option value="">Select</option>
-      <option value="2022-26">2022-26</option>
-      <option value="2023-27">2023-27</option>
-      <option value="2024-28">2024-28</option>
-      <option value="2025-29">2025-29</option>
-    </select>
-  </div>
-
-  <div className="FormGroup">
-    <h1 className="FormLabel">Branch</h1>
-    <select
-      value={formData.branch}
-      onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
-      className="StyledSelect"
-      required
-    >
-      <option value="">Select</option>
-     <option value="CSE">CSE</option>
-      <option value="CSE-AIML">CSE (AIML)</option>
-      <option value="CSE-AIDS">CSE (AIDS)</option>
-      <option value="CSE-AIDS">CSE (DS)</option>
-      <option value="CSE-AIDS">CSE (AI)</option>
-      <option value="CSE-AIDS">Cyber</option>
-      <option value="CSE-AIDS">IT</option>
-      <option value="CSE-AIDS">EC</option>
-      <option value="CSE-AIDS">EX</option>
-      <option value="CSE-AIDS">CIVIL</option>
-      <option value="CSE-AIDS">ME</option>
-    </select>
-  </div>
-</div>
-
-            </div>
-            <h1 style={{ marginRight: "7.7rem" ,
-              fontSize:"1rem",
-              fontFamily:"monospace"}} 
-              className="passkey-text">Create Password</h1>
-            <div className="InputMethodPasskey">
-              <input
-                type="password"
-                placeholder="Create Password"
-                value={formData.password}
-                onChange={(e) =>
-                  setFormData({ ...formData, password: e.target.value })
-                }
-                required
-              />
-            </div>
-
-            <h1 style={{ marginRight: "7.1rem",
-              fontSize:"1rem", 
-              fontFamily:"monospace"}} 
-              className="passkey-text" >Confirm Password</h1>
-            <div className="InputMethodPasskey">
-              <input
-                type="password"
-                placeholder="Confirm Password"
-                value={formData.confirmPassword}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    confirmPassword: e.target.value,
-                  })
-                }
-                required
-              />
-            </div>
-
-            <button ref={buttonRef} className="createbutton" type="submit">
-              Create Account
-            </button>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </section>
-    )}
+        )}
     </>
   );
 };

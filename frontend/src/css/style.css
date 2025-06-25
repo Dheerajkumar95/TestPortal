@@ -412,7 +412,6 @@ body {
   margin-bottom: 2rem;
   font-size: 1rem;
   color: #000000;
-  font-family: monospace;
   cursor: pointer;
 }
 .forgotlink:hover {
@@ -447,21 +446,6 @@ body {
   margin-left: 5rem;
 }
 
-.passkey-rightp {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 20px;
-  max-width: 450px;
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0.2, 0.2, 0.2, 0.2);
-  border-radius: 8px;
-  background-color: #c8e6c9;
-  height: 400px;
-  margin-top: 13rem;
-  margin-right: 5rem;
-}
 .passkey-right {
   flex: 1;
   display: flex;
@@ -469,10 +453,14 @@ body {
   justify-content: center;
   padding: 20px;
   max-width: 450px;
-  border-radius: 20px;
+  border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0.2, 0.2, 0.2, 0.2);
   border-radius: 8px;
-  background-color: #c8e6c9;
+  background: linear-gradient(
+    135deg,
+    rgba(24, 182, 74, 0.05),
+    rgba(24, 182, 74, 0.02)
+  );
   height: 400px;
   margin-top: 13rem;
   margin-right: 5rem;
@@ -505,17 +493,25 @@ label {
   margin-left: -21rem;
 }
 
-input {
-  padding: 12px;
-  font-size: 14px;
+.passkey-right input {
+  width: 100%;
+  padding: 0.6rem 1.5rem;
+  border: 2px solid #e5e7eb;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  font-size: 1rem;
+  background: #fafafa;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
   margin-bottom: 20px;
-  outline: none;
 }
 
-input:focus {
-  border-color: rgb(241, 214, 200);
+.passkey-right input:focus,
+.passkey-right select:focus {
+  outline: none;
+  border-color: rgb(24, 182, 74);
+  box-shadow: 0 0 0 4px rgba(24, 182, 74, 0.1);
+  background: white;
+  transform: translateY(-1px);
 }
 
 .button {
@@ -558,13 +554,6 @@ input:focus {
 .error-message {
   color: red;
   text-align: center;
-}
-/* signUp */
-.signUp {
-  color: rgb(24, 182, 74);
-  text-align: center;
-  height: auto;
-  margin-top: -3rem;
 }
 
 /*congratulation*/
@@ -640,44 +629,14 @@ input:focus {
   height: 400px;
   margin-top: 5rem;
 }
-.passkey-section1 {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0.2, 0.2, 0.2, 0.2);
-  border-radius: 8px;
-  background-color: #c8e6c9;
-  height: 100px;
-  width: 500px;
-  margin-left: 39.2rem;
-  margin-top: -37.5rem;
-}
-.signUp-left {
-  flex: 1;
-  display: flex;
-}
 
-.signUp-left img {
-  max-width: 600px;
-  height: auto;
-  object-fit: contain;
-  margin-top: 10rem;
-}
 .logintext h1 {
   margin-bottom: 60px;
   margin-left: 150px;
   color: rgb(24, 182, 74);
   font-size: 2.5rem;
 }
-.signUp-text {
-  font-size: 2.5rem;
-  margin-bottom: 30px;
-  margin-left: 90px;
-  color: rgb(0, 0, 0);
-}
+
 .login-text {
   font-size: 1rem;
   color: #333;
@@ -855,7 +814,7 @@ input:focus {
   align-items: center;
   font-size: 1rem;
   margin-left: 12rem;
-  margin-top: -1.4rem;
+  margin-top: 0.5rem;
 }
 
 .checkbox input[type="checkbox"] {
@@ -864,13 +823,16 @@ input:focus {
   accent-color: rgb(24, 182, 74);
 }
 .inputbox {
+  cursor: pointer;
   margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 .start-wrapper {
   margin-top: -1rem;
 }
 .checkbox label {
   margin-left: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 .Button {
   background: linear-gradient(90deg, rgb(6, 72, 9), rgb(24, 182, 74));
@@ -976,6 +938,7 @@ input:focus {
 }
 
 .resend-timer {
+  font-size: 1rem;
   color: rgb(24, 182, 74);
 }
 
@@ -1169,9 +1132,6 @@ input:focus {
 }
 /* Responsive design */
 @media (max-width: 1280px) {
-  .signUp {
-    margin-top: -3.5rem;
-  }
   .otp-box {
     margin-top: 7rem;
   }

@@ -26,7 +26,7 @@ const LoginPage = () => {
         <div className="passkey-right">
           <h1 className="title">Login</h1>
           <form  onSubmit={handleSubmit}>
-            <h1 style={{ marginRight: "20.5rem",fontSize:"1rem" ,fontFamily:"monospace" }}>Email ID</h1>
+            <h1 style={{ marginRight: "20.5rem",fontSize:"1rem"}}>Email ID</h1>
             <input   
               type="text"
               name="email"
@@ -34,7 +34,7 @@ const LoginPage = () => {
               onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value.toLowerCase() })}
               placeholder="Enter email ID"
               required />
-            <h1 style={{ marginRight: "20.5rem",fontSize:"1rem" ,fontFamily:"monospace" }}>Password</h1>
+            <h1 style={{ marginRight: "20.5rem",fontSize:"1rem"}}>Password</h1>
             <input    
             type="password"
               name="password"

@@ -3,6 +3,8 @@ import "./css/style.css";
 import "./css/profile.css";
 import "./css/dashboard.css";
 import "./css/Navbar.css";
+import "./css/SignUp.css";
+import "./css/ProfileHeader.css";
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { Routes, Route,Navigate  } from "react-router-dom";

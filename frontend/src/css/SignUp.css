@@ -1,0 +1,384 @@
+/* SignUp Form Styles */
+.signUp {
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signUp-container {
+  width: 80%;
+  max-width: 900px;
+}
+
+.signUp form {
+  width: 100%;
+}
+
+.passkey-section1 {
+  background: white;
+  padding: 3rem;
+  border-radius: 6px;
+  box-shadow: 0 25px 50px rgb(250, 247, 247);
+  width: 100%;
+  border: 1px solid rgba(24, 182, 74, 0.1);
+  max-height: 100vh;
+  overflow-y: auto;
+  margin-top: -2rem;
+  margin-bottom: -2rem;
+}
+
+/* Header Section */
+.header-section {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.header-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(
+    135deg,
+    rgba(24, 182, 74, 0.1),
+    rgba(24, 182, 74, 0.05)
+  );
+  border-radius: 50%;
+  margin-bottom: 1.5rem;
+  border: 2px solid rgba(24, 182, 74, 0.2);
+}
+
+.main-icon {
+  width: 40px;
+  height: 40px;
+  color: rgb(24, 182, 74);
+}
+
+.signUp-text {
+  font-size: 3rem;
+  font-weight: 700;
+  color: rgb(24, 182, 74);
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, rgb(24, 182, 74), rgb(16, 150, 60));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.signUp-subtitle {
+  font-size: 1.1rem;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+.InputMethodsignUp {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Section Styles */
+.form-section {
+  margin: 1.5rem 0;
+  padding: 2rem;
+  background: linear-gradient(
+    135deg,
+    rgba(24, 182, 74, 0.05),
+    rgba(24, 182, 74, 0.02)
+  );
+  border-radius: 6px;
+  border: 1px solid rgba(24, 182, 74, 0.1);
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: rgb(24, 182, 74);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-icon {
+  width: 24px;
+  height: 24px;
+  color: rgb(24, 182, 74);
+}
+
+/* Form Field Styles */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.25rem;
+}
+
+.form-field input,
+.form-field select {
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fafafa;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  outline: none;
+  border-color: rgb(24, 182, 74);
+  box-shadow: 0 0 0 4px rgba(24, 182, 74, 0.1);
+  background: white;
+  transform: translateY(-1px);
+}
+
+.form-field input::placeholder {
+  color: #9ca3af;
+}
+
+.form-field select {
+  cursor: pointer;
+}
+
+.form-field select option {
+  padding: 0.5rem;
+  background: white;
+  color: #374151;
+}
+
+/* Educational Background Grid */
+.education-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.education-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.education-item label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.25rem;
+}
+
+.education-item input {
+  padding: 0.8rem 1.25rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fafafa;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.education-item input:focus {
+  outline: none;
+  border-color: rgb(24, 182, 74);
+  box-shadow: 0 0 0 3px rgba(24, 182, 74, 0.1);
+  background: white;
+  transform: translateY(-1px);
+}
+
+/* CGPA Grid */
+.cgpa-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.5rem;
+}
+
+.sgpa-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.sgpa-item label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.25rem;
+  text-align: center;
+}
+
+.sgpa-item input {
+  padding: 0.8rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fafafa;
+  transition: all 0.3s ease;
+  text-align: center;
+  box-sizing: border-box;
+  font-weight: 600;
+}
+
+.sgpa-item input:focus {
+  outline: none;
+  border-color: rgb(24, 182, 74);
+  box-shadow: 0 0 0 3px rgba(24, 182, 74, 0.1);
+  background: white;
+  transform: translateY(-1px);
+}
+
+/* Create Button */
+.createbutton {
+  width: 100%;
+  padding: 0.8rem 2rem;
+  background: linear-gradient(90deg, rgb(6, 72, 9), rgb(24, 182, 74));
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 2rem;
+  box-shadow: 0 15px 35px rgba(24, 182, 74, 0.3);
+  text-transform: uppercase;
+}
+
+.createbutton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(24, 182, 74, 0.4);
+  background: linear-gradient(90deg, rgb(24, 182, 74), rgb(6, 72, 9));
+}
+
+.createbutton:active {
+  transform: translateY(-1px);
+}
+
+.createbutton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Loading Spinner */
+.loader {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 0.75rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .signUp {
+    padding: 1rem;
+  }
+
+  .passkey-section1 {
+    padding: 2rem;
+    max-height: none;
+  }
+
+  .signUp-text {
+    font-size: 2.5rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .education-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cgpa-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .form-section {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .passkey-section1 {
+    padding: 1.5rem;
+  }
+
+  .signUp-text {
+    font-size: 2rem;
+  }
+
+  .cgpa-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .main-icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* Scrollbar Styling */
+.passkey-section1::-webkit-scrollbar {
+  width: 1px;
+}
+
+.passkey-section1::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 1px;
+}
+
+.passkey-section1::-webkit-scrollbar-thumb {
+  background: rgb(255, 255, 255);
+  border-radius: 1px;
+}
+
+.passkey-section1::-webkit-scrollbar-thumb:hover {
+  background: rgb(255, 255, 255);
+}
+
+/* Enhanced Focus States */
+.form-field input:focus,
+.form-field select:focus,
+.education-item input:focus,
+.sgpa-item input:focus {
+  border-color: rgb(24, 182, 74);
+  box-shadow: 0 0 0 4px rgba(24, 182, 74, 0.1);
+}
+
+/* Hover Effects */
+.form-field input:hover,
+.form-field select:hover,
+.education-item input:hover,
+.sgpa-item input:hover {
+  border-color: rgba(24, 182, 74, 0.5);
+}

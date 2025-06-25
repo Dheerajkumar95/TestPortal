@@ -20,11 +20,11 @@ const PasskeyPage = () => {
   <div className="passkey-left">
     <img src={PassKeyImage} alt="image" />
   </div>
-  <div className="passkey-rightp">
+  <div className="passkey-right">
     <h1 className="title">PassKey Verification</h1>
     <p className="instruction">Please enter the passkey provided by the company to begin the test</p>
     <form  onSubmit={handleSubmit}>
-      <h1 style={{ marginRight: "17.5rem",fontSize:"1rem" ,fontFamily:"monospace" }}>Enter Passkey</h1>
+      <h1 style={{ marginRight: "19rem",fontSize:"1rem"}}>Enter Passkey</h1>
       <input    type="text"
                 value={formPasskey.Passkey}
                 onChange={(e) =>
