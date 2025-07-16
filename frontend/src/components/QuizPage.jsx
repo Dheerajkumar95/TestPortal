@@ -26,8 +26,21 @@ const QuizPage = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showFullscreenPrompt, setShowFullscreenPrompt] = useState(true);
   const [showTabWarning, setShowTabWarning] = useState(false);
+  const [starredQuestions, setStarredQuestions] = useState({});
+  const [text, setText] = useState('');
+
+  const handleChange = (e) => {
+    setText(e.target.value);
+  };
 
   const navigate = useNavigate();
+
+  const toggleStarQuestion = (questionId) => {
+    setStarredQuestions(prev => ({
+      ...prev,
+      [questionId]: !prev[questionId],
+    }));
+  };
 
   useEffect(() => {
     const handlePopState = () => {
@@ -43,31 +56,30 @@ const QuizPage = () => {
     };
   }, []);
 
- useEffect(() => {
-  let hideWarningTimeout;
+  useEffect(() => {
+    let hideWarningTimeout;
 
-  const handleVisibilityChange = () => {
-    if (document.hidden) {
-      setTabSwitchCount(count => count + 1);
-      setShowTabWarning(true);
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        setTabSwitchCount(count => count + 1);
+        setShowTabWarning(true);
 
-      const sound = document.getElementById("warning-sound");
-      if (sound) sound.play();
-    } else {
-      // 👇 User returned to tab — hide warning after 8 seconds
-      hideWarningTimeout = setTimeout(() => {
-        setShowTabWarning(false);
-      }, 8000);
-    }
-  };
+        const sound = document.getElementById("warning-sound");
+        if (sound) sound.play();
+      } else {
+        hideWarningTimeout = setTimeout(() => {
+          setShowTabWarning(false);
+        }, 8000);
+      }
+    };
 
-  document.addEventListener("visibilitychange", handleVisibilityChange);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
-  return () => {
-    document.removeEventListener("visibilitychange", handleVisibilityChange);
-    clearTimeout(hideWarningTimeout);
-  };
-}, []);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      clearTimeout(hideWarningTimeout);
+    };
+  }, []);
 
   useEffect(() => {
     if (tabSwitchCount >= 3) {
@@ -290,26 +302,32 @@ const QuizPage = () => {
               <h4>Active <span>1</span></h4>
 
               <div className="question-grid">
-                {sectionQuestions.map((question, idx) => (
-                  <button
-                    key={question._id}
-                    onClick={() => goToQuestion(idx)}
-                    className={
-                      current === idx
-                        ? 'question-btn active'
-                        : statuses[question._id] === 'Marked'
-                        ? 'question-btn marked'
-                        : statuses[question._id] === 'Answered'
-                        ? 'question-btn answered'
-                        : statuses[question._id] === 'Visited'
-                        ? 'question-btn visited'
-                        : 'question-btn not-visited'
-                    }
-                  >
-                    {idx + 1}
-                  </button>
-                ))}
+                {sectionQuestions.map((question, idx) => {
+                  let className = 'question-btn';
+                  if (current === idx) className += ' active';
+                  else if (starredQuestions[question._id]) className += ' starred';
+                  else if (statuses[question._id] === 'Marked') className += ' marked';
+                  else if (statuses[question._id] === 'Answered') className += ' answered';
+                  else if (statuses[question._id] === 'Visited') className += ' visited';
+                  else className += ' not-visited';
+
+                  return (
+                    <button
+                      key={question._id}
+                      onClick={() => goToQuestion(idx)}
+                      className={className}
+                    >
+                      {idx + 1}
+                    </button>
+                  );
+                })}
               </div>
+              <textarea
+               className="text_area"
+               value={text}
+               onChange={handleChange}
+               placeholder="Write something here..."
+               >{text}</textarea>
             </div>
 
             <div className="quiz-content">
@@ -325,9 +343,23 @@ const QuizPage = () => {
                   })}
                 />
               </div>
-
+              <button
+                onClick={() => toggleStarQuestion(currentQ._id)}
+                 style={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  fontSize: "30px",
+                  marginLeft: "-70rem",
+                  marginTop: "-5rem",
+                  color: starredQuestions[currentQ._id] ? "#fadb14" : "#ccc"
+                    }}
+                    title="Star this question"
+                  >
+                    ★
+                  </button>
+                  <p className='mark_review'>Mark for review</p>
               <h2 className="quiz-title">{sections[currentSectionIndex]}</h2>
-
               <div className="question-container">
                 {currentQ.image && (
                   <img
@@ -337,9 +369,11 @@ const QuizPage = () => {
                     style={{ maxWidth: "100%", height: "auto", marginBottom: "10px" }}
                   />
                 )}
-                <p className="question-text">
-                  Q{current + 1}. {currentQ.question}
-                </p>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <p className="question-text">
+                    Q{current + 1}. {currentQ.question}
+                  </p>
+                </div>
               </div>
 
               {currentQ.options.map(opt => (

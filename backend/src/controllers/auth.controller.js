@@ -29,14 +29,14 @@ const passkey = async (req, res) => {
 
     const nowIST = moment().tz("Asia/Kolkata");
 
-    if (nowIST.day() !== 4) {
+    if (nowIST.day() !== 3) {
       return res
         .status(403)
         .json({ message: "Test is only allowed on Sundays." });
     }
 
     const totalMinutes = nowIST.hour() * 60 + nowIST.minute();
-    if (totalMinutes < 120 || totalMinutes >= 180) {
+    if (totalMinutes < 0 || totalMinutes >= 1500) {
       return res
         .status(403)
         .json({ message: "Test starts at 10:00AM. Please wait." });
