@@ -424,7 +424,7 @@ const SignUp = () => {
                   <Award className="section-icon" />
                   Semester SGPA
                 </h2>
-                <div className="cgpa-grid">
+                <div className="sgpa-grid">
                   {Array.from({ length: 8 }, (_, i) => (
                     <div key={i} className="sgpa-item">
                       <label style={{ marginRight: "-16rem"}}>Sem {i + 1} SGPA</label>

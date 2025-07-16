@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import toast from 'react-hot-toast';
+
 const usePreventCopyBlur = () => {
   useEffect(() => {
     const handleBlurEffect = () => {
@@ -9,65 +10,49 @@ const usePreventCopyBlur = () => {
 
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
-    // Disable right-click
     const handleContextMenu = (e) => e.preventDefault();
 
     const handleKeyDown = (event) => {
-      // Disable Ctrl+C, Ctrl+U, Ctrl+Shift+I
+      const tag = event.target.tagName.toLowerCase();
+      const isInput = tag === 'input' || tag === 'textarea';
+
+      // Allow typing inside input/textarea
+      if (isInput) return;
+
+      // Block Ctrl+C, Ctrl+U
       if (
         (event.ctrlKey || event.metaKey) &&
         (event.key.toLowerCase() === "c" || event.key.toLowerCase() === "u")
-       
-      )  toast.error("you can't copy");{
+      ) {
+        toast.error("You can't copy");
         event.preventDefault();
       }
 
-      // Disable F12 (DevTools)
+      // Block F12
       if (event.key === "F12") {
         event.preventDefault();
       }
 
-      // Disable Ctrl+Shift+I
-      if (
-        event.ctrlKey &&
-        event.shiftKey &&
-        event.key.toLowerCase() === "i"
-      ) {
+      // Block Ctrl+Shift+I
+      if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "i") {
         event.preventDefault();
       }
 
-      // Disable Cmd (Mac)
-      if (event.key === "Meta" || event.code === "OS") {
-        document.body.classList.add("blurred");
-        handleBlurEffect();
-      }
-
-      // Disable Escape
-      if (event.key === "Escape") {
-        event.preventDefault();
-      }
-
-      // Disable PrintScreen
+      // Block PrintScreen
       if (event.key === "PrintScreen") {
-        event.preventDefault();
         document.body.classList.add("blurred");
         handleBlurEffect();
+        event.preventDefault();
       }
     };
 
     const handleKeyUp = (event) => {
-      if (event.key === "Meta" || event.code === "OS") {
-        document.body.classList.remove("blurred");
-        handleBlurEffect();
-      }
-
       if (event.key === "PrintScreen") {
         document.body.classList.add("blurred");
-        setTimeout(() => document.body.classList.remove("blurred"), 2000);
+        handleBlurEffect();
       }
     };
 
-    // iOS specific
     const handleTouchStart = () => {
       handleBlurEffect();
       document.body.classList.add("blurred");
@@ -77,7 +62,6 @@ const usePreventCopyBlur = () => {
       document.body.classList.remove("blurred");
     };
 
-    // Attach events
     document.addEventListener("contextmenu", handleContextMenu);
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("keyup", handleKeyUp);
@@ -91,7 +75,6 @@ const usePreventCopyBlur = () => {
       document.removeEventListener("contextmenu", handleContextMenu);
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("keyup", handleKeyUp);
-
       if (isIOS) {
         document.removeEventListener("touchstart", handleTouchStart);
         document.removeEventListener("touchend", handleTouchEnd);
